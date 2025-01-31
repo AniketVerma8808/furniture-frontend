@@ -1,12 +1,12 @@
 import React from "react";
 import Slider from "react-slick";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
-import rightBanner from '../../assets/image/rightbanner.jpg';
-import rightBanner2 from '../../assets/image/rightbanner2.jpg';
-import rightBanner3 from '../../assets/image/rightbanner3.jpg';
-import rightBanner4 from '../../assets/image/rightbanner4.jpg';
-import leftBanner from '../../assets/image/leftbanner.jpg';
-import leftBanner2 from '../../assets/image/leftbanner2.jpg';
+import rightBanner from '../../assets/image/banner/rightbanner.png';
+import rightBanner2 from '../../assets/image/banner/rightbanner2.png';
+import rightBanner3 from '../../assets/image/banner/rightbanner3.png';
+import rightBanner4 from '../../assets/image/banner/rightbanner4.png';
+import leftBanner from '../../assets/image/banner/leftbanner.png';
+import leftBanner2 from '../../assets/image/banner/leftbanner2.png';
 
 // Custom Left Arrow
 const PrevArrow = ({ onClick }) => (
@@ -53,11 +53,11 @@ const Hero = () => {
             {/* Left Side - Hidden on Mobile, Equal Height */}
             <div className="hidden md:grid md:col-span-4 grid-rows-2 gap-4 h-full">
                 {leftImages.map((img, index) => (
-                    <div key={index} className="bg-gray-200 rounded-lg overflow-hidden h-full">
+                    <div key={index} className="bg-gray-200 h-56 rounded-lg overflow-hidden ">
                         <img
                             src={img}
                             alt={`Left Image ${index + 1}`}
-                            className="w-full h-full object-cover"
+                            className="w-full  object-contain"
                         />
                     </div>
                 ))}

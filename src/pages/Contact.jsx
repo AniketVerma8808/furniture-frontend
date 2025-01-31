@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
-import BannerImg from '../assets/image/banner2.jpg';
+import BannerImg from '../assets/image/banner/banner2.jpg';
 
 const Contact = () => {
     const [name, setName] = useState('');

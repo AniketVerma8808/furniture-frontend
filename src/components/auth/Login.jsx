@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import BannerImg from '../../assets/image/banner2.jpg';
+import BannerImg from '../../assets/image/banner/banner2.jpg';
 import { toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
 

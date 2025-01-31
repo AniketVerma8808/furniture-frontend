@@ -53,7 +53,7 @@ const Footer = () => {
                         <li><Link to="/our-story" className="hover:text-gray-400">Our Story</Link></li>
                         <li><Link to="/sell-with-us" className="hover:text-gray-400">Sell With Royaloak</Link></li>
                         <li><Link to="/careers" className="hover:text-gray-400">Career</Link></li>
-                        <li><Link to="/contact-us" className="hover:text-gray-400">Contact Us</Link></li>
+                        <li><Link to="/contact" className="hover:text-gray-400">Contact Us</Link></li>
                     </ul>
                 </div>
                 <div>
@@ -79,7 +79,7 @@ const Footer = () => {
             </div>
 
             {/* Benefits Section */}
-            <div className="max-w-7xl px-4 mx-auto px-10 py-6 rounded-lg shadow-lg bg-[#363434] text-center md:text-left">
+            <div className="max-w-7xl  mx-auto px-10 py-6 rounded-lg shadow-lg bg-[#363434] text-center md:text-left">
                 <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
                     <div className="flex flex-col items-center gap-2 text-base">
                         <FaShippingFast className="text-xl" />
