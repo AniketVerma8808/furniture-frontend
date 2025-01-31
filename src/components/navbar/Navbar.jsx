@@ -1,4 +1,4 @@
-import { FaUser, FaHeart, FaShoppingCart, FaMapMarkerAlt, FaSearch } from "react-icons/fa";
+import { FaUser, FaHeart, FaShoppingCart, FaMapMarkerAlt, FaSearch, FaBars } from "react-icons/fa";
 import { IoIosArrowDown } from "react-icons/io";
 import { Link } from "react-router-dom";
 import { useState } from "react";
@@ -87,9 +87,7 @@ const Navbar = () => {
                     <div className="md:hidden flex justify-between w-full mt-4">
                         <div className="flex justify-start md:hidden w-full">
                             <button className="text-white" onClick={() => setIsMenuOpen(!isMenuOpen)}>
-                                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                                </svg>
+                                <FaBars className="w-6 h-6" />
                             </button>
                         </div>
 
