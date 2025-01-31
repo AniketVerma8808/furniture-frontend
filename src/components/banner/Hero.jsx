@@ -1,0 +1,84 @@
+import React from "react";
+import Slider from "react-slick";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import rightBanner from '../../assets/image/rightbanner.jpg';
+import rightBanner2 from '../../assets/image/rightbanner2.jpg';
+import rightBanner3 from '../../assets/image/rightbanner3.jpg';
+import rightBanner4 from '../../assets/image/rightbanner4.jpg';
+import leftBanner from '../../assets/image/leftbanner.jpg';
+import leftBanner2 from '../../assets/image/leftbanner2.jpg';
+
+// Custom Left Arrow
+const PrevArrow = ({ onClick }) => (
+    <button
+        onClick={onClick}
+        className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white text-black p-3 rounded-full shadow-md z-10 hover:bg-gray-100"
+    >
+        <FaChevronLeft size={20} />
+    </button>
+);
+
+// Custom Right Arrow
+const NextArrow = ({ onClick }) => (
+    <button
+        onClick={onClick}
+        className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white text-black p-3 rounded-full shadow-md z-10 hover:bg-gray-100"
+    >
+        <FaChevronRight size={20} />
+    </button>
+);
+
+const Hero = () => {
+    const settings = {
+        dots: false,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 3000,
+        arrows: true,
+        prevArrow: <PrevArrow />,
+        nextArrow: <NextArrow />
+    };
+
+    // Left side images (stacked) - Hidden on Mobile
+    const leftImages = [leftBanner, leftBanner2];
+
+    // Right side slider images
+    const rightImages = [rightBanner, rightBanner2, rightBanner3, rightBanner4];
+
+    return (
+        <div className="grid grid-cols-1 md:grid-cols-12 md:h-screen gap-4 px-4 md:px-8 py-6">
+            {/* Left Side - Hidden on Mobile, Equal Height */}
+            <div className="hidden md:grid md:col-span-4 grid-rows-2 gap-4 h-full">
+                {leftImages.map((img, index) => (
+                    <div key={index} className="bg-gray-200 rounded-lg overflow-hidden h-full">
+                        <img
+                            src={img}
+                            alt={`Left Image ${index + 1}`}
+                            className="w-full h-full object-cover"
+                        />
+                    </div>
+                ))}
+            </div>
+
+            {/* Right Side - Slider (Full width on mobile, Equal Height) */}
+            <div className="col-span-12 md:col-span-8 rounded-lg overflow-hidden relative h-full">
+                <Slider {...settings}>
+                    {rightImages.map((img, index) => (
+                        <div key={index} className="h-full">
+                            <img
+                                src={img}
+                                alt={`Slide ${index + 1}`}
+                                className="w-full h-full object-cover rounded-lg"
+                            />
+                        </div>
+                    ))}
+                </Slider>
+            </div>
+        </div>
+    );
+};
+
+export default Hero;

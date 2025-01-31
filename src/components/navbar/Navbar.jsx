@@ -5,87 +5,178 @@ import { useState } from "react";
 
 const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [hoveredCategory, setHoveredCategory] = useState(null);
+    const [isCategoryOpen, setIsCategoryOpen] = useState(null);
+
+    const categories = [
+        { name: "INTERNATIONAL COLLECTION", subcategories: null },
+        {
+            name: "DINING",
+            subcategories: [
+                { title: "SOFAS", items: ["Fabric Sofas", "Wooden Sofas", "Leather Sofas"] },
+                { title: "RECLINERS", items: ["Fabric Recliners", "Leather Recliners", "Recliner Sofas"] },
+                { title: "SEATINGS", items: ["Lounge Chairs", "Rocking Chairs"] },
+                { title: "LIVING ROOM TABLES", items: ["Wooden Tables", "Glass Tables"] },
+            ],
+        },
+        { name: "STUDY & OFFICE", subcategories: null },
+        { name: "OUTDOOR", subcategories: null },
+        { name: "DECOR", subcategories: null },
+        { name: "FURNISHINGS", subcategories: null },
+        { name: "SMART STORAGE", subcategories: null },
+        { name: "NEW ARRIVALS", subcategories: null },
+        { name: "BULK ORDERS", subcategories: null },
+    ];
+
+    const handleCategoryClick = (categoryName) => {
+        setIsCategoryOpen((prev) => (prev === categoryName ? null : categoryName));
+    };
 
     return (
         <header className="bgBlack text-white">
-            <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className=" ">
                 {/* Top Bar */}
-                <div className="flex justify-between items-center px-6 py-2 text-sm border-b border-gray-700">
-                    <div className="flex items-center gap-2">
-                        <FaMapMarkerAlt />
-                        <span>Deliver to - <span className="text-orange-400">560001</span></span>
-                        <button className="text-orange-400 text-xs">✎</button>
-                    </div>
-                    <div className="hidden md:flex gap-6 text-gray-300 text-xs">
-                        <Link to="#">Track Order</Link>
-                        <Link to="#">Royaloak Stores</Link>
-                        <Link to="#">Franchise Enquiry</Link>
-                        <Link to="#">Rent your property</Link>
-                        <Link to="#">Customer Support</Link>
-                        <Link to="#">Careers</Link>
+                <div className="border-b border-gray-700">
+                    <div className="max-w-7xl mx-auto flex justify-between items-center px-6 py-2 text-sm flex-wrap">
+                        {/* Location & Edit Button */}
+                        <div className="flex items-center gap-2 flex-wrap mb-2 sm:mb-0">
+                            <FaMapMarkerAlt />
+                            <span>Deliver to - <span className="text-orange-400">560001</span></span>
+                            <button className="text-orange-400 text-xs">✎</button>
+                        </div>
+
+                        {/* Links Section */}
+                        <div className="flex gap-6 text-gray-300 text-xs flex-wrap justify-center sm:justify-end">
+                            <Link to="#">Track Order</Link>
+                            <Link to="#">Royaloak Stores</Link>
+                            <Link to="#">Franchise Enquiry</Link>
+                            <Link to="#">Rent your property</Link>
+                            <Link to="#">Customer Support</Link>
+                            <Link to="#">Careers</Link>
+                        </div>
                     </div>
                 </div>
 
                 {/* Main Navbar */}
-                <div className="flex justify-between items-center mx-auto px-6 py-4 flex-wrap">
+                <div className="max-w-7xl mx-auto flex justify-between items-center px-6 py-4 flex-wrap gap-4">
+                    {/* Desktop view - Logo left, Links right */}
+                    <div className="flex w-full justify-between items-center">
+                        {/* Logo */}
+                        <Link to={'/'} className="flex justify-center md:justify-start w-full">
+                            <img src="https://www.royaloakindia.com/media/logo/stores/1/logo-for-Website.png" alt="Royaloak Logo" className="h-8 sm:h-12 mx-auto md:mx-0" />
+                        </Link>
 
-                    <div>
-
-                        <h1 className="text-3xl font-bold flex items-start gap-2 mx-auto">
-                            <span className="text-orange-400">ROYAL</span>OAK
-                        </h1>
+                        {/* Desktop Links (Login, Wishlist, Cart) */}
+                        <div className="gap-8 text-lg items-center hidden md:flex">
+                            <Link to='/login' className="flex flex-col items-center">
+                                <FaUser />
+                                <span className="text-xs">LOGIN</span>
+                            </Link>
+                            <div className="flex flex-col items-center">
+                                <FaHeart />
+                                <span className="text-xs">WISHLIST</span>
+                            </div>
+                            <div className="flex flex-col items-center">
+                                <FaShoppingCart />
+                                <span className="text-xs">CART</span>
+                            </div>
+                        </div>
                     </div>
-                    <div className="flex gap-8 text-lg">
-                        <div className="flex flex-col items-center">
-                            <FaUser />
-                            <span className="text-xs">LOGIN</span>
-                        </div>
-                        <div className="flex flex-col items-center">
-                            <FaHeart />
-                            <span className="text-xs">WISHLIST</span>
-                        </div>
-                        <div className="flex flex-col items-center">
-                            <FaShoppingCart />
-                            <span className="text-xs">CART</span>
-                        </div>
-                    </div>
 
-                    {/* Mobile Hamburger Menu */}
-                    <div className="md:hidden flex items-center" onClick={() => setIsMenuOpen(!isMenuOpen)}>
-                        <button className="text-white">
-                            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                            </svg>
-                        </button>
+                    {/* Mobile view - Links (Login, Wishlist, Cart) */}
+                    <div className="md:hidden flex justify-between w-full mt-4">
+                        <div className="flex justify-start md:hidden w-full">
+                            <button className="text-white" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+                                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                                </svg>
+                            </button>
+                        </div>
+
+                        <div className="flex gap-8 text-lg items-center">
+                            <Link to='/login' className="flex flex-col items-center">
+                                <FaUser />
+                                <span className="text-xs">LOGIN</span>
+                            </Link>
+                            <div className="flex flex-col items-center">
+                                <FaHeart />
+                                <span className="text-xs">WISHLIST</span>
+                            </div>
+                            <div className="flex flex-col items-center">
+                                <FaShoppingCart />
+                                <span className="text-xs">CART</span>
+                            </div>
+                        </div>
+
+                        {/* Right side mobile toggle button */}
+
                     </div>
                 </div>
 
-                {/* Categories Menu (Mobile) */}
-                <nav className={`${isMenuOpen ? "block" : "hidden"} md:block  px-6 py-2 border-t border-gray-700`}>
-                    <div className="mx-auto">
-                        <ul className="flex flex-col md:flex-row justify-center gap-4 text-sm text-gray-300">
-                            <li className="flex items-center gap-1">
-                                <Link to="#">INTERNATIONAL COLLECTION</Link> <IoIosArrowDown />
-                            </li>
 
-                            <li className="flex items-center gap-1">
-                                <Link to="#">DINING</Link> <IoIosArrowDown />
+
+                {/* Mobile Category Menu */}
+                <div className={`md:hidden ${isMenuOpen ? "block" : "hidden"} px-6 py-2 border-t border-gray-700`}>
+                    <ul className="text-sm text-gray-300">
+                        {categories.map((category, index) => (
+                            <li key={index} className="relative">
+                                <div
+                                    className="flex items-center justify-between cursor-pointer py-2"
+                                    onClick={() => handleCategoryClick(category.name)}
+                                >
+                                    <span>{category.name}</span>
+                                    {category.subcategories && <IoIosArrowDown />}
+                                </div>
+                                {isCategoryOpen === category.name && category.subcategories && (
+                                    <div className="pl-4">
+                                        <ul>
+                                            {category.subcategories.map((subcategory, subIndex) => (
+                                                <li key={subIndex} className="py-1">
+                                                    <h3 className="font-bold">{subcategory.title}</h3>
+                                                    <ul className="pl-4">
+                                                        {subcategory.items.map((item, itemIndex) => (
+                                                            <li key={itemIndex} className="py-1">{item}</li>
+                                                        ))}
+                                                    </ul>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
+                                )}
                             </li>
-                            <li className="flex items-center gap-1">
-                                <Link to="#">STUDY & OFFICE</Link> <IoIosArrowDown />
-                            </li>
-                            <li className="flex items-center gap-1">
-                                <Link to="#">OUTDOOR</Link> <IoIosArrowDown />
-                            </li>
-                            <li className="flex items-center gap-1">
-                                <Link to="#">DECOR</Link> <IoIosArrowDown />
-                            </li>
-                            <li className="flex items-center gap-1">
-                                <Link to="#">FURNISHINGS</Link> <IoIosArrowDown />
-                            </li>
-                            <li><Link to="#">SMART STORAGE</Link></li>
-                            <li><Link to="#">NEW ARRIVALS</Link></li>
-                            <li><Link to="#">BULK ORDERS</Link></li>
+                        ))}
+                    </ul>
+                </div>
+
+                {/* Desktop Category Menu */}
+                <nav className='hidden md:block px-6 py-2 border-t border-gray-700 z-40 relative'>
+                    <div className="max-w-7xl mx-auto">
+                        <ul className="flex justify-around text-sm text-gray-300">
+                            {categories.map((category, index) => (
+                                <li
+                                    key={index}
+                                    className="relative flex items-center gap-1 cursor-pointer"
+                                    onMouseEnter={() => setHoveredCategory(category.name)}
+                                    onMouseLeave={() => setHoveredCategory(null)}
+                                >
+                                    <Link to="#">{category.name}</Link>
+                                    {category.subcategories && <IoIosArrowDown />}
+                                    {hoveredCategory === category.name && category.subcategories && (
+                                        <div className="absolute top-full -left-60 w-[1200px] bg-gray-800 text-white p-8 shadow-lg grid grid-cols-4 gap-8">
+                                            {category.subcategories.map((subcategory, subIndex) => (
+                                                <div key={subIndex}>
+                                                    <h3 className="font-bold mb-4">{subcategory.title}</h3>
+                                                    <ul>
+                                                        {subcategory.items.map((item, itemIndex) => (
+                                                            <li key={itemIndex} className="py-2 hover:text-orange-400">{item}</li>
+                                                        ))}
+                                                    </ul>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    )}
+                                </li>
+                            ))}
                         </ul>
                     </div>
                 </nav>

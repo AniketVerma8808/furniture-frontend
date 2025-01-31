@@ -2,3 +2,23 @@
   background-color: #2a2828;
   color: white !important;
 }
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: #000;
+}
+
+.bgColor {
+  background-color: #000;
+}
+.bgColorHover:hover {
+  background-color: #2a2828;
+}
+.texthover:hover {
+  color: #2a2828;
+}
+.borderColor {
+  color: #bdbaba !important;
+}
