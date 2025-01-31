@@ -122,7 +122,8 @@ const Review = () => {
     return (
         <div className="max-w-7xl mx-auto py-12 px-4">
             <div className="text-center mb-8">
-                <h2 className="text-2xl font-bold text-black">Customer Reviews</h2>
+                <h3 className="font-roboto font-medium text-[30px] text-[rgb(42,40,40)] leading-[45px]">
+                    Customer Reviews</h3>
             </div>
             <Slider {...settings}>
                 {reviews.map((review) => (

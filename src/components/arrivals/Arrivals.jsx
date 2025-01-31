@@ -57,7 +57,8 @@ const Arrivals = () => {
 
     return (
         <div className="max-w-7xl mx-auto py-8 px-4 relative">
-            <h2 className="text-2xl text-center font-bold text-black mb-4">New Arrivals</h2>
+            <h3 className="font-roboto text-center font-medium text-[30px] text-[rgb(42,40,40)] leading-[45px]">
+                New Arrivals</h3>
             <div className="py-12 relative">
                 <Slider {...settings}>
                     {products.map((product) => (

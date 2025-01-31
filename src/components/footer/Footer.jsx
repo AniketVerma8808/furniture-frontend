@@ -7,7 +7,7 @@ const Footer = () => {
         <footer className="bg-black text-white">
             {/* Newsletter Section */}
             <div className="py-6 border-b border-gray-700">
-                <div className="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center">
+                <div className="max-w-7xl px-4 mx-auto flex flex-col sm:flex-row justify-between items-center">
                     <div className="text-center sm:text-left p-2">
                         <h2 className="text-lg sm:text-xl lg:text-2xl font-semibold">SUBSCRIBE TO NEWSLETTER</h2>
                         <p className="text-base">Be the first to know about new arrivals, sales & promos by submitting your email!</p>
@@ -20,7 +20,7 @@ const Footer = () => {
             </div>
 
             {/* Links Section */}
-            <div className="max-w-7xl mx-auto grid grid-cols-2 sm:grid-cols-2 md:grid-cols-6 gap-6 py-8 border-gray-700 text-base">
+            <div className="max-w-7xl px-4 mx-auto grid grid-cols-2 sm:grid-cols-2 md:grid-cols-6 gap-6 py-8 border-gray-700 text-base">
                 <div>
                     <h3 className="font-semibold mb-2 text-base">QUICK LINKS</h3>
                     <ul>
@@ -79,7 +79,7 @@ const Footer = () => {
             </div>
 
             {/* Benefits Section */}
-            <div className="max-w-7xl mx-auto px-10 py-6 rounded-lg shadow-lg bg-[#363434] text-center md:text-left">
+            <div className="max-w-7xl px-4 mx-auto px-10 py-6 rounded-lg shadow-lg bg-[#363434] text-center md:text-left">
                 <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
                     <div className="flex flex-col items-center gap-2 text-base">
                         <FaShippingFast className="text-xl" />
@@ -113,7 +113,7 @@ const Footer = () => {
             </div>
 
             {/* Bottom Bar */}
-            <div className="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between py-4 text-gray-400 text-xs sm:text-sm md:text-base">
+            <div className="max-w-7xl px-4  mx-auto flex flex-col sm:flex-row justify-between py-4 text-gray-400 text-xs sm:text-sm md:text-base">
                 <p>© 2025, Royaloak Inc. Pvt. Ltd. | All rights reserved.</p>
                 <p>
                     <Link to="/privacy-policy" className="mx-2 hover:text-gray-400">Privacy Policy</Link> |

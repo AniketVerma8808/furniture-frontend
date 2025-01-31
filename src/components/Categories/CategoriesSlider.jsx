@@ -42,26 +42,29 @@ const CategoriesSlider = () => {
             {
                 breakpoint: 768,
                 settings: {
-                    slidesToShow: 2,
+                    slidesToShow: 3,
                 },
             },
             {
                 breakpoint: 480,
                 settings: {
-                    slidesToShow: 1,
+                    slidesToShow: 3,
                 },
             },
         ],
     };
 
     return (
-        <div className="max-w-7xl mx-auto  py-8">
-            <h2 className="text-2xl text-center font-bold text-black mb-4">Shop By Categories</h2>
+        <div className="max-w-7xl mx-auto px-4 py-8">
+            <h3 className="font-roboto text-center font-medium text-[30px] text-[rgb(42,40,40)] leading-[45px]">
+                Shop By Categories</h3>
             <div className='py-12'>
                 {/* Slider Component */}
                 <Slider {...settings}>
                     {categories.map((category, index) => (
-                        <CategoriesItem key={index} icon={category.icon} name={category.name} />
+                        <div key={index} className="flex justify-center">
+                            <CategoriesItem icon={category.icon} name={category.name} />
+                        </div>
                     ))}
                 </Slider>
             </div>
