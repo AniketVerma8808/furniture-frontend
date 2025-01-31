@@ -11,6 +11,7 @@ import Login from './components/auth/Login'
 import Register from './components/auth/Register'
 import Contact from './pages/Contact'
 import NotFound from './pages/NotFound'
+import ProductDetails from './pages/productDetails'
 
 const ScrollToTop = () => {
   const location = useLocation();
@@ -38,6 +39,7 @@ const App = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/product/:id" element={<ProductDetails />} />
 
 
           {/* Define a route for a non-existent path (404) */}

@@ -64,6 +64,9 @@ const Navbar = () => {
                         {/* Logo */}
                         <Link to={'/'} className="flex justify-center md:justify-start w-full">
                             <img src="https://www.royaloakindia.com/media/logo/stores/1/logo-for-Website.png" alt="Royaloak Logo" className="h-8 sm:h-12 mx-auto md:mx-0" />
+                            {/* <h1 className="text-3xl font-bold flex text-start items-start gap-2 mx-auto">
+                               logo
+                            </h1> */}
                         </Link>
 
                         {/* Desktop Links (Login, Wishlist, Cart) */}
