@@ -2,25 +2,9 @@ import React, { useRef, useState } from "react";
 import Slider from "react-slick";
 import InnerImageZoom from 'react-inner-image-zoom';
 import 'react-inner-image-zoom/lib/InnerImageZoom/styles.css';
-import { useParams } from "react-router-dom";
 
-// Mock product data
-const productMock = {
-    title: "Sample Product",
-    images: [
-        "https://www.royaloakindia.com/media/catalog/product/l/s/ls2_201.png?optimize=high&bg-color=255,255,255&fit=bounds&height=500&width=800&canvas=800:500&format=jpeg",
-        "https://www.royaloakindia.com/media/catalog/product/l/s/ls_768.png?optimize=high&bg-color=255,255,255&fit=bounds&height=500&width=800&canvas=800:500&format=jpeg",
-        "https://www.royaloakindia.com/media/catalog/product/1/_/1_698.png?optimize=high&bg-color=255,255,255&fit=bounds&height=500&width=800&canvas=800:500&format=jpeg",
-        "https://www.royaloakindia.com/media/catalog/product/2/_/2_656.png?optimize=high&bg-color=255,255,255&fit=bounds&height=500&width=800&canvas=800:500&format=jpeg",
-        "https://www.royaloakindia.com/media/catalog/product/3/_/3_582.png?optimize=high&bg-color=255,255,255&fit=bounds&height=500&width=800&canvas=800:500&format=jpeg",
-    ],
-};
 
-const ProductZoom = () => {
-    const { id } = useParams();
-
-    const [product] = useState(productMock);
-
+const ProductZoom = ({ images }) => {
     const zoomSliderBig = useRef();
     const zoomSlider = useRef();
 
@@ -53,7 +37,7 @@ const ProductZoom = () => {
             {/* Main Zoom Image Section */}
             <div className="bg-white shadow-lg rounded-lg overflow-hidden mb-6">
                 <Slider {...settingsBig} className="rounded-lg" ref={zoomSliderBig}>
-                    {product?.images?.map((image, index) => (
+                    {images?.map((image, index) => (
                         <div key={index} className="flex justify-center object-contain h-full w-full">
                             <InnerImageZoom
                                 src={image}
@@ -70,7 +54,7 @@ const ProductZoom = () => {
             {/* Thumbnail Slider */}
             <div className="mt-6 zoomSliderdetails">
                 <Slider {...settingsThumbnails} ref={zoomSlider} className="space-x-4">
-                    {product?.images?.map((image, index) => (
+                    {images?.map((image, index) => (
                         <div
                             key={index}
                             className="p-2 border-2 border-gray-200 rounded-lg cursor-pointer transition-transform transform "

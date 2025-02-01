@@ -6,10 +6,10 @@ export const ProductContext = createContext();
 export const ProductProvider = ({ children }) => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [user, setUser] = useState(null);
-
     const [recentlyViewed, setRecentlyViewed] = useState([]);
     const [cart, setCart] = useState([]);
     const [wishlist, setWishlist] = useState([]);
+    const [currentProduct, setCurrentProduct] = useState(null);
 
     useEffect(() => {
         const storedUser = JSON.parse(localStorage.getItem("user"));
@@ -24,6 +24,11 @@ export const ProductProvider = ({ children }) => {
         if (storedWishlist) setWishlist(storedWishlist);
     }, []);
 
+    const updateLocalStorage = (cartData, wishlistData) => {
+        if (cartData) localStorage.setItem("cart", JSON.stringify(cartData));
+        if (wishlistData) localStorage.setItem("wishlist", JSON.stringify(wishlistData));
+    };
+
     // add Recent Viewed
     const addRecentlyViewed = (product) => {
         setRecentlyViewed((prev) => {
@@ -34,12 +39,6 @@ export const ProductProvider = ({ children }) => {
     };
 
     // login
-    // const login = (userData) => {
-    //     setUser(userData);
-    //     localStorage.setItem("user", JSON.stringify(userData));
-    // };
-
-
     const login = (email, password) => {
         if (email === "aniket@techxpert.in" && password === "1234567") {
             const userData = { email };
@@ -47,11 +46,9 @@ export const ProductProvider = ({ children }) => {
             setIsAuthenticated(true);
             localStorage.setItem("user", JSON.stringify(userData));
             return true;
-        } else {
-            return false;
         }
+        return false;
     };
-
 
     // logout
     const logout = () => {
@@ -60,7 +57,7 @@ export const ProductProvider = ({ children }) => {
         localStorage.removeItem("user");
     };
 
-    //  Add to Cart (Prevents Duplicates)
+    // Add to Cart (Prevents Duplicates)
     const addToCart = (product) => {
         setCart((prev) => {
             const existingItem = prev.find((item) => item.id === product.id);
@@ -76,7 +73,7 @@ export const ProductProvider = ({ children }) => {
                 newCart = [...prev, { ...product, quantity: 1 }];
             }
 
-            localStorage.setItem("cart", JSON.stringify(newCart));
+            updateLocalStorage(newCart);
             return newCart;
         });
     };
@@ -89,16 +86,16 @@ export const ProductProvider = ({ children }) => {
                     ? { ...item, quantity: Math.max(1, item.quantity + amount) }
                     : item
             );
-            localStorage.setItem("cart", JSON.stringify(updatedCart));
+            updateLocalStorage(updatedCart);
             return updatedCart;
         });
     };
 
-    //  Remove from Cart
+    // Remove from Cart
     const handleRemoveItem = (id) => {
         setCart((prevCart) => {
             const updatedCart = prevCart.filter((item) => item.id !== id);
-            localStorage.setItem("cart", JSON.stringify(updatedCart));
+            updateLocalStorage(updatedCart);
             return updatedCart;
         });
     };
@@ -106,7 +103,7 @@ export const ProductProvider = ({ children }) => {
     const addToWishlist = (product) => {
         setWishlist((prev) => {
             const newWishlist = [...prev, product];
-            localStorage.setItem("wishlist", JSON.stringify(newWishlist));
+            updateLocalStorage(null, newWishlist);
             return newWishlist;
         });
     };
@@ -114,13 +111,19 @@ export const ProductProvider = ({ children }) => {
     const removeFromWishlist = (productId) => {
         setWishlist((prev) => {
             const updatedWishlist = prev.filter((item) => item.id !== productId);
-            localStorage.setItem("wishlist", JSON.stringify(updatedWishlist));
+            updateLocalStorage(null, updatedWishlist);
             return updatedWishlist;
         });
     };
 
     const newArrivals = products.filter((product) => product.isNewArrival);
     const bestSellers = products.filter((product) => product.isBestSeller);
+
+    const getProductById = (id) => {
+        const product = products.find((product) => product.id === id);
+        setCurrentProduct(product);
+        return product;
+    };
 
     return (
         <ProductContext.Provider
@@ -140,7 +143,10 @@ export const ProductProvider = ({ children }) => {
                 user,
                 login,
                 logout,
-                isAuthenticated
+                isAuthenticated,
+                getProductById,
+                currentProduct,
+                setCurrentProduct,
             }}
         >
             {children}

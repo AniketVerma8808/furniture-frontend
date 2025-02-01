@@ -15,20 +15,20 @@ const Wishlist = () => {
                         <h1 className="text-2xl font-bold">Your Wishlist</h1>
                     </div>
                     <div className="space-y-4 p-4">
-                        {wishlist.map(({ id, image, title, price }) => (
+                        {wishlist.map(({ id, images, title, price }) => (
                             <div
                                 key={id}
                                 className="flex items-center justify-between border-b py-4"
                             >
                                 <div className="flex items-center">
                                     <img
-                                        src={image}
+                                        src={images && images[0]}
                                         alt={title}
                                         className="w-20 h-20 rounded-lg object-cover"
                                     />
                                     <div className="ml-4">
                                         <h2 className="text-lg font-medium">{title}</h2>
-                                        <p className="text-gray-600">₹{price}</p>
+                                        <p className="text-gray-600">{price}</p>
                                     </div>
                                 </div>
                                 <button
@@ -45,7 +45,7 @@ const Wishlist = () => {
                     </div>
                     <div className="p-4">
                         <Link to="/">
-                            <button className="w-full bg-[#75A513] text-white py-2 rounded hover:bg-[#609f10] transition duration-300">
+                            <button className="w-full bgColor text-white py-2 rounded transition duration-300">
                                 Continue Shopping
                             </button>
                         </Link>

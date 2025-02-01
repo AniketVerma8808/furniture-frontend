@@ -8,7 +8,7 @@ const ProductItem = ({ product, label }) => {
     const [isFavorite, setIsFavorite] = useState(false);
     const [isHovered, setIsHovered] = useState(false);
     const navigate = useNavigate();
-    const { addToCart, addToWishlist, wishlist, removeFromWishlist } = useContext(ProductContext);
+    const { addToCart, addToWishlist, wishlist, removeFromWishlist, isAuthenticated } = useContext(ProductContext);
 
 
     useEffect(() => {
@@ -21,12 +21,22 @@ const ProductItem = ({ product, label }) => {
 
 
     const handleAddToCart = () => {
+        if (!isAuthenticated) {
+            toast.error("Please log in to add items to the cart.");
+            navigate("/login");
+            return;
+        }
         addToCart(product);
         toast.success("Added to Cart!");
     };
 
 
     const handleAddToWishlist = () => {
+        if (!isAuthenticated) {
+            toast.error("Please log in to add items to the wishlist.");
+            navigate("/login");
+            return;
+        }
         if (isFavorite) {
             removeFromWishlist(product.id);
             setIsFavorite(false);
@@ -59,7 +69,7 @@ const ProductItem = ({ product, label }) => {
         >
             {/* Product Image with Click Navigation */}
             <div className="block relative" onClick={() => navigate(`/product/${product.id}`)}>
-                <img src={product.image} alt={product.title} className="w-full h-60 object-cover cursor-pointer" />
+                <img src={product.images[0]} alt={product.title} className="w-full h-60 object-cover cursor-pointer" />
                 {/* Add to Cart Button (Centered on Hover) */}
                 <div className={`absolute inset-0 flex items-center justify-center transition-opacity duration-300 ${isHovered ? 'opacity-100' : 'opacity-0'}`}>
                     <button

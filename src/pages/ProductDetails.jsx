@@ -1,25 +1,31 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { HiShoppingCart } from 'react-icons/hi';
 import { FaRegHeart } from 'react-icons/fa';
 import Rating from '../components/rating/Rating';
 import { toast } from 'react-toastify';
 import ProductZoom from '../components/products/ProductZoom';
 import { ProductContext } from '../context/ProductContext';
+import { useParams } from 'react-router-dom';
+import ProductDetailsPage from './ProductDetailsPage';
+import RelatedProduct from '../components/relatedProduct/RelatedProduct';
 
 const ProductDetails = () => {
-
-    const { addToCart, addToWishlist, wishlist, removeFromWishlist } = useContext(ProductContext);
+    const { id } = useParams();
+    const { getProductById, addToCart, addToWishlist, currentProduct } = useContext(ProductContext);
 
     const [quantity, setQuantity] = useState(1);
-    const [product] = useState({
-        title: "Royaloak Astra Magazine Rack- Water Base",
-        price: 1999,
-        salePrice: 1499,
-        description: "This is a detailed description of the product. It explains the features and benefits.",
-        rating: 4.5,
-        category: { name: "Furniture" },
-        subcategory: { name: "Chairs" },
-    });
+    const [product, setProduct] = useState(null);
+
+    useEffect(() => {
+        const fetchedProduct = getProductById(parseInt(id));
+        // console.log(fetchedProduct)
+        if (fetchedProduct) {
+            setProduct(fetchedProduct);
+        } else {
+            toast.error("Product not found!");
+        }
+    }, [id, getProductById]);
+
 
     const handleAddToCart = () => {
         addToCart(product);
@@ -27,15 +33,8 @@ const ProductDetails = () => {
     };
 
     const handleAddToWishlist = () => {
-        if (isFavorite) {
-            removeFromWishlist(product.id);
-            setIsFavorite(false);
-            toast.success("Removed from Wishlist!");
-        } else {
-            addToWishlist(product);
-            setIsFavorite(true);
-            toast.success("Added to Wishlist!");
-        }
+        addToWishlist(product);
+        toast.success("Added to Wishlist!");
     };
 
     // Increment and decrement functions for quantity
@@ -48,6 +47,9 @@ const ProductDetails = () => {
             setQuantity(prevQuantity => prevQuantity - 1);
         }
     };
+    if (!product) {
+        return <div>Loading...</div>;
+    }
 
     return (
         <div className="container min-h-screen mx-auto px-4 mt-10 mb-10">
@@ -55,17 +57,18 @@ const ProductDetails = () => {
                 {/* Left Image Section */}
                 <div className="col-span-5 lg:col-span-2">
                     <div className="h-auto">
-                        <ProductZoom />
+                        <ProductZoom images={product?.images} />
+
                     </div>
                 </div>
                 {/* Right Content Section */}
                 <div className="col-span-5 lg:col-span-3 pt-6">
                     <div className="space-y-4">
-                        <h3 className="font-roboto font-medium text-[30px] text-[rgb(42,40,40)] leading-[45px]">
+                        <h3 className="font-roboto text-[26px] sm:text-[30px] text-[rgb(42,40,40)] leading-[45px]">
                             {product.title}
                         </h3>
                         <h3 className="font-roboto font-medium text-[30px] text-[rgb(42,40,40)] leading-[45px]">
-                            ₹{product.salePrice || product.price}
+                            {product.salePrice || product.price}
                         </h3>
                         <div className="flex items-center space-x-2">
                             <Rating rating={product.rating || 0} />
@@ -77,7 +80,7 @@ const ProductDetails = () => {
                     {/* Category and Subcategory */}
                     <div className="mt-4">
                         <p className="text-gray-600 text-lg">
-                            <strong>Category:</strong> {product.category.name || product.category}
+                            {/* <strong>Category:</strong> {product.category.name || product.category} */}
                         </p>
                     </div>
 
@@ -101,7 +104,7 @@ const ProductDetails = () => {
 
 
                     {/* Add to Cart and Add to Wishlist Buttons */}
-                    <div className="mt-8 flex gap-10">
+                    <div className="mt-8 flex flex-col sm:flex-row gap-4 sm:gap-10">
                         <button
                             onClick={handleAddToCart}
                             className="flex items-center justify-center rounded-md px-5 py-2.5 text-center text-sm font-medium text-white bgColor transition duration-300 focus:outline-none"
@@ -118,6 +121,12 @@ const ProductDetails = () => {
                         </button>
                     </div>
                 </div>
+            </div>
+            <div className="py-8">
+                <RelatedProduct currentProductCategory={product.category} />
+            </div>
+            <div>
+                <ProductDetailsPage />
             </div>
         </div>
     );

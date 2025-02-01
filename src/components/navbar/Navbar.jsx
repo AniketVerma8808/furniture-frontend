@@ -5,6 +5,7 @@ import { useContext, useState } from "react";
 import { ProductContext } from "../../context/ProductContext";
 import { FiLogOut } from "react-icons/fi";
 import { BiUserCircle } from "react-icons/bi";
+import { toast } from "react-toastify";
 
 
 const Navbar = () => {
@@ -12,7 +13,7 @@ const Navbar = () => {
     const [hoveredCategory, setHoveredCategory] = useState(null);
     const [isCategoryOpen, setIsCategoryOpen] = useState(null);
     const [isDropdownOpenUser, setIsDropdownOpenUser] = useState(false);
-    const { cart, wishlist, isAuthenticated, logout, user } = useContext(ProductContext);
+    const { cart, wishlist, isAuthenticated, logout, } = useContext(ProductContext);
 
     const categories = [
         { name: "INTERNATIONAL COLLECTION", subcategories: null },
@@ -45,6 +46,7 @@ const Navbar = () => {
 
     const handleLogout = () => {
         logout();
+        toast.success("logout successful!")
         setIsDropdownOpenUser(false);
     };
 

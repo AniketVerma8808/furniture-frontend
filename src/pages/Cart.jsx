@@ -6,8 +6,13 @@ import { toast } from "react-toastify";
 const Cart = () => {
     const { cart, handleQuantityChange, handleRemoveItem } = useContext(ProductContext);
 
+
+    const parsePrice = (price) => {
+        return parseFloat(price.replace('₹', '').replace(',', ''));
+    }
+
     const calculateTotal = () => {
-        return cart.reduce((total, item) => total + item.price * item.quantity, 0);
+        return cart.reduce((total, item) => total + parsePrice(item.price) * item.quantity, 0);
     };
 
     const shippingFee = cart.length > 0 ? 50 : 0;
@@ -26,11 +31,16 @@ const Cart = () => {
                     <div className="flex flex-col lg:flex-row">
                         {/* Cart Items */}
                         <div className="flex-1 p-4">
-                            {cart.map(({ id, title, price, quantity, image }) => (
+                            {cart.map(({ id, title, price, quantity, images }) => (
                                 <div key={id} className="flex items-center justify-between border-b py-4 flex-wrap lg:flex-nowrap">
                                     {/* Product Info */}
                                     <div className="flex items-center w-full lg:w-auto mb-4 lg:mb-0">
-                                        <img src={image} alt={title} className="w-20 h-20 rounded-lg object-cover" />
+
+                                        <img
+                                            src={images && images[0]}
+                                            alt={title}
+                                            className="w-20 h-20 rounded-lg object-cover"
+                                        />
                                         <div className="ml-4">
                                             <h2 className="text-lg font-medium">{title}</h2>
                                             <p className="text-gray-600"> {price}</p>
@@ -87,7 +97,7 @@ const Cart = () => {
                                 <span>Total</span>
                                 <span>₹{finalTotal.toFixed(2)}</span>
                             </div>
-                            <button className="mt-4 w-full bg-[#75A513] text-white py-2 rounded hover:bg-[#609f10] transition duration-300">
+                            <button className="mt-4 w-full bgColor text-white py-2 rounded  transition duration-300">
                                 Proceed to Checkout
                             </button>
                         </div>
