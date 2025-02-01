@@ -13,6 +13,7 @@ import Contact from './pages/Contact'
 import NotFound from './pages/NotFound'
 import ProductDetails from './pages/ProductDetails'
 import Cart from './pages/Cart'
+import Wishlist from './pages/Wishlist'
 
 const ScrollToTop = () => {
   const location = useLocation();
@@ -41,6 +42,7 @@ const App = () => {
           <Route path="/contact" element={<Contact />} />
           <Route path="/product/:id" element={<ProductDetails />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/wishlist" element={<Wishlist />} />
 
 
           {/* Define a route for a non-existent path (404) */}

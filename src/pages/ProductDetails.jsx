@@ -1,11 +1,15 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { HiShoppingCart } from 'react-icons/hi';
 import { FaRegHeart } from 'react-icons/fa';
 import Rating from '../components/rating/Rating';
 import { toast } from 'react-toastify';
 import ProductZoom from '../components/products/ProductZoom';
+import { ProductContext } from '../context/ProductContext';
 
 const ProductDetails = () => {
+
+    const { addToCart, addToWishlist, wishlist, removeFromWishlist } = useContext(ProductContext);
+
     const [quantity, setQuantity] = useState(1);
     const [product] = useState({
         title: "Royaloak Astra Magazine Rack- Water Base",
@@ -18,11 +22,20 @@ const ProductDetails = () => {
     });
 
     const handleAddToCart = () => {
-        toast.success(`${quantity} item(s) added to Cart!`);
+        addToCart(product);
+        toast.success("Added to Cart!");
     };
 
     const handleAddToWishlist = () => {
-        toast.success("Added to Wishlist!");
+        if (isFavorite) {
+            removeFromWishlist(product.id);
+            setIsFavorite(false);
+            toast.success("Removed from Wishlist!");
+        } else {
+            addToWishlist(product);
+            setIsFavorite(true);
+            toast.success("Added to Wishlist!");
+        }
     };
 
     // Increment and decrement functions for quantity

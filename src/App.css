@@ -20,7 +20,7 @@ select:focus {
   color: #2a2828;
 }
 .borderColor {
-  color: #bdbaba !important;
+  border-color: #bdbaba !important;
 }
 
 .custom-shadow {

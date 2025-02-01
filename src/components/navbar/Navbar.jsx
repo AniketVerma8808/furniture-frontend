@@ -3,12 +3,16 @@ import { IoIosArrowDown } from "react-icons/io";
 import { Link } from "react-router-dom";
 import { useContext, useState } from "react";
 import { ProductContext } from "../../context/ProductContext";
+import { FiLogOut } from "react-icons/fi";
+import { BiUserCircle } from "react-icons/bi";
+
 
 const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [hoveredCategory, setHoveredCategory] = useState(null);
     const [isCategoryOpen, setIsCategoryOpen] = useState(null);
-    const { cart, wishlist } = useContext(ProductContext);
+    const [isDropdownOpenUser, setIsDropdownOpenUser] = useState(false);
+    const { cart, wishlist, isAuthenticated, logout, user } = useContext(ProductContext);
 
     const categories = [
         { name: "INTERNATIONAL COLLECTION", subcategories: null },
@@ -32,6 +36,16 @@ const Navbar = () => {
 
     const handleCategoryClick = (categoryName) => {
         setIsCategoryOpen((prev) => (prev === categoryName ? null : categoryName));
+    };
+
+
+    const handleDropdownToggle = () => {
+        setIsDropdownOpenUser((prev) => !prev);
+    };
+
+    const handleLogout = () => {
+        logout();
+        setIsDropdownOpenUser(false);
     };
 
     return (
@@ -73,10 +87,44 @@ const Navbar = () => {
 
                         {/* Desktop Links (Login, Wishlist, Cart) */}
                         <div className="gap-8 text-lg items-center hidden md:flex">
-                            <Link to='/login' className="flex flex-col items-center">
-                                <FaUser />
-                                <span className="text-xs">LOGIN</span>
-                            </Link>
+                            {isAuthenticated ? (
+                                <div className="relative group flex items-center gap-4">
+                                    <BiUserCircle className="h-8 w-8 text-white cursor-pointer" onClick={handleDropdownToggle} />
+                                    {isDropdownOpenUser && (
+                                        <div className="absolute  right-0 z-50 top-8 w-48 bgBlack text-white border rounded-lg shadow-lg">
+                                            {/* <Link
+                                                onClick={() => setIsDropdownOpenUser(false)}
+                                                to="/profile"
+                                                className="block px-4 py-2 text-sm text-white hover:bg-gray-100 hover:text-black"
+                                            >
+                                                Profile
+                                            </Link> */}
+                                            <Link
+                                                onClick={() => setIsDropdownOpenUser(false)}
+                                                to="/orders"
+                                                className="block px-4 py-2 text-sm text-white hover:bg-gray-100 hover:text-black"
+                                            >
+                                                Orders
+                                            </Link>
+                                            <button
+                                                onClick={handleLogout}
+                                                className="w-full text-left block px-4 py-2 text-sm text-red-500 hover:bg-gray-100"
+                                            >
+                                                <div className="flex items-center gap-2">
+                                                    <FiLogOut className="text-red-400" />
+                                                    Logout
+                                                </div>
+                                            </button>
+                                        </div>
+                                    )}
+                                </div>
+                            ) : (
+                                <Link to='/login' className="flex flex-col items-center">
+                                    <FaUser />
+                                    <span className="text-xs">LOGIN</span>
+                                </Link>
+                            )}
+
                             <Link to="/wishlist" className="flex flex-col items-center relative">
                                 <FaHeart />
                                 <span className="text-xs">WISHLIST</span>
@@ -103,18 +151,51 @@ const Navbar = () => {
                         </div>
 
                         <div className="flex gap-8 text-lg items-center">
-                            <Link to='/login' className="flex flex-col items-center">
-                                <FaUser />
-                                <span className="text-xs">LOGIN</span>
-                            </Link>
-                            <div className="flex flex-col items-center">
+                            {isAuthenticated ? (
+                                <div className="relative group flex items-center gap-4">
+                                    <BiUserCircle className="h-8 w-8 text-white cursor-pointer" onClick={handleDropdownToggle} />
+                                    {isDropdownOpenUser && (
+                                        <div className="absolute right-0 mt-3 w-48 bg-white border rounded-lg shadow-lg">
+                                            <Link
+                                                onClick={() => setIsDropdownOpenUser(false)}
+                                                to="/profile"
+                                                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                            >
+                                                Profile
+                                            </Link>
+                                            <Link
+                                                onClick={() => setIsDropdownOpenUser(false)}
+                                                to="/orders"
+                                                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                            >
+                                                Orders
+                                            </Link>
+                                            <button
+                                                onClick={handleLogout}
+                                                className="w-full text-left block px-4 py-2 text-sm text-red-700 hover:bg-gray-100"
+                                            >
+                                                <div className="flex items-center gap-2">
+                                                    <FiLogOut className="text-red-400" />
+                                                    Logout
+                                                </div>
+                                            </button>
+                                        </div>
+                                    )}
+                                </div>
+                            ) : (
+                                <Link to="/login" className="flex flex-col items-center">
+                                    <FaUser />
+                                    <span className="text-xs">LOGIN</span>
+                                </Link>
+                            )}
+                            <Link to="/wishlist" className="flex flex-col items-center relative">
                                 <FaHeart />
                                 <span className="text-xs">WISHLIST</span>
-                            </div>
-                            <div className="flex flex-col items-center">
+                            </Link>
+                            <Link to="/cart" className="flex flex-col items-center relative">
                                 <FaShoppingCart />
                                 <span className="text-xs">CART</span>
-                            </div>
+                            </Link>
                         </div>
 
                         {/* Right side mobile toggle button */}

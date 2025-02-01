@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
-import BannerImg from '../../assets/image/banner/banner2.jpg';
 import { toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
+import loginBanner from '../../assets/image/banner/loginBanner.png'
+import { IoIosEye, IoIosEyeOff } from "react-icons/io";
 
 const Register = () => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
     const [password, setPassword] = useState('');
+    const [showPassword, setShowPassword] = useState(false);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -28,7 +30,7 @@ const Register = () => {
             {/* Left side Banner */}
             <div className="hidden lg:block h-full">
                 <img
-                    src={BannerImg}
+                    src={loginBanner}
                     alt="Banner"
                     className="w-full h-full object-cover"
                 />
@@ -65,7 +67,7 @@ const Register = () => {
                             name="email"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
-                            className="w-full px-4 py-2 mt-1 border borderColor rounded-lg "
+                            className="w-full px-4 py-2 mt-1 border borderColor  rounded-lg "
                             placeholder="Enter your email"
                         />
                     </div>
@@ -85,17 +87,25 @@ const Register = () => {
                     </div>
 
                     {/* Password Field */}
-                    <div>
-                        <label htmlFor="password" className="block text-sm font-medium text-gray-700">Password</label>
+                    <div className="relative">
+                        <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+                            Password
+                        </label>
                         <input
-                            type="password"
+                            type={showPassword ? "text" : "password"}
                             id="password"
-                            name="password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
-                            className="w-full px-4 py-2 mt-1 border borderColor rounded-lg "
+                            className="w-full px-4 py-2 mt-1 border borderColor rounded-lg pr-10"
                             placeholder="Enter your password"
                         />
+                        <button
+                            type="button"
+                            className="absolute right-3 top-9 text-gray-500 hover:text-gray-700"
+                            onClick={() => setShowPassword(!showPassword)}
+                        >
+                            {showPassword ? <IoIosEye size={22} /> : <IoIosEyeOff size={22} />}
+                        </button>
                     </div>
 
                     {/* Submit Button */}
