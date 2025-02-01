@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { HiShoppingCart } from 'react-icons/hi';
 import { FaRegHeart } from 'react-icons/fa';
-import ProductZoom from '../components/products/ProductZoom';
 import Rating from '../components/rating/Rating';
 import { toast } from 'react-toastify';
+import ProductZoom from '../components/products/ProductZoom';
 
 const ProductDetails = () => {
-    const [quantity, setQuantity] = useState(1);  // Initialize quantity state
+    const [quantity, setQuantity] = useState(1);
     const [product] = useState({
         title: "Royaloak Astra Magazine Rack- Water Base",
         price: 1999,
