@@ -1,12 +1,14 @@
 import { FaUser, FaHeart, FaShoppingCart, FaMapMarkerAlt, FaSearch, FaBars } from "react-icons/fa";
 import { IoIosArrowDown } from "react-icons/io";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { ProductContext } from "../../context/ProductContext";
 
 const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [hoveredCategory, setHoveredCategory] = useState(null);
     const [isCategoryOpen, setIsCategoryOpen] = useState(null);
+    const { cart, wishlist } = useContext(ProductContext);
 
     const categories = [
         { name: "INTERNATIONAL COLLECTION", subcategories: null },
@@ -75,14 +77,20 @@ const Navbar = () => {
                                 <FaUser />
                                 <span className="text-xs">LOGIN</span>
                             </Link>
-                            <div className="flex flex-col items-center">
+                            <Link to="/wishlist" className="flex flex-col items-center relative">
                                 <FaHeart />
                                 <span className="text-xs">WISHLIST</span>
-                            </div>
-                            <div className="flex flex-col items-center">
+                                {wishlist.length > 0 && (
+                                    <span className="absolute -top-5 right-0 bg-red-500 text-white text-xs rounded-full px-2 py-1">{wishlist.length}</span>
+                                )}
+                            </Link>
+                            <Link to="/cart" className="flex flex-col items-center relative">
                                 <FaShoppingCart />
                                 <span className="text-xs">CART</span>
-                            </div>
+                                {cart.length > 0 && (
+                                    <span className="absolute -top-5 right-0 bg-red-500 text-white text-xs rounded-full px-2 py-1">{cart.length}</span>
+                                )}
+                            </Link>
                         </div>
                     </div>
 

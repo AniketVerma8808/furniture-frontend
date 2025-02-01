@@ -1,15 +1,54 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { toast } from 'react-toastify';
+import { ProductContext } from '../../context/ProductContext';
 
-const ProductItem = ({ product }) => {
+const ProductItem = ({ product, label }) => {
     const [isFavorite, setIsFavorite] = useState(false);
     const [isHovered, setIsHovered] = useState(false);
     const navigate = useNavigate();
+    const { addToCart, addToWishlist, wishlist, removeFromWishlist } = useContext(ProductContext);
+
+
+    useEffect(() => {
+        if (wishlist.find(item => item.id === product.id)) {
+            setIsFavorite(true);
+        } else {
+            setIsFavorite(false);
+        }
+    }, [wishlist, product.id]);
+
 
     const handleAddToCart = () => {
+        addToCart(product);
         toast.success("Added to Cart!");
+    };
+
+
+    const handleAddToWishlist = () => {
+        if (isFavorite) {
+            removeFromWishlist(product.id);
+            setIsFavorite(false);
+            toast.success("Removed from Wishlist!");
+        } else {
+            addToWishlist(product);
+            setIsFavorite(true);
+            toast.success("Added to Wishlist!");
+        }
+    };
+
+    const getLabelColor = (label) => {
+        switch (label) {
+            case "Best Seller":
+                return "bg-yellow-500";
+            case "Trending":
+                return "bg-green-500";
+            case "New Arrival":
+                return "bg-blue-500";
+            default:
+                return "bg-red-500";
+        }
     };
 
     return (
@@ -30,14 +69,24 @@ const ProductItem = ({ product }) => {
                         Add to Cart
                     </button>
                 </div>
+                {/* Dynamic Label */}
+                {label && (
+                    <div className={`absolute bottom-0 left-0 text-white text-xs font-semibold px-2 py-1 rounded-md ${getLabelColor(label)}`}>
+                        {label}
+                    </div>
+                )}
             </div>
 
             {/* Favorite Heart Icon */}
             <button
-                onClick={() => setIsFavorite(!isFavorite)}
+                onClick={handleAddToWishlist}
                 className="absolute top-2 right-2 bg-white rounded-full p-2 shadow-md"
             >
-                {isFavorite ? <AiFillHeart className="w-6 h-6 text-red-500" /> : <AiOutlineHeart className="w-6 h-6 text-red-500" />}
+                {isFavorite ? (
+                    <AiFillHeart className="w-6 h-6 text-red-500" />
+                ) : (
+                    <AiOutlineHeart className="w-6 h-6 text-red-500" />
+                )}
             </button>
 
             {/* Product Details */}

@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Slider from 'react-slick';
 import ProductItem from '../products/ProductItem';
-import { products } from '../products/Product';
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import { ProductContext } from '../../context/ProductContext';
 
 const NextArrow = ({ onClick }) => (
     <button
@@ -23,6 +23,8 @@ const PrevArrow = ({ onClick }) => (
 );
 
 const Arrivals = () => {
+    const { newArrivals } = useContext(ProductContext);
+
     const settings = {
         dots: false,
         infinite: true,
@@ -61,9 +63,9 @@ const Arrivals = () => {
                 New Arrivals</h3>
             <div className="py-12 relative">
                 <Slider {...settings}>
-                    {products.map((product) => (
+                    {newArrivals.map((product) => (
                         <div key={product.id} className="px-2">
-                            <ProductItem product={product} />
+                            <ProductItem product={product} label="New Arrival" />
                         </div>
                     ))}
                 </Slider>

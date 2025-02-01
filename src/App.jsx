@@ -12,6 +12,7 @@ import Register from './components/auth/Register'
 import Contact from './pages/Contact'
 import NotFound from './pages/NotFound'
 import ProductDetails from './pages/ProductDetails'
+import Cart from './pages/Cart'
 
 const ScrollToTop = () => {
   const location = useLocation();
@@ -22,7 +23,6 @@ const ScrollToTop = () => {
       behavior: 'smooth',
     });
   }, [location.pathname]);
-
   return null;
 };
 
@@ -40,6 +40,7 @@ const App = () => {
           <Route path="/register" element={<Register />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/product/:id" element={<ProductDetails />} />
+          <Route path="/cart" element={<Cart />} />
 
 
           {/* Define a route for a non-existent path (404) */}

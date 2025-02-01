@@ -1,21 +1,20 @@
 import React from 'react';
 import Slider from 'react-slick';
 import CategoriesItem from './CategoriesItem';
-import { GiSofa } from 'react-icons/gi';
-import { MdChair } from 'react-icons/md';
-import { MdBed } from 'react-icons/md';
-import { MdTableRestaurant } from 'react-icons/md';
+import { MdOutlineTableRestaurant } from 'react-icons/md';
 import { MdOutlineWeekend } from 'react-icons/md';
 import { MdOutlineStorage } from 'react-icons/md';
 import { MdCheckroom } from 'react-icons/md';
 import { MdTv } from 'react-icons/md';
+import { RiArmchairLine, RiSofaLine } from 'react-icons/ri';
+import { LuBedSingle } from 'react-icons/lu';
 
 const CategoriesSlider = () => {
     const categories = [
-        { icon: <GiSofa />, name: "Sofas" },
-        { icon: <MdChair />, name: "Chairs" },
-        { icon: <MdBed />, name: "Beds" },
-        { icon: <MdTableRestaurant />, name: "Tables" },
+        { icon: <RiSofaLine />, name: "Sofas" },
+        { icon: <RiArmchairLine />, name: "Chairs" },
+        { icon: <LuBedSingle />, name: "Beds" },
+        { icon: <MdOutlineTableRestaurant />, name: "Tables" },
         { icon: <MdOutlineWeekend />, name: "Couches" },
         { icon: <MdOutlineStorage />, name: "Storage" },
         { icon: <MdCheckroom />, name: "Furnishings" },
