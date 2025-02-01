@@ -15,7 +15,7 @@ const images = [
 
 const Opportunities = () => {
     return (
-        <div className="max-w-7xl mx-auto py-12 px-4">
+        <div className="max-w-7xl mx-auto py-4 px-4">
             <div className="text-center mb-8">
                 <h3 className="font-roboto font-medium text-[30px] text-[rgb(42,40,40)] leading-[45px]">
                     Opportunities don't Happen, You Create Them

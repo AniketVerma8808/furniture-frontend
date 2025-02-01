@@ -11,7 +11,7 @@ import Login from './components/auth/Login'
 import Register from './components/auth/Register'
 import Contact from './pages/Contact'
 import NotFound from './pages/NotFound'
-import ProductDetails from './pages/productDetails'
+import ProductDetails from './pages/ProductDetails'
 
 const ScrollToTop = () => {
   const location = useLocation();
