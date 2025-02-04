@@ -9,7 +9,7 @@ const Footer = () => {
             <div className="py-6 border-b border-gray-700">
                 <div className="max-w-7xl px-4 mx-auto flex flex-col sm:flex-row justify-between items-center">
                     <div className="text-center sm:text-left p-2">
-                        <h2 className="text-lg sm:text-xl lg:text-2xl font-semibold">SUBSCRIBE TO NEWSLETTER</h2>
+                        <h2 className="text-lg sm:text-xl lg:text-2xl font-semibold ">SUBSCRIBE TO NEWSLETTER</h2>
                         <p className="text-base">Be the first to know about new arrivals, sales & promos by submitting your email!</p>
                     </div>
                     <div className="mt-4 sm:mt-0 flex flex-col sm:flex-row items-center justify-center gap-4 relative">
@@ -20,101 +20,113 @@ const Footer = () => {
             </div>
 
             {/* Links Section */}
-            <div className="max-w-7xl px-4 mx-auto grid grid-cols-2 sm:grid-cols-2 md:grid-cols-6 gap-6 py-8 border-gray-700 text-base">
+            <div className="max-w-7xl px-4 mx-auto grid grid-cols-2 sm:grid-cols-2 md:grid-cols-6 gap-6 py-8 border-gray-700 text-[14px] md:text-[16px]">
                 <div>
-                    <h3 className="font-semibold mb-2 text-base">QUICK LINKS</h3>
+                    <h3 className="font-semibold mb-2 text-[14px] md:text-[16px]">QUICK LINKS</h3>
                     <ul>
-                        <li><Link to="/" className="hover:text-gray-400">Home</Link></li>
-                        <li><Link to="/stores" className="hover:text-gray-400">Royaloak Stores</Link></li>
-                        <li><Link to="/media" className="hover:text-gray-400">Media</Link></li>
-                        <li><Link to="/feedback" className="hover:text-gray-400">Share Feedback</Link></li>
+                        <li className="footer-link"><Link to="/" className="hover:text-gray-400 ">Home</Link></li>
+                        <li className="footer-link"><Link to="/stores" className="hover:text-gray-400">Royaloak Stores</Link></li>
+                        <li className="footer-link"><Link to="/media" className="hover:text-gray-400">Media</Link></li>
+                        <li className="footer-link"><Link to="/feedback" className="hover:text-gray-400">Share Feedback</Link></li>
                     </ul>
                 </div>
                 <div>
-                    <h3 className="font-semibold mb-2 text-base">SERVICES</h3>
+                    <h3 className="font-semibold mb-2 text-[14px] md:text-[16px]">SERVICES</h3>
                     <ul>
-                        <li><Link to="/services/dismantling" className="hover:text-gray-400">Dismantling Service</Link></li>
-                        <li><Link to="/services/re-installation" className="hover:text-gray-400">Re-Installation</Link></li>
-                        <li><Link to="/services/loose-fitting" className="hover:text-gray-400">Loose Fitting</Link></li>
-                        <li><Link to="/complaints" className="hover:text-gray-400">Complaints</Link></li>
+                        <li className="footer-link"><Link to="/services/dismantling" className="hover:text-gray-400">Dismantling Service</Link></li>
+                        <li className="footer-link"><Link to="/services/re-installation" className="hover:text-gray-400">Re-Installation</Link></li>
+                        <li className="footer-link"><Link to="/services/loose-fitting" className="hover:text-gray-400">Loose Fitting</Link></li>
+                        <li className="footer-link"><Link to="/complaints" className="hover:text-gray-400">Complaints</Link></li>
                     </ul>
                 </div>
                 <div>
-                    <h3 className="font-semibold mb-2 text-base">CORPORATE INFO</h3>
+                    <h3 className="font-semibold mb-2 text-[14px] md:text-[16px]">CORPORATE INFO</h3>
                     <ul>
-                        <li><Link to="/blogs" className="hover:text-gray-400">Blogs</Link></li>
-                        <li><Link to="/franchise" className="hover:text-gray-400">Become A Franchise</Link></li>
-                        <li><Link to="/rent-property" className="hover:text-gray-400">Rent Your Property</Link></li>
+                        <li className="footer-link"><Link to="/blogs" className="hover:text-gray-400">Blogs</Link></li>
+                        <li className="footer-link"><Link to="/franchise" className="hover:text-gray-400">Become A Franchise</Link></li>
+                        <li className="footer-link"><Link to="/rent-property" className="hover:text-gray-400">Rent Your Property</Link></li>
                     </ul>
                 </div>
                 <div>
-                    <h3 className="font-semibold mb-2 text-base">ROYALOAK</h3>
+                    <h3 className="font-semibold mb-2 text-[14px] md:text-[16px]">ROYALOAK</h3>
                     <ul>
-                        <li><Link to="/our-story" className="hover:text-gray-400">Our Story</Link></li>
-                        <li><Link to="/sell-with-us" className="hover:text-gray-400">Sell With Royaloak</Link></li>
-                        <li><Link to="/careers" className="hover:text-gray-400">Career</Link></li>
-                        <li><Link to="/contact" className="hover:text-gray-400">Contact Us</Link></li>
+                        <li className="footer-link"><Link to="/our-story" className="hover:text-gray-400">Our Story</Link></li>
+                        <li className="footer-link"><Link to="/sell-with-us" className="hover:text-gray-400">Sell With Royaloak</Link></li>
+                        <li className="footer-link"><Link to="/careers" className="hover:text-gray-400">Career</Link></li>
+                        <li className="footer-link"><Link to="/contact" className="hover:text-gray-400">Contact Us</Link></li>
                     </ul>
                 </div>
                 <div>
-                    <h3 className="font-semibold mb-2 text-base">MY ACCOUNT</h3>
+                    <h3 className="font-semibold mb-2 text-[14px] md:text-[16px]">MY ACCOUNT</h3>
                     <ul>
-                        <li><Link to="/cart" className="hover:text-gray-400">My Cart</Link></li>
-                        <li><Link to="/orders" className="hover:text-gray-400">My Orders</Link></li>
-                        <li><Link to="/track-order" className="hover:text-gray-400">Track Order</Link></li>
+                        <li className="footer-link" ><Link to="/cart" className="hover:text-gray-400">My Cart</Link></li>
+                        <li className="footer-link" ><Link to="/orders" className="hover:text-gray-400">My Orders</Link></li>
+                        <li className="footer-link" ><Link to="/track-order" className="hover:text-gray-400">Track Order</Link></li>
                     </ul>
                 </div>
                 <div>
-                    <h3 className="font-semibold mb-2 text-base uppercase">Social Accounts</h3>
-                    <div className="flex gap-4 mb-2">
-                        <Link to="#" className="text-xl"><FaFacebookF /></Link>
-                        <Link to="#" className="text-xl"><FaInstagram /></Link>
-                        <Link to="#" className="text-xl"><FaYoutube /></Link>
-                        <Link to="#" className="text-xl"><FaTwitter /></Link>
-                        <Link to="#" className="text-xl"><FaLinkedin /></Link>
+                    <h3 className="font-semibold mb-2 text-[14px] md:text-[16px] uppercase">Social Accounts</h3>
+                    <div className="flex flex-wrap gap-2 md:gap-4 mb-2">
+                        <div className="bg-white rounded-full p-2 text-black social-icon">
+                            <Link to="#" className="text-[16px] "><FaFacebookF /></Link>
+                        </div>
+                        <div className="bg-white rounded-full p-2 text-black social-icon">
+                            <Link to="#" className="text-[16px]"><FaInstagram /></Link>
+                        </div>
+                        <div className="bg-white rounded-full p-2 text-black social-icon">
+                            <Link to="#" className="text-[16px]"><FaYoutube /></Link>
+                        </div>
+                        <div className="bg-white rounded-full p-2 text-black social-icon">
+                            <Link to="#" className="text-[16px]"><FaTwitter /></Link>
+                        </div>
+
                     </div>
-                    <h3 className="font-semibold mb-2 text-base uppercase">Pay Using</h3>
+
+
+                    {/* <h3 className="font-semibold mb-2 text-base uppercase">Pay Using</h3> */}
                     {/* Add payment icons here */}
                 </div>
             </div>
 
             {/* Benefits Section */}
-            <div className="max-w-7xl  mx-auto px-10 py-6 rounded-lg shadow-lg bg-[#363434] text-center md:text-left">
+            <div className="max-w-7xl  mx-auto px-4 py-6 rounded-lg shadow-lg bg-[#363434] text-center md:text-left">
                 <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
                     <div className="flex flex-col items-center gap-2 text-base">
                         <FaShippingFast className="text-xl" />
                         <div>
-                            <h4 className="font-semibold">FREE DELIVERY</h4>
-                            <p>When ordering from Rs. 2500.</p>
+                            <h4 className="font-semibold text-[14px] md:text-[16px]">FREE DELIVERY</h4>
+                            <p className="text-[14px] md:text-[16px]">When ordering from Rs. 2500.</p>
                         </div>
                     </div>
                     <div className="flex flex-col items-center gap-2 text-base">
                         <FaExchangeAlt className="text-xl" />
                         <div>
-                            <h4 className="font-semibold">EASY RETURNS</h4>
-                            <p>If goods have problems</p>
+                            <h4 className="font-semibold text-[14px] md:text-[16px]">EASY RETURNS</h4>
+                            <p className="text-[14px] md:text-[16px]">If goods have problems</p>
                         </div>
                     </div>
                     <div className="flex flex-col items-center gap-2 text-base">
                         <FaLock className="text-xl" />
                         <div>
-                            <h4 className="font-semibold">SECURE PAYMENT</h4>
-                            <p>100% secure payment</p>
+                            <h4 className="font-semibold text-[14px] md:text-[16px]">SECURE PAYMENT</h4>
+                            <p className="text-[14px] md:text-[16px]">100% secure payment</p>
                         </div>
                     </div>
                     <div className="flex flex-col items-center gap-2 text-base">
                         <FaHeadphonesAlt className="text-xl" />
                         <div>
-                            <h4 className="font-semibold">9 AM TO 6:30 PM | 7 DAYS</h4>
-                            <p>Dedicated support</p>
+                            <h4 className="font-semibold text-[14px] md:text-[16px]">9 AM TO 6:30 PM | 7 DAYS</h4>
+                            <p className="text-[14px] md:text-[16px]">Dedicated support</p>
                         </div>
                     </div>
                 </div>
             </div>
 
             {/* Bottom Bar */}
-            <div className="max-w-7xl px-4  mx-auto flex flex-col sm:flex-row justify-between py-4 text-gray-400 text-xs sm:text-sm md:text-base">
-                <p>© 2025, Royaloak Inc. Pvt. Ltd. | All rights reserved.</p>
+            <div className="max-w-7xl px-4 mx-auto flex flex-col sm:flex-row justify-between py-4 text-white text-[14px] md:text-[16px]">
+                <p>© 2025, Company Name | All rights reserved.
+                    <span> Designed by <Link to="https://techxpert.in" target="_blank" rel="noopener noreferrer" className="text-white hover:underline">Techxpert</Link></span>
+                </p>
                 <p>
                     <Link to="/privacy-policy" className="mx-2 hover:text-gray-400">Privacy Policy</Link> |
                     <Link to="/terms-and-conditions" className="mx-2 hover:text-gray-400">Terms & Conditions</Link> |
@@ -122,13 +134,14 @@ const Footer = () => {
                 </p>
             </div>
 
+
             {/* Floating Buttons */}
             {/* Uncomment if needed */}
-            {/* <div className="fixed bottom-4 right-4 flex flex-col gap-3">
-                    <button className="bg-green-500 p-3 rounded-full text-white"><FaWhatsapp size={20} /></button>
-                    <button className="bg-orange-500 p-3 rounded-full text-white"><FaPhoneAlt size={20} /></button>
-                    <button className="bg-gray-500 p-3 rounded-full text-white"><FaCommentDots size={20} /></button>
-                </div> */}
+            <div className="fixed bottom-4 right-4 flex flex-col gap-3">
+                <button className="bg-green-500 p-3 rounded-full text-white"><FaWhatsapp size={20} /></button>
+                <button className="bg-orange-500 p-3 rounded-full text-white"><FaPhoneAlt size={20} /></button>
+                <button className="bg-gray-500 p-3 rounded-full text-white"><FaCommentDots size={20} /></button>
+            </div>
         </footer>
     );
 };

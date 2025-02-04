@@ -28,3 +28,18 @@ select:focus {
     3px 0px 6px rgba(0, 0, 0, 0.05), -3px 0px 6px rgba(0, 0, 0, 0.05);
   transition: box-shadow 0.3s ease-in-out;
 }
+
+/* Add this CSS to your stylesheet */
+
+.footer-link {
+  transition: transform 0.3s ease-in-out;
+}
+
+.footer-link:hover {
+  transform: translateX(8px);
+}
+
+.social-icon:hover {
+  transform: scale(1.1);
+  transition: transform 0.3s ease;
+}

@@ -21,31 +21,29 @@ const CategoriesSlider = () => {
         { icon: <MdTv />, name: "TV Units" },
     ];
 
-
     // Slider settings
     const settings = {
         dots: false,
         infinite: true,
         speed: 500,
         autoplay: true,
-        slidesToShow: 8,
+        slidesToShow: 6, // Default for larger screens
         slidesToScroll: 1,
-
         responsive: [
             {
-                breakpoint: 1024,
+                breakpoint: 1024, // Tablet and up
+                settings: {
+                    slidesToShow: 4,
+                },
+            },
+            {
+                breakpoint: 768, // Mobile screens
                 settings: {
                     slidesToShow: 3,
                 },
             },
             {
-                breakpoint: 768,
-                settings: {
-                    slidesToShow: 3,
-                },
-            },
-            {
-                breakpoint: 480,
+                breakpoint: 480, // Extra small devices
                 settings: {
                     slidesToShow: 3,
                 },
@@ -55,8 +53,9 @@ const CategoriesSlider = () => {
 
     return (
         <div className="max-w-7xl mx-auto px-4 py-8">
-            <h3 className="font-roboto text-center font-medium text-[30px] text-[rgb(42,40,40)] leading-[45px]">
-                Shop By Categories</h3>
+            <h3 className="font-roboto text-center font-medium text-[30px] text-[rgb(42,40,40)] leading-[45px] mb-6">
+                Shop By Categories
+            </h3>
             <div className='py-12'>
                 {/* Slider Component */}
                 <Slider {...settings}>

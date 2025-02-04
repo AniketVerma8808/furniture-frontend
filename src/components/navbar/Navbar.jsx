@@ -59,8 +59,8 @@ const Navbar = () => {
                         {/* Location & Edit Button */}
                         <div className="flex items-center gap-2 flex-wrap mb-2 sm:mb-0">
                             <FaMapMarkerAlt />
-                            <span>Deliver to - <span className="text-orange-400">560001</span></span>
-                            <button className="text-orange-400 text-xs">✎</button>
+                            <span>Deliver to - <span className="text-red-400">123456</span></span>
+                            <button className="text-red-400 text-xs">✎</button>
                         </div>
 
                         {/* Links Section */}
@@ -80,13 +80,15 @@ const Navbar = () => {
                     {/* Desktop view - Logo left, Links right */}
                     <div className="flex w-full justify-between items-center">
                         {/* Logo */}
-                        <Link to={'/'} className="flex justify-center md:justify-start w-full">
+                        {/* <Link to={'/'} className="flex justify-center md:justify-start w-full">
                             <img src="https://www.royaloakindia.com/media/logo/stores/1/logo-for-Website.png" alt="Royaloak Logo" className="h-8 sm:h-12 mx-auto md:mx-0" />
-                            {/* <h1 className="text-3xl font-bold flex text-start items-start gap-2 mx-auto">
-                               logo
-                            </h1> */}
+                           
+                      </Link> */}
+                        <Link to={'/'} className="flex">
+                            <h1 className="text-3xl font-bold flex text-start items-start gap-2 mx-auto">
+                                logo
+                            </h1>
                         </Link>
-
                         {/* Desktop Links (Login, Wishlist, Cart) */}
                         <div className="gap-8 text-lg items-center hidden md:flex">
                             {isAuthenticated ? (
