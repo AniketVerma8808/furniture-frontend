@@ -49,9 +49,9 @@ const Hero = () => {
     const rightImages = [rightBanner, rightBanner2, rightBanner3, rightBanner4];
 
     return (
-        <div className="grid grid-cols-1 md:grid-cols-12  gap-4 px-4 md:px-8 py-6">
+        <div className="grid grid-cols-1 lg:grid-cols-12  gap-4 px-4 md:px-8 py-6">
             {/* Left Side - Hidden on Mobile, Equal Height */}
-            <div className="hidden md:grid md:col-span-4 grid-rows-2 gap-4 h-full">
+            <div className="hidden lg:grid lg:col-span-4 grid-rows-2 gap-4 h-full">
                 {leftImages.map((img, index) => (
                     <div key={index} className="bg-gray-200 h-56 rounded-lg overflow-hidden ">
                         <img

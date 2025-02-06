@@ -24,7 +24,12 @@ const Product = ({ category }) => {
 
     return (
         <div className="container mx-auto p-4">
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+            <div className="pb-8">
+                <h3 className="font-roboto text-center font-medium text-[30px] text-[rgb(42,40,40)] leading-[45px]">
+                    All Products
+                </h3>
+            </div>
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                 {productList.map((product) => (
                     <ProductItem key={product.id} product={product} />
                 ))}

@@ -14,6 +14,10 @@ import NotFound from './pages/NotFound'
 import ProductDetails from './pages/ProductDetails'
 import Cart from './pages/Cart'
 import Wishlist from './pages/Wishlist'
+import Product from './components/products/Product'
+import Checkout from './pages/Checkout'
+import YourOrder from './components/orders/YourOrder'
+import OrderDetails from './components/orders/OrderDetails'
 
 const ScrollToTop = () => {
   const location = useLocation();
@@ -40,9 +44,13 @@ const App = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/products/:name" element={<Product />} />
           <Route path="/product/:id" element={<ProductDetails />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/wishlist" element={<Wishlist />} />
+          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/orders" element={<YourOrder />} />
+          <Route path='/order_details/:id' element={<OrderDetails />} />
 
 
           {/* Define a route for a non-existent path (404) */}

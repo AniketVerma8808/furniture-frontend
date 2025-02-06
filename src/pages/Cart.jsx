@@ -1,11 +1,14 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { IoIosTrash } from "react-icons/io";
 import { ProductContext } from "../context/ProductContext";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import Loader from "../components/loader/Loader";
 
 const Cart = () => {
     const { cart, handleQuantityChange, handleRemoveItem } = useContext(ProductContext);
-
+    const [loading, setLoading] = useState(false);
+    const navigate = useNavigate();
 
     const parsePrice = (price) => {
         return parseFloat(price.replace('₹', '').replace(',', ''));
@@ -17,6 +20,30 @@ const Cart = () => {
 
     const shippingFee = cart.length > 0 ? 50 : 0;
     const finalTotal = calculateTotal() + shippingFee;
+
+    const handleProceedToCheckout = async () => {
+        setLoading(true);
+
+        // Save cart data in localStorage for checkout
+        const cartData = cart.map((item) => ({
+            id: item.id,
+            title: item.title,
+            price: item.price,
+            quantity: item.quantity,
+        }));
+
+        localStorage.setItem("cartData", JSON.stringify(cartData));
+        localStorage.setItem("totalAmount", finalTotal.toFixed(2));
+
+        // Simulate loading time and navigate to checkout page
+        setTimeout(() => {
+            navigate("/checkout");
+            setLoading(false);
+        }, 2000);
+    };
+
+
+
 
     return (
         <div className="min-h-screen bg-gray-100 p-4 sm:p-8">
@@ -97,8 +124,12 @@ const Cart = () => {
                                 <span>Total</span>
                                 <span>₹{finalTotal.toFixed(2)}</span>
                             </div>
-                            <button className="mt-4 w-full bgColor text-white py-2 rounded  transition duration-300">
-                                Proceed to Checkout
+                            <button
+                                onClick={handleProceedToCheckout}
+                                disabled={loading}
+                                className="mt-4 w-full bgColor cursor-pointer text-white py-2 rounded  transition duration-300"
+                            >
+                                {loading ? <Loader color="white" size="4" /> : 'Proceed to Checkout'}
                             </button>
                         </div>
                     </div>

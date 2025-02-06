@@ -1,8 +1,8 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useContext, useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
-import { toast } from 'react-toastify';
-import { ProductContext } from '../../context/ProductContext';
+import { toast } from "react-toastify";
+import { ProductContext } from "../../context/ProductContext";
 
 const ProductItem = ({ product, label }) => {
     const [isFavorite, setIsFavorite] = useState(false);
@@ -10,15 +10,13 @@ const ProductItem = ({ product, label }) => {
     const navigate = useNavigate();
     const { addToCart, addToWishlist, wishlist, removeFromWishlist, isAuthenticated } = useContext(ProductContext);
 
-
     useEffect(() => {
-        if (wishlist.find(item => item.id === product.id)) {
+        if (wishlist.find((item) => item.id === product.id)) {
             setIsFavorite(true);
         } else {
             setIsFavorite(false);
         }
     }, [wishlist, product.id]);
-
 
     const handleAddToCart = () => {
         if (!isAuthenticated) {
@@ -29,7 +27,6 @@ const ProductItem = ({ product, label }) => {
         addToCart(product);
         toast.success("Added to Cart!");
     };
-
 
     const handleAddToWishlist = () => {
         if (!isAuthenticated) {
@@ -65,15 +62,25 @@ const ProductItem = ({ product, label }) => {
         <div
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
-            className="bg-white shadow-lg rounded-lg overflow-hidden relative transition-transform duration-300 "
+            className="bg-white shadow-md rounded-lg overflow-hidden relative transition-transform duration-300"
         >
             {/* Product Image with Click Navigation */}
             <div className="block relative" onClick={() => navigate(`/product/${product.id}`)}>
-                <img src={product.images[0]} alt={product.title} className="w-full h-60 object-cover cursor-pointer" />
+                <img
+                    src={product.images[0]}
+                    alt={product.title}
+                    className="w-full h-52 sm:h-60 object-cover cursor-pointer"
+                />
                 {/* Add to Cart Button (Centered on Hover) */}
-                <div className={`absolute inset-0 flex items-center justify-center transition-opacity duration-300 ${isHovered ? 'opacity-100' : 'opacity-0'}`}>
+                <div
+                    className={`absolute inset-0 flex items-center justify-center transition-opacity duration-300 ${isHovered ? "opacity-100" : "opacity-0"
+                        }`}
+                >
                     <button
-                        onClick={(e) => { e.stopPropagation(); handleAddToCart(); }}
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            handleAddToCart();
+                        }}
                         className="bg-black py-2 px-4 text-white text-sm font-semibold rounded-lg hover:bg-gray-800 transition"
                     >
                         Add to Cart
@@ -81,7 +88,7 @@ const ProductItem = ({ product, label }) => {
                 </div>
                 {/* Dynamic Label */}
                 {label && (
-                    <div className={`absolute bottom-0 left-0 text-white text-xs font-semibold px-2 py-1 rounded-md ${getLabelColor(label)}`}>
+                    <div className={`absolute bottom-2 left-2 text-white text-xs font-semibold px-2 py-1 rounded-md ${getLabelColor(label)}`}>
                         {label}
                     </div>
                 )}
@@ -90,21 +97,17 @@ const ProductItem = ({ product, label }) => {
             {/* Favorite Heart Icon */}
             <button
                 onClick={handleAddToWishlist}
-                className="absolute top-2 right-2 bg-white rounded-full p-2 shadow-md"
+                className="absolute top-2 right-2 bg-white rounded-full p-3 sm:p-2 shadow-md"
             >
-                {isFavorite ? (
-                    <AiFillHeart className="w-6 h-6 text-red-500" />
-                ) : (
-                    <AiOutlineHeart className="w-6 h-6 text-red-500" />
-                )}
+                {isFavorite ? <AiFillHeart className="w-6 h-6 text-red-500" /> : <AiOutlineHeart className="w-6 h-6 text-red-500" />}
             </button>
 
             {/* Product Details */}
-            <div className="p-4">
-                <h3 className="text-gray-800 font-semibold text-lg truncate">{product.title}</h3>
-                <p className="text-sm text-gray-500">{product.collection}</p>
+            <div className="p-3 sm:p-4">
+                <h3 className="text-gray-800 font-semibold text-md sm:text-lg truncate">{product.title}</h3>
+                <p className="text-xs sm:text-sm text-gray-500 line-clamp-1">{product.collection}</p>
                 <div className="mt-2 flex items-center">
-                    <span className="text-xl font-bold text-gray-900">{product.price}</span>
+                    <span className="text-lg sm:text-xl font-bold text-gray-900">{product.price}</span>
                     <span className="ml-2 text-sm text-gray-400 line-through">{product.oldPrice}</span>
                 </div>
             </div>
