@@ -49,6 +49,34 @@ export const ProductProvider = ({ children }) => {
         });
     };
 
+
+    // Register function
+    const register = (name, email, phone, password) => {
+        const existingUser = JSON.parse(localStorage.getItem("user"));
+        if (existingUser && existingUser.email === email) {
+            toast.error("User already exists with this email!");
+            return false;
+        }
+        const newUser = { name, email, phone, password };
+        localStorage.setItem("user", JSON.stringify(newUser));
+        setUser(newUser);
+        setIsAuthenticated(true);
+        toast.success("Registration successful!");
+        return true;
+    };
+
+    // Login function
+    // const login = (email, password) => {
+    //     const storedUser = JSON.parse(localStorage.getItem("user"));
+    //     if (storedUser && storedUser.email === email && storedUser.password === password) {
+    //         setUser(storedUser);
+    //         setIsAuthenticated(true);
+    //         return true;
+    //     }
+    //     return false;
+    // };
+
+
     // login
     const login = (email, password) => {
         if (email === "aniket@techxpert.in" && password === "1234567") {
@@ -69,7 +97,7 @@ export const ProductProvider = ({ children }) => {
     };
 
     // Add to Cart (Prevents Duplicates)
-    const addToCart = (product) => {
+    const addToCart = (product, quantity = 1) => {
         setCart((prev) => {
             const existingItem = prev.find((item) => item.id === product.id);
             let newCart;
@@ -77,17 +105,19 @@ export const ProductProvider = ({ children }) => {
             if (existingItem) {
                 newCart = prev.map((item) =>
                     item.id === product.id
-                        ? { ...item, quantity: item.quantity + 1 }
+                        ? { ...item, quantity: item.quantity + quantity }
                         : item
                 );
             } else {
-                newCart = [...prev, { ...product, quantity: 1 }];
+                newCart = [...prev, { ...product, quantity }];
             }
 
             updateLocalStorage(newCart);
+            // toast.success(`Added to Cart! (Qty: ${quantity})`);
             return newCart;
         });
     };
+
 
     // Handle Quantity Change
     const handleQuantityChange = (id, amount) => {
@@ -232,6 +262,7 @@ export const ProductProvider = ({ children }) => {
                 wishlist,
                 addToWishlist,
                 removeFromWishlist,
+                register,
                 user,
                 login,
                 logout,

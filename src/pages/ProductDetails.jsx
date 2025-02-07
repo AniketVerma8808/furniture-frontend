@@ -11,7 +11,7 @@ import RelatedProduct from '../components/relatedProduct/RelatedProduct';
 
 const ProductDetails = () => {
     const { id } = useParams();
-    const { getProductById, addToCart, addToWishlist, currentProduct } = useContext(ProductContext);
+    const { getProductById, addToCart, addToWishlist } = useContext(ProductContext);
 
     const [quantity, setQuantity] = useState(1);
     const [product, setProduct] = useState(null);
@@ -27,26 +27,25 @@ const ProductDetails = () => {
     }, [id, getProductById]);
 
 
+
+    const incrementQuantity = () => setQuantity((prev) => prev + 1);
+    const decrementQuantity = () => setQuantity((prev) => Math.max(1, prev - 1));
+
     const handleAddToCart = () => {
-        addToCart(product);
-        toast.success("Added to Cart!");
-    };
-
-    const handleAddToWishlist = () => {
-        addToWishlist(product);
-        toast.success("Added to Wishlist!");
-    };
-
-    // Increment and decrement functions for quantity
-    const incrementQuantity = () => {
-        setQuantity(prevQuantity => prevQuantity + 1);
-    };
-
-    const decrementQuantity = () => {
-        if (quantity > 1) {
-            setQuantity(prevQuantity => prevQuantity - 1);
+        if (product) {
+            addToCart(product, quantity);
+            toast.success(`${quantity} item(s) added to cart!`);
         }
     };
+
+    // Add to Wishlist
+    const handleAddToWishlist = () => {
+        if (product) {
+            addToWishlist(product);
+            toast.success("Added to Wishlist!");
+        }
+    };
+
     if (!product) {
         return <div>Loading...</div>;
     }
@@ -87,17 +86,11 @@ const ProductDetails = () => {
                     {/* Quantity Selector */}
                     <div className="mt-6 flex items-center space-x-4">
                         <p className="text-lg font-medium">Quantity:</p>
-                        <button
-                            onClick={decrementQuantity}
-                            className="bg-gray-300 text-gray-700 rounded-full px-3 py-1"
-                        >
+                        <button onClick={decrementQuantity} className="bg-gray-300 text-gray-700 rounded-full px-3 py-1">
                             -
                         </button>
                         <span className="text-lg font-semibold">{quantity}</span>
-                        <button
-                            onClick={incrementQuantity}
-                            className="bg-gray-300 text-gray-700 rounded-full px-3 py-1"
-                        >
+                        <button onClick={incrementQuantity} className="bg-gray-300 text-gray-700 rounded-full px-3 py-1">
                             +
                         </button>
                     </div>

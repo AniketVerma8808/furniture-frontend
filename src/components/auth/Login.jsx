@@ -4,12 +4,14 @@ import { Link, useNavigate } from 'react-router-dom';
 import loginBanner from '../../assets/image/banner/loginBanner.png'
 import { IoIosEye, IoIosEyeOff } from "react-icons/io";
 import { ProductContext } from '../../context/ProductContext';
+import Loader from '../loader/Loader';
 
 const Login = () => {
     const { login } = useContext(ProductContext)
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
     const handleSubmit = (e) => {
@@ -19,13 +21,18 @@ const Login = () => {
             toast.error('Please fill out all fields!');
             return;
         }
+        setLoading(true);
 
-        if (login(email, password)) {
-            toast.success("Login successful!");
-            navigate("/");
-        } else {
-            toast.error("Invalid email or password!");
-        }
+        setTimeout(() => {
+            if (login(email, password)) {
+                toast.success("Login successful!");
+                navigate("/");
+            } else {
+                toast.error("Invalid email or password!");
+            }
+            setLoading(false);
+        }, 2000);
+
     };
 
     return (
@@ -79,8 +86,13 @@ const Login = () => {
                         </button>
                     </div>
 
-                    <button type="submit" className="w-full py-2 bgColor text-white rounded-lg mt-4">Login</button>
-
+                    <button
+                        type="submit"
+                        className="w-full py-2 bgColor text-white rounded-lg mt-4 flex justify-center items-center"
+                        disabled={loading}
+                    >
+                        {loading ? <Loader size={5} color="white" /> : "Login"}
+                    </button>
 
 
                     {/* Register Link */}

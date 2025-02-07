@@ -1,6 +1,6 @@
 import { FaUser, FaHeart, FaShoppingCart, FaMapMarkerAlt, FaSearch, FaBars } from "react-icons/fa";
 import { IoIosArrowDown } from "react-icons/io";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
 import { ProductContext } from "../../context/ProductContext";
 import { FiLogOut } from "react-icons/fi";
@@ -14,7 +14,7 @@ const Navbar = () => {
     const [isCategoryOpen, setIsCategoryOpen] = useState(null);
     const [isDropdownOpenUser, setIsDropdownOpenUser] = useState(false);
     const { cart, wishlist, isAuthenticated, logout, } = useContext(ProductContext);
-
+    const navigate = useNavigate();
     const categories = [
         { name: "INTERNATIONAL COLLECTION", subcategories: null },
         {
@@ -47,6 +47,7 @@ const Navbar = () => {
     const handleLogout = () => {
         logout();
         toast.success("logout successful!")
+        navigate("/")
         setIsDropdownOpenUser(false);
     };
 
@@ -159,7 +160,7 @@ const Navbar = () => {
                                 <div className="relative group flex items-center gap-4">
                                     <BiUserCircle className="h-8 w-8 text-white cursor-pointer" onClick={handleDropdownToggle} />
                                     {isDropdownOpenUser && (
-                                        <div className="absolute right-0 mt-3 w-48 bg-white border rounded-lg shadow-lg">
+                                        <div className="absolute -left-3 top-12 z-50 w-48 bg-white border rounded-lg shadow-lg">
                                             <Link
                                                 onClick={() => setIsDropdownOpenUser(false)}
                                                 to="/profile"
@@ -195,10 +196,16 @@ const Navbar = () => {
                             <Link to="/wishlist" className="flex flex-col items-center relative">
                                 <FaHeart />
                                 <span className="text-xs">WISHLIST</span>
+                                {wishlist.length > 0 && (
+                                    <span className="absolute -top-5 right-0 bg-red-500 text-white text-xs rounded-full px-2 py-1">{wishlist.length}</span>
+                                )}
                             </Link>
                             <Link to="/cart" className="flex flex-col items-center relative">
                                 <FaShoppingCart />
                                 <span className="text-xs">CART</span>
+                                {cart.length > 0 && (
+                                    <span className="absolute -top-5 right-0 bg-red-500 text-white text-xs rounded-full px-2 py-1">{cart.length}</span>
+                                )}
                             </Link>
                         </div>
 

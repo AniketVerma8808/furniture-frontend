@@ -1,12 +1,12 @@
 import React, { useContext } from "react";
 import { IoIosTrash } from "react-icons/io";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { ProductContext } from "../context/ProductContext";
 
 const Wishlist = () => {
     const { wishlist, removeFromWishlist } = useContext(ProductContext);
-
+    const navigate = useNavigate()
     return (
         <div className="min-h-screen bg-gray-100 p-4 sm:p-8">
             {wishlist?.length > 0 ? (
@@ -25,6 +25,7 @@ const Wishlist = () => {
                                         src={images && images[0]}
                                         alt={title}
                                         className="w-20 h-20 rounded-lg object-cover"
+                                        onClick={() => navigate(`/product/${id}`)}
                                     />
                                     <div className="ml-4">
                                         <h2 className="text-lg font-medium">{title}</h2>

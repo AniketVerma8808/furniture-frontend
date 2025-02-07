@@ -1,29 +1,39 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { toast } from 'react-toastify';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import loginBanner from '../../assets/image/banner/loginBanner.png'
 import { IoIosEye, IoIosEyeOff } from "react-icons/io";
+import Loader from '../loader/Loader';
+import { ProductContext } from '../../context/ProductContext';
 
 const Register = () => {
+    const { register } = useContext(ProductContext)
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const navigate = useNavigate();
 
-    const handleSubmit = (e) => {
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
-
         // Basic validation
         if (!name || !email || !phone || !password) {
             toast.error('Please fill out all fields!');
             return;
         }
-
-        // Simulating data submission
-        console.log({ name, email, phone, password });
-        toast.success('Registration successful!');
+        setLoading(true);
+        setTimeout(() => {
+            const success = register(name, email, phone, password);
+            if (success) {
+                navigate("/login");
+            }
+            setLoading(false);
+        }, 2000);
     };
+
 
     return (
         <div className="grid grid-cols-1 lg:grid-cols-2  gap-4 p-4">
@@ -109,12 +119,21 @@ const Register = () => {
                     </div>
 
                     {/* Submit Button */}
+
+
                     <button
+                        type="submit"
+                        className="w-full py-2 bgColor text-white rounded-lg mt-4 flex justify-center items-center"
+                        disabled={loading}
+                    >
+                        {loading ? <Loader size={5} color="white" /> : "Register"}
+                    </button>
+                    {/* <button
                         type="submit"
                         className="w-full py-2 bgColor text-white rounded-lg mt-4 "
                     >
                         Register
-                    </button>
+                    </button> */}
                     <div className="text-center mt-4">
                         <p className="text-sm text-gray-600">
                             Already have an account?{' '}

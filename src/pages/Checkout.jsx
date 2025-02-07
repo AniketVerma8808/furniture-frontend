@@ -53,6 +53,7 @@ const Checkout = () => {
         }
     }, [cart]);
 
+
     const handleAddAddress = () => {
         setIsAdding(true);
         setTimeout(() => {
@@ -177,7 +178,7 @@ const Checkout = () => {
                                 className="mt-6 w-full bg-[#000] hover:bg-gray-800 text-white font-medium py-3 rounded-lg transition duration-200"
                             >
                                 {isDelivering ? (
-                                    <Loader color="white" size="4" />
+                                    <Loader size={5} color="white" />
                                 ) : (
                                     "Deliver Here"
                                 )}
@@ -189,7 +190,7 @@ const Checkout = () => {
                                 className="mt-4 w-full bg-gray-200 hover:bg-gray-300 text-gray-800 font-medium py-3 rounded-lg transition duration-200"
                             >
                                 {loading ? (
-                                    <Loader color="white" size="4" />
+                                    <Loader size={5} color="white" />
                                 ) : (
                                     "Add New Address"
                                 )}
@@ -324,14 +325,11 @@ const Checkout = () => {
                             </button>
                             <button
                                 onClick={isEditing ? handleUpdateAddress : handleAddAddress}
-                                className="w-full bg-[#000] text-white py-2 rounded-lg"
+                                className="w-full bg-[#000] text-white py-2 rounded-lg flex items-center justify-center"
                             >
-                                {isAdding || isUpdating ? (
-                                    <Loader color="white" size="4" />
-                                ) : (
-                                    isEditing ? "Update Address" : "Add Address"
-                                )}
+                                {isAdding || isUpdating ? <Loader size={5} color="white" /> : isEditing ? "Update Address" : "Add Address"}
                             </button>
+
                         </div>
                     </div>
                 </div>

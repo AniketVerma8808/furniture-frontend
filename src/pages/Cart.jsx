@@ -67,6 +67,7 @@ const Cart = () => {
                                             src={images && images[0]}
                                             alt={title}
                                             className="w-20 h-20 rounded-lg object-cover"
+                                            onClick={() => navigate(`/product/${id}`)}
                                         />
                                         <div className="ml-4">
                                             <h2 className="text-lg font-medium">{title}</h2>
@@ -129,7 +130,7 @@ const Cart = () => {
                                 disabled={loading}
                                 className="mt-4 w-full bgColor cursor-pointer text-white py-2 rounded  transition duration-300"
                             >
-                                {loading ? <Loader color="white" size="4" /> : 'Proceed to Checkout'}
+                                {loading ? <Loader size={5} color="white" /> : 'Proceed to Checkout'}
                             </button>
                         </div>
                     </div>
