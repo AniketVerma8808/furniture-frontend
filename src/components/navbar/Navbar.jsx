@@ -6,7 +6,9 @@ import { ProductContext } from "../../context/ProductContext";
 import { FiLogOut } from "react-icons/fi";
 import { BiUserCircle } from "react-icons/bi";
 import { toast } from "react-toastify";
+import { useDispatch, useSelector } from "react-redux";
 
+import { logoutUser } from '../../redux/authSlice';
 
 const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -14,6 +16,10 @@ const Navbar = () => {
     const [isCategoryOpen, setIsCategoryOpen] = useState(null);
     const [isDropdownOpenUser, setIsDropdownOpenUser] = useState(false);
     const { cart, wishlist, isAuthenticated, logout, } = useContext(ProductContext);
+    const { user } = useSelector((state) => state.auth)
+    const dispatch = useDispatch()
+
+    console.log(user, "user in navbar");
     const navigate = useNavigate();
     const categories = [
         { name: "INTERNATIONAL COLLECTION", subcategories: null },
@@ -45,7 +51,8 @@ const Navbar = () => {
     };
 
     const handleLogout = () => {
-        logout();
+        dispatch(logoutUser())
+        // logout();
         toast.success("logout successful!")
         navigate("/")
         setIsDropdownOpenUser(false);
@@ -92,8 +99,9 @@ const Navbar = () => {
                         </Link>
                         {/* Desktop Links (Login, Wishlist, Cart) */}
                         <div className="gap-8 text-lg items-center hidden md:flex">
-                            {isAuthenticated ? (
+                            {user?.name != null ? (
                                 <div className="relative group flex items-center gap-4">
+                                    {user?.name}
                                     <BiUserCircle className="h-8 w-8 text-white cursor-pointer" onClick={handleDropdownToggle} />
                                     {isDropdownOpenUser && (
                                         <div className="absolute  right-0 z-50 top-8 w-48 bgBlack text-white border rounded-lg shadow-lg">
@@ -156,8 +164,9 @@ const Navbar = () => {
                         </div>
 
                         <div className="flex gap-8 text-lg items-center">
-                            {isAuthenticated ? (
+                            {user?.name != null ? (
                                 <div className="relative group flex items-center gap-4">
+                                    {user?.name}
                                     <BiUserCircle className="h-8 w-8 text-white cursor-pointer" onClick={handleDropdownToggle} />
                                     {isDropdownOpenUser && (
                                         <div className="absolute -left-3 top-12 z-50 w-48 bg-white border rounded-lg shadow-lg">

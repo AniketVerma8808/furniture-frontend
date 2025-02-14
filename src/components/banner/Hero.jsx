@@ -7,6 +7,7 @@ import rightBanner3 from '../../assets/image/banner/rightbanner3.png';
 import rightBanner4 from '../../assets/image/banner/rightbanner4.png';
 import leftBanner from '../../assets/image/banner/leftbanner.png';
 import leftBanner2 from '../../assets/image/banner/leftbanner2.png';
+import { useSelector } from "react-redux";
 
 // Custom Left Arrow
 const PrevArrow = ({ onClick }) => (
@@ -29,6 +30,7 @@ const NextArrow = ({ onClick }) => (
 );
 
 const Hero = () => {
+    const { banners } = useSelector((state) => state.home);
     const settings = {
         dots: false,
         infinite: true,
@@ -66,10 +68,10 @@ const Hero = () => {
             {/* Right Side - Slider (Full width on mobile, Equal Height) */}
             <div className="col-span-12 md:col-span-8 rounded-lg overflow-hidden relative h-full">
                 <Slider {...settings}>
-                    {rightImages.map((img, index) => (
+                    {banners.map(({image}, index) => (
                         <div key={index} className="h-full">
                             <img
-                                src={img}
+                                src={image}
                                 alt={`Slide ${index + 1}`}
                                 className="w-full h-full object-cover rounded-lg"
                             />

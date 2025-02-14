@@ -5,6 +5,10 @@ import loginBanner from '../../assets/image/banner/loginBanner.png'
 import { IoIosEye, IoIosEyeOff } from "react-icons/io";
 import { ProductContext } from '../../context/ProductContext';
 import Loader from '../loader/Loader';
+import Layout from './Layout';
+import { LoginService } from '../../services/api.service';
+import { useDispatch } from 'react-redux';
+import { loginSuccess } from '../../redux/authSlice';
 
 const Login = () => {
     const { login } = useContext(ProductContext)
@@ -13,8 +17,9 @@ const Login = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
+    const dispatch = useDispatch()
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         if (!email || !password) {
@@ -23,30 +28,21 @@ const Login = () => {
         }
         setLoading(true);
 
-        setTimeout(() => {
-            if (login(email, password)) {
-                toast.success("Login successful!");
-                navigate("/");
-            } else {
-                toast.error("Invalid email or password!");
-            }
+        await LoginService({ email, password }).then((res) => {
+            toast.success("Login successful!");
+            console.log(res, "response from login api ");
+            const { token, user } = res.data
+            dispatch(loginSuccess({token,user}))
+            navigate("/");
             setLoading(false);
-        }, 2000);
-
+        }).catch((err) => {
+            console.log(err);
+            setLoading(false);
+        })
     };
 
     return (
-        <div className="grid grid-cols-1 lg:grid-cols-2  gap-4 p-4">
-            {/* Left side Banner */}
-            <div className="hidden lg:block h-full">
-                <img
-                    src={loginBanner}
-                    alt="Banner"
-                    className="w-full h-full object-cover"
-                />
-            </div>
-
-            {/* Right side Login Form */}
+        <Layout>
             <div className="flex justify-center items-start w-full p-4">
                 <form
                     onSubmit={handleSubmit}
@@ -106,7 +102,9 @@ const Login = () => {
                     </div>
                 </form>
             </div>
-        </div>
+
+        </Layout>
+
     );
 };
 

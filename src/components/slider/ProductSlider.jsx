@@ -1,8 +1,7 @@
 import React, { useContext } from 'react';
 import Slider from 'react-slick';
-
-import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import ProductItem from '../products/ProductItem';
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { ProductContext } from '../../context/ProductContext';
 
 const NextArrow = ({ onClick }) => (
@@ -23,9 +22,8 @@ const PrevArrow = ({ onClick }) => (
     </button>
 );
 
-const RecentViewed = () => {
-    const { bestSellers } = useContext(ProductContext);
-
+const ProductSlider = ({ title, data }) => {
+    const { newArrivals } = useContext(ProductContext);
 
     const settings = {
         dots: false,
@@ -60,28 +58,19 @@ const RecentViewed = () => {
     };
 
     return (
-        <div className="max-w-7xl mx-auto pt-12 px-4 relative">
-            <h3 className="font-roboto text-center font-medium text-[30px] text-[rgb(42,40,40)] leading-[45px]">
-                Recently Viewed
-            </h3>
+        <div className="max-w-7xl mx-auto px-4 relative">
+            <h3 className="font-roboto text-center font-medium text-[30px] text-[rgb(42,40,40)] leading-[45px]">{title}</h3>
             <div className="py-12 relative">
-                {bestSellers && bestSellers.length > 0 ? (
-                    <Slider {...settings}>
-                        {bestSellers.map((product) => (
-                            <div key={product.id} className="px-2">
-                                <ProductItem product={product} label="Trending" />
-                            </div>
-                        ))}
-                    </Slider>
-                ) : (
-                    <p className="text-center text-gray-600">No best sellers available at the moment.</p>
-                )}
+                <Slider {...settings}>
+                    {data?.map((product) => (
+                        <div key={product.id} className="px-2">
+                            <ProductItem product={product} label="New Arrival" />
+                        </div>
+                    ))}
+                </Slider>
             </div>
         </div>
     );
 };
 
-
-
-
-export default RecentViewed
+export default ProductSlider;

@@ -1,100 +1,74 @@
-import React, { useContext, useState } from 'react';
-import { toast } from 'react-toastify';
-import { Link, useNavigate } from 'react-router-dom';
-import loginBanner from '../../assets/image/banner/loginBanner.png'
+import React, { useState } from "react";
+import { toast } from "react-toastify";
+import { Link, useNavigate } from "react-router-dom";
 import { IoIosEye, IoIosEyeOff } from "react-icons/io";
-import Loader from '../loader/Loader';
-import { ProductContext } from '../../context/ProductContext';
+import Loader from "../loader/Loader";
+import Layout from "./Layout";
+import { RegisterService } from "../../services/api.service";
 
 const Register = () => {
-    const { register } = useContext(ProductContext)
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [phone, setPhone] = useState('');
-    const [password, setPassword] = useState('');
+    const navigate = useNavigate();
+    const [formData, setFormData] = useState({
+        name: "",
+        email: "",
+        phone: "",
+        password: "",
+    });
     const [showPassword, setShowPassword] = useState(false);
     const [loading, setLoading] = useState(false);
-    const navigate = useNavigate();
 
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        // Basic validation
-        if (!name || !email || !phone || !password) {
-            toast.error('Please fill out all fields!');
-            return;
-        }
-        setLoading(true);
-        setTimeout(() => {
-            const success = register(name, email, phone, password);
-            if (success) {
-                navigate("/login");
-            }
-            setLoading(false);
-        }, 2000);
+    // Handle input change
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData((prev) => ({ ...prev, [name]: value }));
     };
 
+    // Handle form submission
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const { name, email, phone, password } = formData;
+
+        // Basic validation
+        if (!name || !email || !phone || !password) {
+            toast.error("Please fill out all fields!");
+            return;
+        }
+
+        setLoading(true);
+        try {
+            await RegisterService(formData);
+            toast.success("Registration successful!");
+            navigate("/login");
+        } catch (error) {
+            console.error("Registration error:", error);
+            toast.error(error.response.data.message  || 'Internal Server Error');
+        } finally {
+            setLoading(false);
+        }
+    };
 
     return (
-        <div className="grid grid-cols-1 lg:grid-cols-2  gap-4 p-4">
-            {/* Left side Banner */}
-            <div className="hidden lg:block h-full">
-                <img
-                    src={loginBanner}
-                    alt="Banner"
-                    className="w-full h-full object-cover"
-                />
-            </div>
-
-            {/* Right side Register Form */}
+        <Layout>
             <div className="flex justify-center items-start w-full p-4">
-                <form
-                    onSubmit={handleSubmit}
-                    className="w-full p-6 space-y-4"
-                >
+                <form onSubmit={handleSubmit} className="w-full p-6 space-y-4">
                     <h2 className="text-3xl text-center font-semibold text-gray-800">Register</h2>
 
-                    {/* Name Field */}
-                    <div>
-                        <label htmlFor="name" className="block text-sm font-medium text-gray-700">Name</label>
-                        <input
-                            type="text"
-                            id="name"
-                            name="name"
-                            value={name}
-                            onChange={(e) => setName(e.target.value)}
-                            className="w-full px-4 py-2 mt-1 border borderColor rounded-lg "
-                            placeholder="Enter your name"
-                        />
-                    </div>
-
-                    {/* Email Field */}
-                    <div>
-                        <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
-                        <input
-                            type="email"
-                            id="email"
-                            name="email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            className="w-full px-4 py-2 mt-1 border borderColor  rounded-lg "
-                            placeholder="Enter your email"
-                        />
-                    </div>
-
-                    {/* Phone Field */}
-                    <div>
-                        <label htmlFor="phone" className="block text-sm font-medium text-gray-700">Phone</label>
-                        <input
-                            type="tel"
-                            id="phone"
-                            name="phone"
-                            value={phone}
-                            onChange={(e) => setPhone(e.target.value)}
-                            className="w-full px-4 py-2 mt-1 border borderColor rounded-lg "
-                            placeholder="Enter your phone number"
-                        />
-                    </div>
+                    {["name", "email", "phone"].map((field) => (
+                        <div key={field}>
+                            <label htmlFor={field} className="block text-sm font-medium text-gray-700 capitalize">
+                                {field}
+                            </label>
+                            <input
+                                type={field === "email" ? "email" : "text"}
+                                id={field}
+                                name={field}
+                                value={formData[field]}
+                                onChange={handleChange}
+                                className="w-full px-4 py-2 mt-1 border border-gray-300 rounded-lg"
+                                placeholder={`Enter your ${field}`}
+                            />
+                        </div>
+                    ))}
 
                     {/* Password Field */}
                     <div className="relative">
@@ -104,9 +78,10 @@ const Register = () => {
                         <input
                             type={showPassword ? "text" : "password"}
                             id="password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            className="w-full px-4 py-2 mt-1 border borderColor rounded-lg pr-10"
+                            name="password"
+                            value={formData.password}
+                            onChange={handleChange}
+                            className="w-full px-4 py-2 mt-1 border border-gray-300 rounded-lg pr-10"
                             placeholder="Enter your password"
                         />
                         <button
@@ -119,34 +94,25 @@ const Register = () => {
                     </div>
 
                     {/* Submit Button */}
-
-
                     <button
                         type="submit"
-                        className="w-full py-2 bgColor text-white rounded-lg mt-4 flex justify-center items-center"
+                        className="w-full py-2 bg-blue-600 text-white rounded-lg mt-4 flex justify-center items-center"
                         disabled={loading}
                     >
                         {loading ? <Loader size={5} color="white" /> : "Register"}
                     </button>
-                    {/* <button
-                        type="submit"
-                        className="w-full py-2 bgColor text-white rounded-lg mt-4 "
-                    >
-                        Register
-                    </button> */}
+
                     <div className="text-center mt-4">
                         <p className="text-sm text-gray-600">
-                            Already have an account?{' '}
+                            Already have an account?{" "}
                             <Link to="/login" className="text-blue-500 hover:underline">
                                 Click here to Login
                             </Link>
                         </p>
                     </div>
-
                 </form>
             </div>
-
-        </div>
+        </Layout>
     );
 };
 
