@@ -45,7 +45,6 @@ const productSlice = createSlice({
             })
             .addCase(fetchProducts.fulfilled, (state, action) => {
                 const { bestsellor, newarrival, products } = action.payload;
-                console.log(action.payload , "hey");
                 state.loading = false;
                 state.products = products;
                 state.bestsellor = bestsellor

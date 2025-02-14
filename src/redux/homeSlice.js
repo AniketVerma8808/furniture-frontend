@@ -1,6 +1,45 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { getBannerService } from "../services/api.service";
 
+// Function to get city from latitude & longitude using OpenStreetMap API
+const getCityFromCoordinates = async (latitude, longitude) => {
+  const url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`;
+
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+    console.log(data);
+    return data.address?.city || data.address?.town || data.address?.village || "Unknown Location";
+  } catch (error) {
+    console.error("Error fetching city name:", error);
+    return "Unknown Location";
+  }
+};
+
+// Async thunk to fetch user location
+export const fetchUserLocation = createAsyncThunk(
+  "home/fetchUserLocation",
+  async (_, { rejectWithValue }) => {
+    return new Promise((resolve, reject) => {
+      if (!navigator.geolocation) {
+        reject(rejectWithValue("Geolocation is not supported by this browser"));
+      } else {
+        navigator.geolocation.getCurrentPosition(
+          async (position) => {
+            const { latitude, longitude } = position.coords;
+            const city = await getCityFromCoordinates(latitude, longitude);
+            resolve({ latitude, longitude, city });
+          },
+          (error) => {
+            reject(rejectWithValue(error.message || "Failed to retrieve location"));
+          },
+          { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
+        );
+      }
+    });
+  }
+);
+
 // Async thunk to fetch banner data
 export const fetchBanners = createAsyncThunk("home/fetchBanners", async (_, { rejectWithValue }) => {
   try {
@@ -24,6 +63,13 @@ const initialState = {
   banners: [],
   status: "idle", // loading, succeeded, failed
   error: null,
+
+  // Location State
+  latitude: null,
+  longitude: null,
+  city: null,
+  locationStatus: "idle", // loading, succeeded, failed
+  locationError: null,
 };
 
 // Create Slice
@@ -55,6 +101,7 @@ const homeSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+      // Fetch Banners
       .addCase(fetchBanners.pending, (state) => {
         state.status = "loading";
       })
@@ -65,6 +112,21 @@ const homeSlice = createSlice({
       .addCase(fetchBanners.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.payload || action.error.message;
+      })
+
+      // Fetch User Location
+      .addCase(fetchUserLocation.pending, (state) => {
+        state.locationStatus = "loading";
+      })
+      .addCase(fetchUserLocation.fulfilled, (state, action) => {
+        state.locationStatus = "succeeded";
+        state.latitude = action.payload.latitude;
+        state.longitude = action.payload.longitude;
+        state.city = action.payload.city;
+      })
+      .addCase(fetchUserLocation.rejected, (state, action) => {
+        state.locationStatus = "failed";
+        state.locationError = action.payload || "Error fetching location";
       });
   },
 });

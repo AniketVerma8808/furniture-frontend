@@ -5,6 +5,45 @@ import { MdOutlineTableRestaurant, MdOutlineWeekend, MdOutlineStorage, MdCheckro
 import { RiArmchairLine, RiSofaLine } from "react-icons/ri";
 import { LuBedSingle } from "react-icons/lu";
 
+const settings = {
+    dots: false,
+    infinite: true,
+    speed: 500,
+    autoplay: true,
+    adaptiveHeight: true,
+    slidesToShow: 6,
+    slidesToScroll: 1,
+    responsive: [
+        {
+            breakpoint: 1024,
+            settings: {
+                slidesToShow: 4,
+                slidesToScroll: 1,
+                centerMode: false,
+            },
+        },
+        {
+            breakpoint: 768,
+            settings: {
+                slidesToShow: 3,
+                slidesToScroll: 1,
+                centerMode: true,
+                arrows: false,
+            },
+        },
+        {
+            breakpoint: 480,
+            settings: {
+                slidesToShow: 2,
+                slidesToScroll: 1,
+                centerMode: true,
+                arrows: false,
+            },
+        },
+
+    ],
+};
+
 const CategoriesSlider = () => {
     const categories = [
         { icon: <RiSofaLine />, name: "Sofas" },
@@ -17,44 +56,7 @@ const CategoriesSlider = () => {
         { icon: <MdTv />, name: "TV Units" },
     ];
 
-    const settings = {
-        dots: false,
-        infinite: true,
-        speed: 500,
-        autoplay: true,
-        adaptiveHeight: true,
-        slidesToShow: 6,
-        slidesToScroll: 1,
-        responsive: [
-            {
-                breakpoint: 1024,
-                settings: {
-                    slidesToShow: 4,
-                    slidesToScroll: 1,
-                    centerMode: false,
-                },
-            },
-            {
-                breakpoint: 768,
-                settings: {
-                    slidesToShow: 3,
-                    slidesToScroll: 1,
-                    centerMode: true,
-                    arrows: false,
-                },
-            },
-            {
-                breakpoint: 480,
-                settings: {
-                    slidesToShow: 2,
-                    slidesToScroll: 1,
-                    centerMode: true,
-                    arrows: false,
-                },
-            },
 
-        ],
-    };
 
 
     return (

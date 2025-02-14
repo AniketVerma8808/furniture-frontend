@@ -19,7 +19,7 @@ import Checkout from './pages/Checkout'
 import YourOrder from './components/orders/YourOrder'
 import OrderDetails from './components/orders/OrderDetails'
 import { useDispatch } from 'react-redux'
-import { fetchBanners } from './redux/homeSlice'
+import { fetchBanners, fetchUserLocation } from './redux/homeSlice'
 import { fetchProducts } from './redux/productSlice'
 
 const ScrollToTop = () => {
@@ -45,7 +45,9 @@ const App = () => {
   const dispatch = useDispatch()
 
   useEffect(()=>{
+    dispatch(fetchUserLocation() )
     dispatch(fetchBanners() )
+
     dispatch(fetchProducts() )
 
   },[])
