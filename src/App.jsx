@@ -24,8 +24,6 @@ import { fetchProducts } from './redux/productSlice'
 
 const ScrollToTop = () => {
   const location = useLocation();
-
-
   useEffect(() => {
     window.scrollTo({
       top: 0,
@@ -40,17 +38,12 @@ const ScrollToTop = () => {
 
 
 const App = () => {
-
-
   const dispatch = useDispatch()
-
-  useEffect(()=>{
-    dispatch(fetchUserLocation() )
-    dispatch(fetchBanners() )
-
-    dispatch(fetchProducts() )
-
-  },[])
+  useEffect(() => {
+    dispatch(fetchUserLocation())
+    dispatch(fetchBanners())
+    dispatch(fetchProducts())
+  }, [])
 
   return (
     <>
@@ -80,7 +73,7 @@ const App = () => {
       {/* Toast container for notifications */}
       <ToastContainer
         position="top-right"
-        autoClose={3000}
+        autoClose={1000}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick
@@ -88,7 +81,7 @@ const App = () => {
         pauseOnFocusLoss
         draggable
         pauseOnHover
-        theme="colored"
+        theme="dark"
       />
     </>
   )

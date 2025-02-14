@@ -124,7 +124,7 @@ const Footer = () => {
 
             {/* Bottom Bar */}
             <div className="max-w-7xl px-4 mx-auto flex flex-col sm:flex-row justify-between py-4 text-white text-[14px] md:text-[16px]">
-                <p>© 2025, Company Name | All rights reserved.
+                <p>© 2025, BedsLane | All rights reserved.
                     <span> Designed by <Link to="https://techxpert.in" target="_blank" rel="noopener noreferrer" className="text-white hover:underline">Techxpert</Link></span>
                 </p>
                 <p>

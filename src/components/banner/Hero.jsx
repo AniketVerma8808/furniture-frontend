@@ -1,10 +1,6 @@
 import React from "react";
 import Slider from "react-slick";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
-import rightBanner from '../../assets/image/banner/rightbanner.png';
-import rightBanner2 from '../../assets/image/banner/rightbanner2.png';
-import rightBanner3 from '../../assets/image/banner/rightbanner3.png';
-import rightBanner4 from '../../assets/image/banner/rightbanner4.png';
 import leftBanner from '../../assets/image/banner/leftbanner.png';
 import leftBanner2 from '../../assets/image/banner/leftbanner2.png';
 import { useSelector } from "react-redux";
@@ -48,7 +44,6 @@ const Hero = () => {
     const leftImages = [leftBanner, leftBanner2];
 
     // Right side slider images
-    const rightImages = [rightBanner, rightBanner2, rightBanner3, rightBanner4];
 
     return (
         <div className="grid grid-cols-1 lg:grid-cols-12  gap-4 px-4 md:px-8 py-6">
