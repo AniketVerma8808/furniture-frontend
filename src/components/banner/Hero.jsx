@@ -50,7 +50,7 @@ const Hero = () => {
             {/* Left Side - Hidden on Mobile, Equal Height */}
             <div className="hidden lg:grid lg:col-span-4 grid-rows-2 gap-4 h-full">
                 {leftImages.map((img, index) => (
-                    <div key={index} className="bg-gray-200 h-40 xl:h-[230px] rounded-lg overflow-hidden ">
+                    <div key={index} className="bg-gray-200 h-40 xl:h-[260px] rounded-lg overflow-hidden ">
                         <img
                             src={img}
                             alt={`Left Image ${index + 1}`}

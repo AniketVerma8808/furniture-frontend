@@ -140,16 +140,16 @@ const Navbar = () => {
                             <Link to="/wishlist" className="flex flex-col items-center relative">
                                 <FaHeart />
                                 <span className="text-xs">WISHLIST</span>
-                                {wishlist.length > 0 && (
+                                {/* {wishlist.length > 0 && (
                                     <span className="absolute -top-5 right-0 bg-red-500 text-white text-xs rounded-full px-2 py-1">{wishlist.length}</span>
-                                )}
+                                )} */}
                             </Link>
                             <Link to="/cart" className="flex flex-col items-center relative">
                                 <FaShoppingCart />
                                 <span className="text-xs">CART</span>
-                                {cart.length > 0 && (
+                                {/* {cart.length > 0 && (
                                     <span className="absolute -top-5 right-0 bg-red-500 text-white text-xs rounded-full px-2 py-1">{cart.length}</span>
-                                )}
+                                )} */}
                             </Link>
                         </div>
                     </div>
@@ -204,16 +204,16 @@ const Navbar = () => {
                             <Link to="/wishlist" className="flex flex-col items-center relative">
                                 <FaHeart />
                                 <span className="text-xs">WISHLIST</span>
-                                {wishlist.length > 0 && (
+                                {/* {wishlist.length > 0 && (
                                     <span className="absolute -top-5 right-0 bg-red-500 text-white text-xs rounded-full px-2 py-1">{wishlist.length}</span>
-                                )}
+                                )} */}
                             </Link>
                             <Link to="/cart" className="flex flex-col items-center relative">
                                 <FaShoppingCart />
                                 <span className="text-xs">CART</span>
-                                {cart.length > 0 && (
+                                {/* {cart.length > 0 && (
                                     <span className="absolute -top-5 right-0 bg-red-500 text-white text-xs rounded-full px-2 py-1">{cart.length}</span>
-                                )}
+                                )} */}
                             </Link>
                         </div>
 
