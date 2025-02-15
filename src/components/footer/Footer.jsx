@@ -21,7 +21,7 @@ const Footer = () => {
     <footer className="bg-black text-white">
       {/* Newsletter Section */}
       <div className="py-6 border-b border-gray-700">
-        <div className="container px-4 mx-auto flex flex-col sm:flex-row justify-between items-center">
+        <div className="container px-4 md:px-8 mx-auto flex flex-col sm:flex-row justify-between items-center">
           <div className="text-center sm:text-left p-2">
             <h2 className="text-[22px] font-semibold ">
               SUBSCRIBE TO NEWSLETTER
@@ -45,7 +45,7 @@ const Footer = () => {
       </div>
 
       {/* Links Section */}
-      <div className="max-w-7xl px-4 mx-auto grid grid-cols-2 sm:grid-cols-2 md:grid-cols-6 gap-6 py-8 border-gray-700 text-[14px] md:text-[16px]">
+      <div className="container px-4 md:px-8 mx-auto grid grid-cols-2 sm:grid-cols-2 md:grid-cols-6 gap-6 py-8 border-gray-700 text-[14px] md:text-[16px]">
         <div>
           <h3 className="font-semibold mb-2 text-[14px] md:text-[16px]">
             QUICK LINKS
@@ -225,7 +225,8 @@ const Footer = () => {
       </div>
 
       {/* Benefits Section */}
-      <div className="max-w-7xl  mx-auto px-4 py-6 rounded-lg shadow-lg bg-[#363434] text-center md:text-left">
+      <div className="container px-4 md:px-8  mx-auto py-6 ">
+        <div className="rounded-lg shadow-lg bg-[#363434] text-center md:text-left py-6">
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
           <div className="flex flex-col items-center gap-2 text-base">
             <FaShippingFast className="text-xl" />
@@ -259,9 +260,10 @@ const Footer = () => {
           </div>
         </div>
       </div>
+      </div>
 
       {/* Bottom Bar */}
-      <div className="max-w-7xl px-4 mx-auto flex flex-col sm:flex-row justify-between py-4 text-white text-[14px] md:text-[16px]">
+      <div className="container px-4 md:px-8 mx-auto flex flex-col sm:flex-row justify-between py-4 text-white text-[14px] md:text-[16px]">
         <p className="text-[12px]">
           © 2025, BedsLane | All rights reserved.
           <span>

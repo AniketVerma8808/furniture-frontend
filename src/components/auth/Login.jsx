@@ -87,8 +87,9 @@ const Login = () => {
                         type="submit"
                         className="w-full py-2 bgColor text-white rounded-lg mt-4 flex justify-center items-center"
                         disabled={loading}
+                        style={{height:"40px",width:"100%"}}
                     >
-                        {loading ? <Loader size={5} color="white" /> : "Login"}
+                        {loading ? <Loader size={5} color="white"  /> : "Login"}
                     </button>
 
 

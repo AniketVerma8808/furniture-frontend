@@ -1,15 +1,17 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React from "react";
+import { Link } from "react-router-dom";
 
 const NoCart = () => {
-    return (
-        <div>
-            <div className='flex flex-col items-center justify-center h-screen '>
-            <img src="/Cartempty.png" alt="" />
-                <Link to={'/'} className='text-xl md:text-3xl font-bold py-8'>Please Add Some Product</Link>
-            </div>
-        </div>
-    )
-}
+  return (
+    <div>
+      <div className="flex flex-col items-center justify-center h-screen ">
+        <img src="/empty.png" alt="" />
+        <Link to={"/"} className="text-xl md:text-3xl font-bold py-8">
+          Please Add Some Product
+        </Link>
+      </div>
+    </div>
+  );
+};
 
-export default NoCart
+export default NoCart;

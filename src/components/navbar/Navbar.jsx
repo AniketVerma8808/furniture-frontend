@@ -62,7 +62,7 @@ const Navbar = () => {
             <div className=" ">
                 {/* Top Bar */}
                 <div className="border-b border-gray-700">
-                    <div className="max-w-7xl px-4 md:px-0 mx-auto flex justify-between items-center  py-2 text-sm flex-wrap">
+                    <div className="container  px-4 md:px-8 mx-auto flex justify-between items-center  py-2 text-sm flex-wrap">
                         {/* Location & Edit Button */}
                         <div className="flex items-center gap-2 flex-wrap mb-2 sm:mb-0">
                             <FaMapMarkerAlt />
@@ -83,7 +83,7 @@ const Navbar = () => {
                 </div>
 
                 {/* Main Navbar */}
-                <div className="max-w-7xl px-4 md:px-0 mx-auto flex justify-between items-center py-4 flex-wrap gap-4">
+                <div className="container px-4 md:px-8 mx-auto flex justify-between items-center py-4 flex-wrap gap-4">
                     {/* Desktop view - Logo left, Links right */}
                     <div className="flex w-full justify-between items-center">
                         {/* Logo */}

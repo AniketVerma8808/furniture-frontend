@@ -93,7 +93,8 @@ const ResetPassword = () => {
                     {/* Submit Button */}
                     <button
                         type="submit"
-                         className="w-full py-2 bgColor text-white rounded-lg mt-4 flex justify-center items-center"
+                         className="py-2 bgColor text-white rounded-lg mt-4 flex justify-center items-center"
+                         style={{height:"40px",width:"100%"}}
                     >
                         Reset Password
                     </button>
