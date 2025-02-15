@@ -69,7 +69,7 @@ const ProductItem = ({ product, label }) => {
                 <img
                     src={product.images[0]}
                     alt={product.title}
-                    className="w-full h-52 sm:h-60 object-cover cursor-pointer"
+                    className="w-full h-52 sm:h-60 object-cover  rounded-lg cursor-pointer"
                 />
                 {/* Add to Cart Button (Centered on Hover) */}
                 <div
@@ -88,7 +88,7 @@ const ProductItem = ({ product, label }) => {
                 </div>
                 {/* Dynamic Label */}
                 {label && (
-                    <div className={`absolute bottom-2 left-2 text-white text-xs font-semibold px-2 py-1 rounded-md ${getLabelColor(label)}`}>
+                    <div className={`absolute bottom-0 left-0 text-white text-xs font-semibold px-2 py-1 rounded-md ${getLabelColor(label)}`}>
                         {label}
                     </div>
                 )}
@@ -97,17 +97,17 @@ const ProductItem = ({ product, label }) => {
             {/* Favorite Heart Icon */}
             <button
                 onClick={handleAddToWishlist}
-                className="absolute top-2 right-2 bg-white rounded-full p-3 sm:p-2 shadow-md"
+                className="absolute top-2 right-2  p-3 sm:p-2 "
             >
-                {isFavorite ? <AiFillHeart className="w-6 h-6 text-red-500" /> : <AiOutlineHeart className="w-6 h-6 text-red-500" />}
+                {isFavorite ? <AiFillHeart className="w-6 h-6 text-[#bc562d]" /> : <AiOutlineHeart className="w-6 h-6 text-[#bc562d]" />}
             </button>
 
             {/* Product Details */}
             <div className="p-3 sm:p-4">
-                <h3 className="text-gray-800 font-semibold text-md sm:text-lg truncate">{product.title}</h3>
+                <h3 className="text-gray-800 font-semibold text-[14px]  truncate">{product.title}</h3>
                 <p className="text-xs sm:text-sm text-gray-500 line-clamp-1">{product.collection}</p>
                 <div className="mt-2 flex items-center">
-                    <span className="text-lg sm:text-xl font-bold text-gray-900">{product.price}</span>
+                    <span className="text-[12px] sm:text-[14px] font-bold text-gray-900">{product.price}</span>
                     <span className="ml-2 text-sm text-gray-400 line-through">{product.oldPrice}</span>
                 </div>
             </div>

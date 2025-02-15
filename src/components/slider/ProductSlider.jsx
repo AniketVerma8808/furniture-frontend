@@ -31,7 +31,7 @@ const ProductSlider = ({ title, data }) => {
         speed: 500,
         autoplay: true,
         autoplaySpeed: 3000,
-        slidesToShow: 4,
+        slidesToShow: 3,
         slidesToScroll: 1,
         nextArrow: <NextArrow />,
         prevArrow: <PrevArrow />,
@@ -58,12 +58,12 @@ const ProductSlider = ({ title, data }) => {
     };
 
     return (
-        <div className="container mx-auto px-4 md:px-8 relative">
+        <div className="container mx-auto px-2 md:px-8 relative">
             <h3 className="font-roboto text-center font-medium text-[30px] text-[rgb(42,40,40)] leading-[45px]">{title}</h3>
-            <div className="py-12 relative">
+            <div className="py-8 md:py-12 relative">
                 <Slider {...settings}>
                     {data?.map((product) => (
-                        <div key={product.id} className="px-2">
+                        <div key={product.id} className="md:px-8 px-1">
                             <ProductItem product={product} label="New Arrival" />
                         </div>
                     ))}

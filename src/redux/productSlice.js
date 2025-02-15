@@ -9,11 +9,11 @@ export const fetchProducts = createAsyncThunk(
         //  neds to have product api so that we can store data 
 
             const newarrival = products.filter((product) => product.isNewArrival);
-            const bestsellor = products.filter((product) => product.isBestSeller);
+            const bestseller = products.filter((product) => product.isBestSeller);
 
 
             return {
-                bestsellor,
+                bestseller,
                 newarrival,
                 products
             };
@@ -27,7 +27,7 @@ const productSlice = createSlice({
     name: 'product',
     initialState: {
         products: [],
-        bestsellor: [],
+        bestseller: [],
         newarrival: [],
         loading: false,
         error: null,
@@ -44,10 +44,10 @@ const productSlice = createSlice({
                 state.error = null;
             })
             .addCase(fetchProducts.fulfilled, (state, action) => {
-                const { bestsellor, newarrival, products } = action.payload;
+                const { bestseller, newarrival, products } = action.payload;
                 state.loading = false;
                 state.products = products;
-                state.bestsellor = bestsellor
+                state.bestseller = bestseller
                 state.newarrival = newarrival
             })
             .addCase(fetchProducts.rejected, (state, action) => {

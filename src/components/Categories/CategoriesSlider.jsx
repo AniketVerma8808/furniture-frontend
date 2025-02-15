@@ -64,7 +64,7 @@ const CategoriesSlider = () => {
             <h3 className="font-roboto text-center font-medium text-[30px] text-[rgb(42,40,40)] leading-[45px] mb-6">
                 Shop By Categories
             </h3>
-            <div className="py-12">
+            <div className="py-6 sm:py-8 md:py-12">
                 {/* Slider Component */}
                 <Slider {...settings}>
                     {categories.map((category, index) => (
