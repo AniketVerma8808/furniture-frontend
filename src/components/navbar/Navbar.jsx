@@ -1,8 +1,7 @@
 import { FaUser, FaHeart, FaShoppingCart, FaMapMarkerAlt, FaSearch, FaBars } from "react-icons/fa";
 import { IoIosArrowDown } from "react-icons/io";
 import { Link, useNavigate } from "react-router-dom";
-import { useContext, useState } from "react";
-import { ProductContext } from "../../context/ProductContext";
+import {  useState } from "react";
 import { FiLogOut } from "react-icons/fi";
 import { BiUserCircle } from "react-icons/bi";
 import { toast } from "react-toastify";
@@ -15,7 +14,6 @@ const Navbar = () => {
     const [hoveredCategory, setHoveredCategory] = useState(null);
     const [isCategoryOpen, setIsCategoryOpen] = useState(null);
     const [isDropdownOpenUser, setIsDropdownOpenUser] = useState(false);
-    const { cart, wishlist, isAuthenticated, logout, } = useContext(ProductContext);
     const { user } = useSelector((state) => state.auth)
     const { city } = useSelector((state) => state.home)
 

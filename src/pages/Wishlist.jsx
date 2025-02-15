@@ -3,6 +3,7 @@ import { IoIosTrash } from "react-icons/io";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { ProductContext } from "../context/ProductContext";
+import Nowishlist from "./Nowishlist";
 
 const Wishlist = () => {
     const { wishlist, removeFromWishlist } = useContext(ProductContext);
@@ -53,9 +54,7 @@ const Wishlist = () => {
                     </div>
                 </div>
             ) : (
-                <div className="text-center text-gray-600 text-lg font-medium">
-                    Your wishlist is empty.
-                </div>
+               <Nowishlist/>
             )}
         </div>
     );

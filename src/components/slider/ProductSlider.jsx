@@ -58,7 +58,7 @@ const ProductSlider = ({ title, data }) => {
     };
 
     return (
-        <div className="max-w-7xl mx-auto px-4 relative">
+        <div className="container mx-auto px-4 md:px-8 relative">
             <h3 className="font-roboto text-center font-medium text-[30px] text-[rgb(42,40,40)] leading-[45px]">{title}</h3>
             <div className="py-12 relative">
                 <Slider {...settings}>

@@ -1,19 +1,19 @@
 import React, { useContext } from "react";
-import { ProductContext } from "../../context/ProductContext";
+// import { ProductContext } from "../../context/ProductContext";
 import { useParams } from "react-router-dom";
 
 const OrderDetails = () => {
-    const { orders } = useContext(ProductContext);
+    // const { orders } = useContext(ProductContext);
     const { orderId } = useParams();
     console.log(orderId);
 
-    const order = orders.find((order) => order.orderId === orderId);
+    // const order = orders.find((order) => order.orderId === orderId);
 
-    if (!order) {
-        return <div>Order not found</div>;
-    }
+    // if (!order) {
+    //     return <div>Order not found</div>;
+    // }
 
-    const { address } = order;
+    // const { address } = order;
     const {
         name,
         address: orderAddress,

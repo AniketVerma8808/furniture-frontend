@@ -49,9 +49,9 @@ const Register = () => {
 
     return (
         <Layout>
-            <div className="flex justify-center items-start w-full p-4">
-                <form onSubmit={handleSubmit} className="w-full p-6 space-y-4">
+            <div className="flex justify-center flex-col w-full p-4">
                     <h2 className="text-3xl text-center font-semibold text-gray-800">Register</h2>
+                <form onSubmit={handleSubmit} className="w-full p-6 space-y-4">
 
                     {["name", "email", "phone"].map((field) => (
                         <div key={field}>
@@ -64,7 +64,7 @@ const Register = () => {
                                 name={field}
                                 value={formData[field]}
                                 onChange={handleChange}
-                                className="w-full px-4 py-2 mt-1 border border-gray-300 rounded-lg"
+                              className="w-full px-4 py-2 mt-1 border borderColor rounded-lg "
                                 placeholder={`Enter your ${field}`}
                             />
                         </div>
@@ -81,7 +81,7 @@ const Register = () => {
                             name="password"
                             value={formData.password}
                             onChange={handleChange}
-                            className="w-full px-4 py-2 mt-1 border border-gray-300 rounded-lg pr-10"
+                              className="w-full px-4 py-2 mt-1 border borderColor rounded-lg "
                             placeholder="Enter your password"
                         />
                         <button
@@ -96,7 +96,7 @@ const Register = () => {
                     {/* Submit Button */}
                     <button
                         type="submit"
-                        className="w-full py-2 bg-blue-600 text-white rounded-lg mt-4 flex justify-center items-center"
+                        className="w-full py-2 bgColor text-white rounded-lg mt-4 flex justify-center items-center"
                         disabled={loading}
                     >
                         {loading ? <Loader size={5} color="white" /> : "Register"}

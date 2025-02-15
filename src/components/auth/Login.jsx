@@ -1,9 +1,7 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 import { Link, useNavigate } from 'react-router-dom';
-import loginBanner from '../../assets/image/banner/loginBanner.png'
 import { IoIosEye, IoIosEyeOff } from "react-icons/io";
-import { ProductContext } from '../../context/ProductContext';
 import Loader from '../loader/Loader';
 import Layout from './Layout';
 import { LoginService } from '../../services/api.service';
@@ -11,7 +9,6 @@ import { useDispatch } from 'react-redux';
 import { loginSuccess } from '../../redux/authSlice';
 
 const Login = () => {
-    const { login } = useContext(ProductContext)
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
@@ -81,7 +78,11 @@ const Login = () => {
                             {showPassword ? <IoIosEye size={22} /> : <IoIosEyeOff size={22} />}
                         </button>
                     </div>
-
+                    <div className="text-right mt-2">
+                        <Link to="/forgot-password" className="text-sm text-gray-600 hover:underline">
+                            Forgot Password?
+                        </Link>
+                    </div>
                     <button
                         type="submit"
                         className="w-full py-2 bgColor text-white rounded-lg mt-4 flex justify-center items-center"

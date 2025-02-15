@@ -2,29 +2,29 @@ import React, { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { toast } from "react-toastify";
-import { ProductContext } from "../../context/ProductContext";
+// import { ProductContext } from "../../context/ProductContext";
 
 const ProductItem = ({ product, label }) => {
     const [isFavorite, setIsFavorite] = useState(false);
     const [isHovered, setIsHovered] = useState(false);
     const navigate = useNavigate();
-    const { addToCart, addToWishlist, wishlist, removeFromWishlist, isAuthenticated } = useContext(ProductContext);
+    // const { addToCart, addToWishlist, wishlist, removeFromWishlist, isAuthenticated } = useContext(ProductContext);
 
-    useEffect(() => {
-        if (wishlist.find((item) => item.id === product.id)) {
-            setIsFavorite(true);
-        } else {
-            setIsFavorite(false);
-        }
-    }, [wishlist, product.id]);
+    // useEffect(() => {
+    //     if (wishlist.find((item) => item.id === product.id)) {
+    //         setIsFavorite(true);
+    //     } else {
+    //         setIsFavorite(false);
+    //     }
+    // }, [wishlist, product.id]);
 
     const handleAddToCart = () => {
-        if (!isAuthenticated) {
+        // if (!isAuthenticated) {
             toast.error("Please log in to add items to the cart.");
             navigate("/login");
             return;
-        }
-        addToCart(product);
+        // }
+        // addToCart(product);
         toast.success("Added to Cart!");
     };
 

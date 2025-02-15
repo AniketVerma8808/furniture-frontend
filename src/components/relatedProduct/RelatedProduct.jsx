@@ -21,7 +21,7 @@ const RelatedProduct = ({ currentProductCategory }) => {
     console.log("All products:", products);
 
     return (
-        <div className="max-w-7xl mx-auto px-4 relative">
+        <div className="container mx-auto px-4 relative">
             <h3 className="font-roboto text-center font-medium text-[30px] text-[rgb(42,40,40)] leading-[45px]">
                 Related Products
             </h3>

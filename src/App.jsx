@@ -21,6 +21,11 @@ import OrderDetails from './components/orders/OrderDetails'
 import { useDispatch } from 'react-redux'
 import { fetchBanners, fetchUserLocation } from './redux/homeSlice'
 import { fetchProducts } from './redux/productSlice'
+import ForgotPassword from './components/auth/ForgotPassword'
+import ResetPassword from './components/auth/ResetPassword'
+import Policies from './pages/Policies'
+import TermsAndConditions from './pages/TermsAndConditions'
+import PrivacyPolicy from './pages/PrivacyPolicy'
 
 const ScrollToTop = () => {
   const location = useLocation();
@@ -49,12 +54,14 @@ const App = () => {
     <>
       <ScrollToTop />
       <Navbar />
-      <main className="overflow-y-hidden min-h-screen antialiased">
+      <main className="overflow-y-hidden  antialiased">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/reset" element={<ResetPassword />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/products/:name" element={<Product />} />
           <Route path="/product/:id" element={<ProductDetails />} />
@@ -63,6 +70,9 @@ const App = () => {
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/orders" element={<YourOrder />} />
           <Route path='/order_details/:id' element={<OrderDetails />} />
+          <Route path='/policies' element={<Policies />} />
+          <Route path='/terms&conditions' element={<TermsAndConditions />} />
+          <Route path='/privacy&policy' element={<PrivacyPolicy />} />
 
 
           {/* Define a route for a non-existent path (404) */}

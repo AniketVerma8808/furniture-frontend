@@ -4,6 +4,7 @@ import { ProductContext } from "../context/ProductContext";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import Loader from "../components/loader/Loader";
+import NoCart from "./NoCart";
 
 const Cart = () => {
     const { cart, handleQuantityChange, handleRemoveItem } = useContext(ProductContext);
@@ -136,7 +137,7 @@ const Cart = () => {
                     </div>
                 </div>
             ) : (
-                <div className="text-center text-gray-600 text-lg font-medium">Your cart is empty.</div>
+               <NoCart/>
             )}
         </div>
     );

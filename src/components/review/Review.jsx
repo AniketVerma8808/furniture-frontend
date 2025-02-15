@@ -48,7 +48,7 @@ const Review = () => {
     }), []);
 
     return (
-        <div className="max-w-7xl mx-auto py-12 px-4">
+        <div className="container mx-auto py-12 px-4 md:px-8">
             <h3 className="text-center font-roboto font-medium text-[30px] text-[rgb(42,40,40)] leading-[45px] mb-8">
                 Customer Reviews
             </h3>

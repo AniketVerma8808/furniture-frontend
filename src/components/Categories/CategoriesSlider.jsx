@@ -60,7 +60,7 @@ const CategoriesSlider = () => {
 
 
     return (
-        <div className="max-w-7xl mx-auto px-2 md:px-0 py-8">
+        <div className="container mx-auto px-2 md:px-8 py-8">
             <h3 className="font-roboto text-center font-medium text-[30px] text-[rgb(42,40,40)] leading-[45px] mb-6">
                 Shop By Categories
             </h3>
