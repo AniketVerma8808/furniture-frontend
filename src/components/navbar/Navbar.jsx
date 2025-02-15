@@ -19,7 +19,6 @@ const Navbar = () => {
 
     const dispatch = useDispatch()
 
-    console.log(user, "user in navbar");
     const navigate = useNavigate();
     const categories = [
         { name: "INTERNATIONAL COLLECTION", subcategories: null },

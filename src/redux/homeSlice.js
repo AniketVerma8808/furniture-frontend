@@ -8,7 +8,6 @@ const getCityFromCoordinates = async (latitude, longitude) => {
   try {
     const response = await fetch(url);
     const data = await response.json();
-    console.log(data);
     return data.address?.city || data.address?.town || data.address?.village || "Unknown Location";
   } catch (error) {
     console.error("Error fetching city name:", error);

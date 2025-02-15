@@ -16,10 +16,6 @@ export const getBannerService = async() => {
 
 // all Blogs data API
 export const GetBlogsService = () => {
-  return apiClient.get(`/blogs`);
+  return clientAxios.get(`/blogs`);
 };
 
-// all Style data API
-export const GetBlogByIdService = (blogId) => {
-  return apiClient.get(`/blogs/${blogId}`);
-};

@@ -28,6 +28,7 @@ import TermsAndConditions from './pages/TermsAndConditions'
 import PrivacyPolicy from './pages/PrivacyPolicy'
 import BlogPage from './pages/BlogPage'
 import BlogDetails from './pages/BlogDetails'
+import { fetchBlogs } from './redux/blogSlice'
 
 const ScrollToTop = () => {
   const location = useLocation();
@@ -48,6 +49,7 @@ const App = () => {
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(fetchUserLocation())
+    dispatch(fetchBlogs())
     dispatch(fetchBanners())
     dispatch(fetchProducts())
   }, [])

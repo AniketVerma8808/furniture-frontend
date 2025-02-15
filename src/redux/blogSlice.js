@@ -6,8 +6,8 @@ export const fetchBlogs = createAsyncThunk(
   "blog/fetchBlogs",
   async (_, { rejectWithValue }) => {
     try {
-      const { data } = await GetBlogsService(); 
-      return data.blogs;
+      const { data } = await GetBlogsService();
+      return data.data;
     } catch (error) {
       console.error("Blogs fetching error:", error);
       return rejectWithValue(error.response?.data || "Failed to fetch blogs");
@@ -17,16 +17,21 @@ export const fetchBlogs = createAsyncThunk(
 
 const initialState = {
   blogs: [],
+  individual: JSON.parse(localStorage.getItem("selectedBlog")) || null, // Load from local storage
   loading: false,
-  loading: null,
+  error: null,
 };
 
 const blogSlice = createSlice({
   name: "blog",
   initialState,
   reducers: {
-    setBlogs: (state, action) => {
-      state.blogs = action.payload;
+    setIndividualBlog: (state, action) => {
+      const selectedBlog = state.blogs.find((x) => x._id === action.payload);
+      if (selectedBlog) {
+        state.individual = selectedBlog;
+        localStorage.setItem("selectedBlog", JSON.stringify(selectedBlog)); // Save to local storage
+      }
     },
   },
   extraReducers: (builder) => {
@@ -38,6 +43,11 @@ const blogSlice = createSlice({
       .addCase(fetchBlogs.fulfilled, (state, action) => {
         state.loading = false;
         state.blogs = action.payload;
+        // Restore individual blog from local storage if it exists
+        const storedBlog = JSON.parse(localStorage.getItem("selectedBlog"));
+        if (storedBlog) {
+          state.individual = action.payload.find((x) => x._id === storedBlog._id) || null;
+        }
       })
       .addCase(fetchBlogs.rejected, (state, action) => {
         state.loading = false;
@@ -46,5 +56,5 @@ const blogSlice = createSlice({
   },
 });
 
-export const { setBlogs } = blogSlice.actions;
+export const { setIndividualBlog } = blogSlice.actions;
 export default blogSlice.reducer;
