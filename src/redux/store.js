@@ -2,14 +2,13 @@ import { configureStore } from "@reduxjs/toolkit";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import { combineReducers } from "redux";
-import {thunk} from "redux-thunk"; // Correct import (no curly brackets)
+import { thunk } from "redux-thunk"; // Correct import (no curly brackets)
 import authReducer from "./authSlice";
 import productReducer from "./productSlice";
 import cartReducer from "./cartSlice";
 import wishlistReducer from "./wishlistSlice";
 import homeReducer from "./homeSlice";
-
-
+import blogReducer from "./blogSlice"
 // Persist Config
 const persistConfig = {
   key: "root",
@@ -24,6 +23,7 @@ const rootReducer = combineReducers({
   cart: cartReducer,
   wishlist: wishlistReducer,
   home: homeReducer,
+  blog: blogReducer,
 });
 
 // Persisted Reducer

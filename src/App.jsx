@@ -26,6 +26,8 @@ import ResetPassword from './components/auth/ResetPassword'
 import Policies from './pages/Policies'
 import TermsAndConditions from './pages/TermsAndConditions'
 import PrivacyPolicy from './pages/PrivacyPolicy'
+import BlogPage from './pages/BlogPage'
+import BlogDetails from './pages/BlogDetails'
 
 const ScrollToTop = () => {
   const location = useLocation();
@@ -73,6 +75,8 @@ const App = () => {
           <Route path='/policies' element={<Policies />} />
           <Route path='/terms&conditions' element={<TermsAndConditions />} />
           <Route path='/privacy&policy' element={<PrivacyPolicy />} />
+          <Route path='/blogs' element={<BlogPage />} />
+          <Route path='/blogdetails/:id' element={<BlogDetails />} />
 
 
           {/* Define a route for a non-existent path (404) */}
