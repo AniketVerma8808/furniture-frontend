@@ -7,24 +7,26 @@ const CartCard = ({ initialCart = [] }) => {
   const [cart, setCart] = useState(initialCart);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
- 
   const updateQuantity = (id, change) => {
     setCart((prevCart) =>
       prevCart
         .map((item) =>
-          item.id === id ? { ...item, quantity: Math.max(1, item.quantity + change) } : item
+          item.id === id
+            ? { ...item, quantity: Math.max(1, item.quantity + change) }
+            : item
         )
-        .filter((item) => item.quantity > 0) 
+        .filter((item) => item.quantity > 0)
     );
   };
 
- 
   const removeItem = (id) => {
     setCart((prevCart) => prevCart.filter((item) => item.id !== id));
   };
 
-
-  const subtotal = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
+  const subtotal = cart.reduce(
+    (acc, item) => acc + item.price * item.quantity,
+    0
+  );
 
   return (
     <div className="relative">
@@ -35,7 +37,7 @@ const CartCard = ({ initialCart = [] }) => {
         className="flex flex-col items-center cursor-pointer"
         onClick={() => setIsDropdownOpen(!isDropdownOpen)}
       >
-        <FaShoppingCart className="text-[16px] md:text-[16px]"/>
+        <FaShoppingCart className="text-[16px] md:text-[16px]" />
         <span className="text-[8px] md:text-xs">CART</span>
       </div>
 
@@ -52,7 +54,9 @@ const CartCard = ({ initialCart = [] }) => {
 
           {/* Cart Summary */}
           <div className="flex justify-between px-4 py-2 border-b">
-            <p>{cart.length} {cart.length === 1 ? "item" : "items"}</p>
+            <p>
+              {cart.length} {cart.length === 1 ? "item" : "items"}
+            </p>
             <div>
               <p className="text-gray-500 text-xs">Subtotal</p>
               <p className="font-semibold text-lg">${subtotal.toFixed(2)}</p>
@@ -62,11 +66,20 @@ const CartCard = ({ initialCart = [] }) => {
           {/* Cart Items */}
           {cart.length > 0 ? (
             cart.map((item, index) => (
-              <div key={index} className="flex items-center gap-3 px-4 py-3 border-b">
-                <img src={item.image} alt={item.name} className="w-12 h-12 rounded-md" />
+              <div
+                key={index}
+                className="flex items-center gap-3 px-4 py-3 border-b"
+              >
+                <img
+                  src={item.image}
+                  alt={item.name}
+                  className="w-12 h-12 rounded-md"
+                />
                 <div className="flex-1">
                   <p className="text-sm font-semibold">{item.name}</p>
-                  <p className="text-xs text-gray-500">${item.price.toFixed(2)}</p>
+                  <p className="text-xs text-gray-500">
+                    ${item.price.toFixed(2)}
+                  </p>
 
                   {/* Quantity Control */}
                   <div className="flex items-center gap-3 mt-2">
@@ -79,7 +92,9 @@ const CartCard = ({ initialCart = [] }) => {
                       >
                         -
                       </button>
-                      <span className="text-sm font-medium">{item.quantity}</span>
+                      <span className="text-sm font-medium">
+                        {item.quantity}
+                      </span>
                       <button
                         onClick={() => updateQuantity(item.id, 1)}
                         className="bg-gray-200 px-3 py-1 rounded hover:bg-gray-300"
@@ -105,7 +120,7 @@ const CartCard = ({ initialCart = [] }) => {
               Proceed to Checkout
             </button>
             <Link
-              to="/cart"
+              to="/checkout"
               className="block text-center bg-gray-200  text-gray-700 py-3 rounded-lg"
               onClick={() => setIsDropdownOpen(false)}
             >
