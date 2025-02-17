@@ -1,65 +1,53 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Cart from "./Cart";
-import Checkout2 from "./Checkout2";
 import Address from "./Address";
+import { useLocation } from "react-router-dom";
 
 function Checkout() {
   const [step, setStep] = useState("cart");
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.pathname === "/checkout") {
+      setStep("cart");
+    }
+  }, [location.pathname]);
 
   return (
-    <div className="flex flex-col items-center justify-between gap-6 py-12">
-      {/* Sidebar */}
-      <div className="flex flex-row gap-4 w-full md:w-1/4">
-        <button
-          className={`p-3 text-center rounded-lg ${
-            step === "cart" ? "bgColor text-white" : "bg-gray-300"
-          }`}
-          onClick={() => setStep("cart")}
-        >
-          <div>
-            {/* <p>1</p> */}
-            <span> Cart</span>
-          </div>
-        </button>
-        <button
-          className={`p-3 text-center rounded-lg ${
-            step === "address" ? "bgColor text-white" : "bg-gray-300"
-          }`}
-          onClick={() => setStep("address")}
-        >
-          Address
-        </button>
-        <button
-          className={`p-3 text-center rounded-lg ${
-            step === "payment" ? "bgColor text-white" : "bg-gray-300"
-          }`}
-          onClick={() => setStep("payment")}
-        >
-          Payment
-        </button>
-      </div>
+    <>
+      {/* Stepper */}
+      <div className="bg-white">
+        <div className="flex items-center justify-center mb-6 pt-12">
+          {["Cart", "Address", "Payment"].map((label, index) => (
+            <div key={index} className="flex items-center">
+              <div
+                className={`w-10 h-10 flex items-center justify-center rounded-full text-white font-bold ${
+                  step === label.toLowerCase() ? "bgColor" : "bg-gray-300"
+                }`}
+                onClick={() => setStep(label.toLowerCase())}
+              >
+                {index + 1}
+              </div>
+              {index < 2 && <div className="w-20 h-1 bg-gray-300 mx-2"></div>}
+            </div>
+          ))}
+        </div>
 
-      {/* Content Area */}
-      <div className="w-full  p-6  rounded-lg">
-        {step === "cart" && (
-          <div>
-            <Cart />
+        <div className="flex flex-col items-center justify-between gap-6">
+          {/* Content Area */}
+          <div className="w-full rounded-lg">
+            {step === "cart" && <Cart />}
+            {step === "address" && <Address />}
+            {step === "payment" && (
+              <div>
+                <h2 className="text-2xl mb-4">Payment Information</h2>
+                {/* Payment form content goes here */}
+              </div>
+            )}
           </div>
-        )}
-        {step === "address" && (
-          <div>
-           
-            <Address />
-          </div>
-        )}
-        {step === "payment" && (
-          <div>
-            <h2 className="text-2xl mb-4">Payment Information</h2>
-            {/* Payment form content goes here */}
-          </div>
-        )}
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 

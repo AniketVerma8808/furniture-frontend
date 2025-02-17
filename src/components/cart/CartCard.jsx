@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { IoIosTrash, IoMdClose } from "react-icons/io";
 import { FaShoppingCart } from "react-icons/fa";
 
 const CartCard = ({ initialCart = [] }) => {
   const [cart, setCart] = useState(initialCart);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const navigate = useNavigate();
 
   const updateQuantity = (id, change) => {
     setCart((prevCart) =>
@@ -27,6 +28,15 @@ const CartCard = ({ initialCart = [] }) => {
     (acc, item) => acc + item.price * item.quantity,
     0
   );
+
+  const handleProceedToCheckout = () => {
+    navigate("/checkout");
+  };
+
+  const handleViewCart = () => {
+    setIsDropdownOpen(false);
+    navigate("/checkout");
+  };
 
   return (
     <div className="relative">
@@ -116,13 +126,16 @@ const CartCard = ({ initialCart = [] }) => {
 
           {/* Checkout & View Cart Buttons */}
           <div className="p-4">
-            <button className="w-full bgColor text-white py-3 rounded-lg mb-2">
+            <button
+              onClick={handleProceedToCheckout}
+              className="w-full bgColor text-white py-3 rounded-lg mb-2"
+            >
               Proceed to Checkout
             </button>
             <Link
               to="/checkout"
-              className="block text-center bg-gray-200  text-gray-700 py-3 rounded-lg"
-              onClick={() => setIsDropdownOpen(false)}
+              className="block text-center bg-gray-200 text-gray-700 py-3 rounded-lg"
+              onClick={handleViewCart}
             >
               View & Edit Cart
             </Link>
