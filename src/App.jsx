@@ -57,7 +57,7 @@ const App = () => {
     <>
       <ScrollToTop />
       <Navbar />
-      <main className="overflow-y-hidden min-h-screen  antialiased">
+      <main className="overflow-y-hidden   antialiased">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />

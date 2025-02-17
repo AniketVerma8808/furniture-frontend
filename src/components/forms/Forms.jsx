@@ -81,7 +81,11 @@ const Forms = ({ title, image, issueType }) => {
         {/* Left Side: Image or Address */}
         <div className="hidden lg:block p-6 rounded-lg">
           {image ? (
-            <img src={image} alt={title} className="w-full h-auto rounded-lg" />
+            <img
+              src={image}
+              alt={title}
+              className="w-full h-auto max-w-xs md:max-w-sm lg:max-w-md xl:max-w-lg rounded-lg"
+            />
           ) : (
             <div>
               <h2 className="text-2xl font-semibold text-gray-800">
@@ -115,7 +119,7 @@ const Forms = ({ title, image, issueType }) => {
         </div>
 
         {/* Right Side: Contact Form */}
-        <div className="p-6 rounded-lg">
+        <div className="p-2 md:p-6 rounded-lg">
           <form onSubmit={handleSubmit} className="space-y-4 mt-4">
             <div>
               <label
