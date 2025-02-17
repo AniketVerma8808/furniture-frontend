@@ -23,15 +23,15 @@ const dummyCart = [
     name: "Nike Shoes",
     price: 99.99,
     quantity: 2,
-    image: "https://via.placeholder.com/50"
+    image: "https://via.placeholder.com/50",
   },
   {
     id: 2,
     name: "Adidas Sneakers",
     price: 89.99,
     quantity: 1,
-    image: "https://via.placeholder.com/50"
-  }
+    image: "https://via.placeholder.com/50",
+  },
 ];
 
 const Navbar = () => {
@@ -72,7 +72,7 @@ const Navbar = () => {
           title: "SIDE TABLES",
           items: ["Bedside Table", "End Table", "Nesting Tables"],
         },
-      ],  
+      ],
     },
     { name: "STUDY & OFFICE", subcategories: null },
     { name: "OUTDOOR", subcategories: null },
@@ -119,10 +119,16 @@ const Navbar = () => {
               <Link to="#" className="border-r border-gray-400 pr-2 sm:pr-4">
                 Bedslane
               </Link>
-              <Link to="#" className="border-r border-gray-400 pr-2 sm:pr-4">
+              <Link
+                to="/franchise"
+                className="border-r border-gray-400 pr-2 sm:pr-4"
+              >
                 Franchise Enquiry
               </Link>
-              <Link to="#" className="border-r border-gray-400 pr-2 sm:pr-4">
+              <Link
+                to="/rent-property"
+                className="border-r border-gray-400 pr-2 sm:pr-4"
+              >
                 Rent your property
               </Link>
               <Link to="#" className="pr-0">
@@ -221,8 +227,8 @@ const Navbar = () => {
                                     <span className="absolute -top-5 right-0 bg-red-500 text-white text-xs rounded-full px-2 py-1">{wishlist.length}</span>
                                 )} */}
               </Link>
-              <Link  className="flex flex-col items-center relative">
-                <CartCard initialCart={dummyCart}/>
+              <Link className="flex flex-col items-center relative">
+                <CartCard initialCart={dummyCart} />
               </Link>
             </div>
           </div>
@@ -329,7 +335,7 @@ const Navbar = () => {
                 <FaShoppingCart />
                 <span className="text-[8px]">CART</span>
               </Link> */}
-               <CartCard initialCart={dummyCart}/>
+              <CartCard initialCart={dummyCart} />
             </div>
           </div>
         </div>

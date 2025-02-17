@@ -19,7 +19,7 @@ const Layout = ({ children }) => {
     const { banners } = useSelector((state) => state.home);
 
     return (
-        <div className="grid grid-cols-1 lg:grid-cols-2 p-20  gap-4">
+        <div className="  p-4 ">
             {/* Left side Banner */}
             <div className="hidden lg:block h-full">
                 <div className="col-span-12 md:col-span-8 rounded-lg overflow-hidden relative h-full">

@@ -280,22 +280,34 @@ const Footer = () => {
             <div className="flex md:flex-col items-center gap-2 text-base">
               <FaShippingFast className="text-[14px] md:text-xl" />
               <div>
-                <h4 className="font-normal text-[11px] md:text-[13px] ">FREE DELIVERY</h4>
-                <p className="text-[9px] md:text-[12px] ">When ordering from Rs. 2500.</p>
+                <h4 className="font-normal text-[11px] md:text-[13px] ">
+                  FREE DELIVERY
+                </h4>
+                <p className="text-[9px] md:text-[12px] ">
+                  When ordering from Rs. 2500.
+                </p>
               </div>
             </div>
             <div className="flex md:flex-col items-center gap-2 text-base">
               <FaExchangeAlt className="text-[14px] md:text-xl" />
               <div>
-                <h4 className="font-normal text-[11px] md:text-[13px] ">EASY RETURNS</h4>
-                <p className="text-[9px] md:text-[12px] ">If goods have problems</p>
+                <h4 className="font-normal text-[11px] md:text-[13px] ">
+                  EASY RETURNS
+                </h4>
+                <p className="text-[9px] md:text-[12px] ">
+                  If goods have problems
+                </p>
               </div>
             </div>
             <div className="flex md:flex-col items-center gap-2 text-base">
               <FaLock className="text-[14px] md:text-xl" />
               <div>
-                <h4 className="font-normal text-[11px] md:text-[13px] ">SECURE PAYMENT</h4>
-                <p className="text-[9px] md:text-[12px] ">100% secure payment</p>
+                <h4 className="font-normal text-[11px] md:text-[13px] ">
+                  SECURE PAYMENT
+                </h4>
+                <p className="text-[9px] md:text-[12px] ">
+                  100% secure payment
+                </p>
               </div>
             </div>
             <div className="flex md:flex-col items-center gap-2 text-base">

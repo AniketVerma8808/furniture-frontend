@@ -19,9 +19,10 @@ const ForgotPassword = () => {
   };
 
   return (
-    <Layout>
+    <div className="grid grid-cols-1 md:grid-cols-2  py-0 sm:py-4 md:py-8 lg:py-12">
+      <Layout />
       <div className="flex justify-center items-start w-full p-4">
-        <form onSubmit={handleSubmit} className="w-full p-6 space-y-4">
+        <form onSubmit={handleSubmit} className="w-full p-0 md:p-6 space-y-4">
           <h2 className="text-2xl font-semibold text-center text-gray-800">
             Forgot Password
           </h2>
@@ -62,7 +63,7 @@ const ForgotPassword = () => {
           </div>
         </form>
       </div>
-    </Layout>
+    </div>
   );
 };
 
