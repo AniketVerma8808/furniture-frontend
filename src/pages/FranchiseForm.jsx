@@ -1,5 +1,6 @@
 import React from "react";
 import Forms from "../components/forms/Forms";
+import FranchiseImg from "../assets/image/Furniture images/FranchiseInquiry.png";
 
 const FranchiseForm = () => {
   return (
@@ -7,7 +8,7 @@ const FranchiseForm = () => {
       <Forms
         title="Franchise Inquiry"
         issueType="Franchise"
-        image="https://via.placeholder.com/600x400"
+        image={FranchiseImg}
       />
     </>
   );

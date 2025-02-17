@@ -15,35 +15,13 @@ import {
   FaHeadphonesAlt,
 } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import Newsletter from "../newletter/Newsletter";
 
 const Footer = () => {
   return (
     <footer className="bg-black text-white">
       {/* Newsletter Section */}
-      <div className="py-6 border-b border-gray-700">
-        <div className="container px-4 md:px-8 mx-auto flex flex-col sm:flex-row justify-between items-center">
-          <div className="text-start md:text-center sm:text-left p-2">
-            <h2 className="text-[16px] md:text-[22px] font-normal ">
-              SUBSCRIBE TO NEWSLETTER
-            </h2>
-            <p className="text-[12px] md:text-[14px]">
-              Be the first to know about new arrivals, sales & promos by
-              submitting your email!
-            </p>
-          </div>
-          <div className="mt-4 sm:mt-0 flex flex-col sm:flex-row items-center justify-center gap-4 relative">
-            <input
-              type="text"
-              placeholder="Please enter your email"
-              className="p-3 w-72 sm:w-96 bg-white text-black rounded-lg text-[12px]"
-            />
-            <button className="bg-black text-white text-[13px] px-4 py-2 rounded-lg sm:rounded-r absolute right-2">
-              Subscribe
-            </button>
-          </div>
-        </div>
-      </div>
-
+      <Newsletter />
       {/* Links Section */}
       <div className="container px-4 md:px-8 mx-auto grid grid-cols-2 sm:grid-cols-2 md:grid-cols-6 gap-6 py-8 border-gray-700 text-[14px] md:text-[16px]">
         <div>
@@ -64,7 +42,7 @@ const Footer = () => {
                 to="/stores"
                 className="hover:text-gray-400 text-[11px] md:text-[13px]"
               >
-                Royaloak Stores
+                Bedslane Stores
               </Link>
             </li>
             <li className="footer-link">
@@ -156,8 +134,8 @@ const Footer = () => {
           </ul>
         </div>
         <div>
-          <h3 className="font-normal mb-2 text-[13px] sm:text-[14px] md:text-[16px]">
-            ROYALOAK
+          <h3 className="font-normal uppercase mb-2 text-[13px] sm:text-[14px] md:text-[16px]">
+            Bedslane
           </h3>
           <ul>
             <li className="footer-link">
@@ -173,7 +151,7 @@ const Footer = () => {
                 to="/sell-with-us"
                 className="hover:text-gray-400 text-[11px] md:text-[13px]"
               >
-                Sell With Royaloak
+                Sell With Bedslane
               </Link>
             </li>
             <li className="footer-link">

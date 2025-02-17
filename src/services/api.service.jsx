@@ -22,3 +22,6 @@ export const GetBlogsService = () => {
 export const FormService = (data) => {
   return clientAxios.post("/help", data);
 };
+export const NewsletterService = (data) => {
+  return clientAxios.post("/newsletter", data);
+};

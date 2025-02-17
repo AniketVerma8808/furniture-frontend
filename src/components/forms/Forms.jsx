@@ -65,7 +65,7 @@ const Forms = ({ title, image, issueType }) => {
       navigate("/");
     } catch (error) {
       console.error("Request error:", error);
-      toast.error(error.response.data?.message || "Something went wrong!");
+      toast.error(error.response.data?.message || "Internal Server Error");
     } finally {
       setLoading(false);
     }

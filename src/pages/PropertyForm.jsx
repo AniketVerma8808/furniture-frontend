@@ -1,5 +1,6 @@
 import React from "react";
 import Forms from "../components/forms/Forms";
+import PropertyImg from "../assets/image/Furniture images/RentYourProperty.png";
 
 const PropertyForm = () => {
   return (
@@ -7,7 +8,7 @@ const PropertyForm = () => {
       <Forms
         title="Rent Your Property"
         issueType="Rent Your Property"
-        image="https://via.placeholder.com/600x400"
+        image={PropertyImg}
       />
     </>
   );
