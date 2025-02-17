@@ -1,17 +1,17 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import Cart from "./Cart";
 import Address from "./Address";
-import { useLocation } from "react-router-dom";
 
 function Checkout() {
   const [step, setStep] = useState("cart");
   const location = useLocation();
 
   useEffect(() => {
-    if (location.pathname === "/checkout") {
-      setStep("cart");
+    if (location.state?.step) {
+      setStep(location.state.step);
     }
-  }, [location.pathname]);
+  }, [location.state]);
 
   return (
     <>

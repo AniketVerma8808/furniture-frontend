@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { IoIosTrash, IoMdClose } from "react-icons/io";
 import { FaShoppingCart } from "react-icons/fa";
@@ -29,13 +29,19 @@ const CartCard = ({ initialCart = [] }) => {
     0
   );
 
+  // Navigate to Checkout with state
   const handleProceedToCheckout = () => {
-    navigate("/checkout");
+    navigate("/checkout", { state: { step: "address" } });
   };
 
   const handleViewCart = () => {
     setIsDropdownOpen(false);
-    navigate("/checkout");
+    navigate("/checkout", { state: { step: "cart" } });
+  };
+
+  const handleGoToShop = () => {
+    setIsDropdownOpen(false);
+    navigate("/");
   };
 
   return (
@@ -121,24 +127,37 @@ const CartCard = ({ initialCart = [] }) => {
               </div>
             ))
           ) : (
-            <p className="px-4 py-4 text-gray-500 text-center">Cart is empty</p>
+            <p className="px-4 py-4 text-gray-500 text-center">
+              You have no items in your shopping cart.
+            </p>
           )}
 
           {/* Checkout & View Cart Buttons */}
           <div className="p-4">
-            <button
-              onClick={handleProceedToCheckout}
-              className="w-full bgColor text-white py-3 rounded-lg mb-2"
-            >
-              Proceed to Checkout
-            </button>
-            <Link
-              to="/checkout"
-              className="block text-center bg-gray-200 text-gray-700 py-3 rounded-lg"
-              onClick={handleViewCart}
-            >
-              View & Edit Cart
-            </Link>
+            {cart.length > 0 ? (
+              <>
+                <button
+                  onClick={handleProceedToCheckout}
+                  className="w-full bgColor text-white py-3 rounded-lg mb-2"
+                >
+                  Proceed to Checkout
+                </button>
+                <Link
+                  to="/checkout"
+                  className="block text-center bg-gray-200 text-gray-700 py-3 rounded-lg"
+                  onClick={handleViewCart}
+                >
+                  View & Edit Cart
+                </Link>
+              </>
+            ) : (
+              <button
+                onClick={handleGoToShop}
+                className="block text-center w-full bg-gray-200 text-gray-700 py-3 rounded-lg"
+              >
+                Go to Shop
+              </button>
+            )}
           </div>
         </div>
       )}

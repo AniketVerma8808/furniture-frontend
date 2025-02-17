@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import OrderSummary from "../components/orders/OrderSummary";
-import NoCart from "./NoCart";
 import reviewImg4 from "../assets/image/review/review4.jpg";
 import { AiOutlineDelete, AiOutlineHeart } from "react-icons/ai";
 import { TbTruckDelivery } from "react-icons/tb";
 import { toast } from "react-toastify";
-
+import noProductImage from "../assets/image/Furniture images/cart.jpeg";
+import NoProduct from "./NoProduct";
 const Cart = () => {
   const navigate = useNavigate();
 
@@ -155,7 +155,7 @@ const Cart = () => {
           </div>
         </div>
       ) : (
-        <NoCart />
+        <NoProduct image={noProductImage} />
       )}
     </div>
   );
