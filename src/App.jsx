@@ -31,7 +31,7 @@ import BlogDetails from "./pages/BlogDetails";
 import { fetchBlogs } from "./redux/blogSlice";
 import ComplaintsForm from "./pages/ComplaintsForm";
 import FranchiseForm from "./pages/FranchiseForm";
-import PropertyForm from "./pages/propertyForm";
+import PropertyForm from "./pages/PropertyForm";
 
 const ScrollToTop = () => {
   const location = useLocation();
