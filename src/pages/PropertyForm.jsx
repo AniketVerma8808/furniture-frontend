@@ -6,6 +6,7 @@ const PropertyForm = () => {
     <>
       <Forms
         title="Rent Your Property"
+        issueType="Rent Your Property"
         image="https://via.placeholder.com/600x400"
       />
     </>

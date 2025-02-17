@@ -49,7 +49,7 @@ const Register = () => {
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2  py-0 sm:py-4 md:py-8 lg:py-12">
-     <Layout/>
+      <Layout />
       <div className="flex justify-center flex-col w-full p-4">
         <h2 className="text-3xl text-center font-semibold text-gray-800">
           Register
@@ -125,8 +125,7 @@ const Register = () => {
           </div>
         </form>
       </div>
-   
-   </div>
+    </div>
   );
 };
 
