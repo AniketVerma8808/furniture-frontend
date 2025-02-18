@@ -6,19 +6,19 @@ import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
 const NextArrow = ({ onClick }) => (
   <button
-    className="absolute  md:top-[100px] lg:top-[100px] xl:top-[128px] right-8 transform -translate-y-1/2 bg-gray-100 text-black p-2 lg:p-3  shadow-lg z-10 hover:bg-gray-200 transition hidden md:block"
+    className="absolute  md:top-[100px] lg:top-[100px] xl:top-[128px] right-8 transform -translate-y-1/2 bg-gray-100 text-black p-2 lg:p-[9px]  shadow-lg z-10 hover:bg-gray-200 transition hidden md:block"
     onClick={onClick}
   >
-    <FaChevronRight size={20} />
+    <FaChevronRight size={16} />
   </button>
 );
 
 const PrevArrow = ({ onClick }) => (
   <button
-    className="absolute  md:top-[100px] lg:top-[100px] xl:top-[128px] left-8 transform -translate-y-1/2 bg-gray-100 text-black p-2 lg:p-3  shadow-lg z-10 hover:bg-gray-200 transition hidden md:block"
+    className="absolute  md:top-[100px] lg:top-[100px] xl:top-[128px] left-8 transform -translate-y-1/2 bg-gray-100 text-black p-2 lg:p-[9px] shadow-lg z-10 hover:bg-gray-200 transition hidden md:block"
     onClick={onClick}
   >
-    <FaChevronLeft size={20} />
+    <FaChevronLeft size={16} />
   </button>
 );
 

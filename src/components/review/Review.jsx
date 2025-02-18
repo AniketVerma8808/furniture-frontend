@@ -2,16 +2,17 @@ import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
 import { FaChevronLeft, FaChevronRight, FaStar } from "react-icons/fa";
 import { TestimonialsService } from "../../services/api.service";
+import Skeleton from "../loader/Skeleton";
 
 const ArrowButton = ({ direction, onClick }) => {
   const Icon = direction === "next" ? FaChevronRight : FaChevronLeft;
   return (
     <button
-      className="absolute top-1/2 transform -translate-y-1/2 bg-gray-100 text-black p-3 shadow-lg z-10 hover:bg-gray-200 transition"
+      className="absolute top-1/2 transform -translate-y-1/2 bg-gray-100 text-black p-[9px] shadow-lg z-10 hover:bg-gray-200 transition"
       onClick={onClick}
       style={{ [direction === "next" ? "right" : "left"]: 14 }}
     >
-      <Icon size={20} />
+      <Icon size={16} />
     </button>
   );
 };
@@ -60,7 +61,7 @@ const Review = () => {
     ],
   };
   if (loading) {
-    return <div>Loading...</div>;
+    return <Skeleton cardCount={3} />;
   }
 
   return (

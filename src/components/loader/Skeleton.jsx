@@ -1,27 +1,24 @@
-import React from 'react'
+import React from "react";
 
-const Skeleton = () => {
+const Skeleton = ({ cardCount }) => {
+  const columns = cardCount >= 4 ? 3 : cardCount >= 2 ? 2 : 1;
+
   return (
-    <>
-       <div className="flex min-h-screen bg-gray-100">
-      {/* Sidebar */}
-      <div className="hidden md:block w-64 bg-white shadow-lg p-4 animate-pulse"></div>
-      
-      {/* Main Content */}
-      <div className="flex-1 p-6 flex flex-col items-center justify-center">
-        {/* Header */}
-        <div className="w-full max-w-4xl bg-white shadow-md h-16 mb-6 animate-pulse"></div>
-        
-        {/* Skeleton Card */}
-        <div className="w-full max-w-sm bg-white shadow-lg rounded-lg p-6 flex flex-col items-center animate-pulse">
-          <div className="w-24 h-24 bg-gray-300 rounded-full mb-4"></div>
-          <div className="w-3/4 h-4 bg-gray-300 rounded mb-2"></div>
-          <div className="w-1/2 h-4 bg-gray-300 rounded"></div>
-        </div>
+    <div className="flex min-h-screen bg-gray-100">
+      {/* Skeleton Cards */}
+      <div
+        className={`grid grid-cols-1 sm:grid-cols-${columns} lg:grid-cols-3 xl:grid-cols-4 gap-4`}
+      >
+        {Array.from({ length: cardCount }).map((_, index) => (
+          <div key={index} className="animate-pulse space-y-4">
+            <div className="bg-gray-200 h-48 w-full rounded-lg"></div>
+            <div className="h-4 bg-gray-200 rounded w-3/4"></div>
+            <div className="h-4 bg-gray-200 rounded w-1/2"></div>
+          </div>
+        ))}
       </div>
     </div>
-    </>
-  )
-}
+  );
+};
 
-export default Skeleton
+export default Skeleton;
