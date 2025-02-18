@@ -25,3 +25,6 @@ export const FormService = (data) => {
 export const NewsletterService = (data) => {
   return clientAxios.post("/newsletter", data);
 };
+export const TestimonialsService = () => {
+  return clientAxios.get(`/testimonials`);
+};

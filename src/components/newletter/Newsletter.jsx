@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { toast } from "react-toastify";
 import { NewsletterService } from "../../services/api.service";
+import Loader from "../loader/Loader";
 
 const Newsletter = () => {
   const [email, setEmail] = useState("");
@@ -61,10 +62,10 @@ const Newsletter = () => {
             />
             <button
               onClick={handleSubmit}
-              className="bg-black text-white text-[13px] px-4 py-2 rounded-lg sm:rounded-r absolute right-2"
-              disabled={loading} // Disable the button while loading
+              className="bg-black text-white text-center text-[13px] px-4 py-2 rounded-lg sm:rounded-r absolute right-2 sm:w-auto min-w-[120px] h-[35px] flex justify-center items-center"
+              disabled={loading}
             >
-              {loading ? "Subscribing..." : "Subscribe"}
+              {loading ? <Loader size={5} color="white" /> : "Subscribe"}
             </button>
           </div>
         </div>

@@ -1,54 +1,15 @@
-import React, { useMemo } from "react";
+import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
 import { FaChevronLeft, FaChevronRight, FaStar } from "react-icons/fa";
-import reviewImg from "../../assets/image/review/review.jpg";
-import reviewImg2 from "../../assets/image/review/review2.jpg";
-import reviewImg3 from "../../assets/image/review/review3.jpg";
-import reviewImg4 from "../../assets/image/review/review4.jpg";
+import { TestimonialsService } from "../../services/api.service";
 
-const reviews = [
-  {
-    id: 1,
-    image: reviewImg,
-    text: "Lorem ipsum dolor sit amet...",
-    rating: 4.5,
-    name: "John Doe",
-    location: "New York, USA",
-  },
-  {
-    id: 2,
-    image: reviewImg2,
-    text: "Sed ut perspiciatis unde...",
-    rating: 5.0,
-    name: "Jane Smith",
-    location: "California, USA",
-  },
-  {
-    id: 3,
-    image: reviewImg3,
-    text: "Quis autem vel eum iure...",
-    rating: 4.0,
-    name: "Alice Johnson",
-    location: "London, UK",
-  },
-  {
-    id: 4,
-    image: reviewImg4,
-    text: "Lorem ipsum dolor sit amet...",
-    rating: 4.5,
-    name: "John Doe",
-    location: "New York, USA",
-  },
-];
-
-// Memoized Arrow Components
 const ArrowButton = ({ direction, onClick }) => {
   const Icon = direction === "next" ? FaChevronRight : FaChevronLeft;
   return (
     <button
-      className="absolute top-1/2 transform -translate-y-1/2 bg-gray-100 text-black p-3 rounded-full shadow-lg z-10 hover:bg-gray-200 transition"
+      className="absolute top-1/2 transform -translate-y-1/2 bg-gray-100 text-black p-3 shadow-lg z-10 hover:bg-gray-200 transition"
       onClick={onClick}
-      style={{ [direction === "next" ? "right" : "left"]: 0 }}
+      style={{ [direction === "next" ? "right" : "left"]: 14 }}
     >
       <Icon size={20} />
     </button>
@@ -56,34 +17,60 @@ const ArrowButton = ({ direction, onClick }) => {
 };
 
 const Review = () => {
-  const settings = useMemo(
-    () => ({
-      dots: false,
-      infinite: true,
-      speed: 400,
-      autoplay: true,
-      autoplaySpeed: 2500,
-      slidesToShow: 3,
-      slidesToScroll: 1,
-      nextArrow: <ArrowButton direction="next" />,
-      prevArrow: <ArrowButton direction="prev" />,
-      responsive: [
-        { breakpoint: 1024, settings: { slidesToShow: 3 } },
-        { breakpoint: 768, settings: { slidesToShow: 2 } },
-        { breakpoint: 480, settings: { slidesToShow: 1 } },
-      ],
-    }),
-    []
-  );
+  const [reviews, setReviews] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const getTestimonials = async () => {
+      setLoading(true);
+      const response = await TestimonialsService();
+      console.log("testimonials", response.data);
+      setReviews(response.data.data);
+      setLoading(false);
+    };
+
+    getTestimonials();
+  }, []);
+
+  const settings = {
+    dots: false,
+    arrows: true,
+    infinite: reviews.length > 1,
+    speed: 500,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 2000,
+    cssEase: "linear",
+    nextArrow: <ArrowButton direction="next" />,
+    prevArrow: <ArrowButton direction="prev" />,
+    slidesToShow: reviews.length === 1 ? 1 : 3,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: reviews.length === 1 ? 1 : 3,
+        },
+      },
+      {
+        breakpoint: 640,
+        settings: {
+          slidesToShow: 1,
+        },
+      },
+    ],
+  };
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="container mx-auto pb-12 px-4 md:px-8">
-      <h3 className="text-center font-roboto font-medium text-[30px] text-[rgb(42,40,40)] leading-[45px] mb-8">
+      <h3 className="text-center font-roboto font-medium text-[30px] text-[rgb(42,40,40)] leading-[45px]">
         Customer Reviews
       </h3>
       <Slider {...settings}>
-        {reviews.map(({ id, image, text, rating, name, location }) => (
-          <div key={id} className="px-4 py-4">
+        {reviews.map(({ _id, name, message, image, location, rating }) => (
+          <div key={_id} className="px-4 py-4">
             <div className="bg-white p-6 rounded-lg shadow-md text-center">
               <img
                 src={image}
@@ -91,7 +78,10 @@ const Review = () => {
                 className="rounded-lg h-48 w-full mx-auto mb-4"
                 loading="lazy"
               />
-              <p className="text-sm text-gray-500 mb-4">{text}</p>
+              <p className="text-sm text-gray-500 line-clamp-1 mb-4">
+                {message}
+              </p>{" "}
+              {/* Updated to use 'message' */}
               <div className="flex justify-center items-center gap-2">
                 <div className="flex gap-1 text-yellow-400">
                   {[...Array(5)].map((_, i) => (

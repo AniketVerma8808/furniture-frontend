@@ -9,7 +9,7 @@ import { useSelector } from "react-redux";
 const PrevArrow = ({ onClick }) => (
   <button
     onClick={onClick}
-    className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white text-black p-3 rounded-full shadow-md z-10 hover:bg-gray-100"
+    className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white text-black p-3 shadow-md z-10 hover:bg-gray-100"
   >
     <FaChevronLeft size={20} />
   </button>
@@ -19,7 +19,7 @@ const PrevArrow = ({ onClick }) => (
 const NextArrow = ({ onClick }) => (
   <button
     onClick={onClick}
-    className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white text-black p-3 rounded-full shadow-md z-10 hover:bg-gray-100"
+    className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white text-black p-3  shadow-md z-10 hover:bg-gray-100"
   >
     <FaChevronRight size={20} />
   </button>
