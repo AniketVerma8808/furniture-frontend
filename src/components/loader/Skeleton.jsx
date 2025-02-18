@@ -4,7 +4,7 @@ const Skeleton = ({ cardCount }) => {
   const columns = cardCount >= 4 ? 3 : cardCount >= 2 ? 2 : 1;
 
   return (
-    <div className="flex min-h-screen bg-gray-100">
+    <div className="flex  bg-gray-100">
       {/* Skeleton Cards */}
       <div
         className={`grid grid-cols-1 sm:grid-cols-${columns} lg:grid-cols-3 xl:grid-cols-4 gap-4`}

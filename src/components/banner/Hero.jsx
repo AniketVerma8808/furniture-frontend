@@ -1,15 +1,16 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import leftBanner from "../../assets/image/banner/leftbanner.png";
 import leftBanner2 from "../../assets/image/banner/leftbanner2.png";
 import { useSelector } from "react-redux";
+import Skeleton from "../loader/Skeleton";
 
 // Custom Left Arrow
 const PrevArrow = ({ onClick }) => (
   <button
     onClick={onClick}
-    className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white text-black p-[9px] shadow-md z-10 hover:bg-gray-100"
+    className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white text-black p-[9px] shadow-md z-10 hover:bg-gray-100 hidden md:block"
   >
     <FaChevronLeft size={16} />
   </button>
@@ -19,7 +20,7 @@ const PrevArrow = ({ onClick }) => (
 const NextArrow = ({ onClick }) => (
   <button
     onClick={onClick}
-    className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white text-black p-[9px]  shadow-md z-10 hover:bg-gray-100"
+    className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white text-black p-[9px]  shadow-md z-10 hover:bg-gray-100 hidden md:block"
   >
     <FaChevronRight size={16} />
   </button>
@@ -27,6 +28,15 @@ const NextArrow = ({ onClick }) => (
 
 const Hero = () => {
   const { banners } = useSelector((state) => state.home);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // Simulate a delay to show the loading state
+    if (banners.length > 0) {
+      setLoading(false);
+    }
+  }, [banners]);
+
   const settings = {
     dots: false,
     infinite: true,
@@ -65,17 +75,21 @@ const Hero = () => {
 
       {/* Right Side - Slider (Full width on mobile, Equal Height) */}
       <div className="col-span-12 md:col-span-8 rounded-lg overflow-hidden relative h-full">
-        <Slider {...settings}>
-          {banners.map(({ image }, index) => (
-            <div key={index} className="h-full">
-              <img
-                src={image}
-                alt={`Slide ${index + 1}`}
-                className="w-full h-full object-cover rounded-lg"
-              />
-            </div>
-          ))}
-        </Slider>
+        {loading ? (
+          <Skeleton cardCount={1} />
+        ) : (
+          <Slider {...settings}>
+            {banners.map(({ image }, index) => (
+              <div key={index} className="h-full">
+                <img
+                  src={image}
+                  alt={`Slide ${index + 1}`}
+                  className="w-full h-full object-cover rounded-lg"
+                />
+              </div>
+            ))}
+          </Slider>
+        )}
       </div>
     </div>
   );
