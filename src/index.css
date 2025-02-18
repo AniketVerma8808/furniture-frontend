@@ -2,12 +2,46 @@
 @import "slick-carousel/slick/slick.css";
 @import "slick-carousel/slick/slick-theme.css";
 
-@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+/* @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"); */
 
 html {
   scroll-behavior: smooth;
 }
-h3 {
-  font-family: "Inter " !important;
+
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap");
+
+body {
+  font-family: "Poppins", sans-serif;
   font-weight: 400;
+  color: #333;
+}
+
+/* Headings */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Inter", sans-serif;
+  font-weight: 700;
+}
+
+/* Paragraphs */
+p {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+}
+
+/* Lists */
+ul,
+li {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+}
+
+/* Span */
+span {
+  font-family: "Poppins", sans-serif;
+  font-weight: 300;
 }

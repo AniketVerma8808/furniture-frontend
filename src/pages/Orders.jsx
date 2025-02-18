@@ -14,10 +14,10 @@ const Orders = () => {
   return (
     <div className="min-h-screen py-4">
       <div className="container mx-auto max-w-7xl px-2 md:px-8">
-        <h3 className="text-lg md:text-xl  mb-4">My Orders</h3>
+        <h3 className="text-sm md:text-[18px]  mb-4">My Orders</h3>
 
         {/* Tabs */}
-        <div className="mb-6 flex justify-between space-x-2 md:space-x-4 border-b-2 border-gray-200 text-[12px] md:text-base">
+        <div className="mb-6 flex justify-between space-x-2 md:space-x-4 border-b-2 border-gray-200 text-[12px] md:text-[14px]">
           <button
             className={`${
               activeTab === "inProcess" ? "border-b-2 border-black" : ""

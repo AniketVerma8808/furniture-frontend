@@ -32,7 +32,7 @@ const ReturnsAndRefunds = () => {
   return (
     <div className="min-h-screen">
       <div className="container mx-auto max-w-7xl">
-        <h3 className="text-xl  mb-4">Returns & Refunds</h3>
+        <h3 className="text-[18px]  mb-4">Returns & Refunds</h3>
 
         {/* Orders List */}
         <div className="bg-white shadow-lg rounded-lg p-6">
@@ -56,12 +56,12 @@ const ReturnsAndRefunds = () => {
                   {/* Order Details */}
                   <div className="flex-grow">
                     <div className="flex justify-between items-center mb-2">
-                      <h4 className="text-lg ">{order.name}</h4>
+                      <h4 className="text-[14px] ">{order.name}</h4>
                       <span className="text-sm text-gray-500">
                         {order.date}
                       </span>
                     </div>
-                    <div className="flex justify-between">
+                    <div className="flex justify-between text-sm">
                       <span className="text-gray-700">
                         Status: {order.status}
                       </span>

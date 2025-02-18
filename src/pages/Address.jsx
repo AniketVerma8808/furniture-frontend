@@ -1,20 +1,47 @@
 import React, { useState } from "react";
-import OrderSummary from "../components/orders/OrderSummary";
+import { HiPlus } from "react-icons/hi";
+import { toast } from "react-toastify";
 
 const Address = () => {
   const [isChecked, setIsChecked] = useState(false);
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    company: "",
+    streetAddress: "",
+    city: "",
+    pincode: "",
+    mobileNumber: "",
+    gstin: "",
+  });
+
+  // Handle form field changes
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("Address Submitted:", formData);
+    toast.success("Address Submitted:");
+  };
+
   return (
     <div>
-      <div className=" min-h-screen">
+      <div className=" min-h-screen pb-12">
         <div className="container mx-auto max-w-7xl">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+          <div className="">
             {/* Left Section */}
-            <div className="lg:col-span-8 bg-white p-6 rounded-lg  border border-gray-200 shadow-md">
+            <div className=" bg-white p-6 rounded-lg  border border-gray-200 shadow-md">
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 ">
                 {/* Delivery Address Section */}
                 <div className="lg:col-span-8">
                   <div className="border border-gray-300 rounded-lg p-4 h-36">
-                    <h3 className="text-xl  mb-2">
+                    <h3 className="text-base md:text-xl  mb-2">
                       Delivery Address
                     </h3>
                     <p className="text-sm text-gray-600">
@@ -24,17 +51,21 @@ const Address = () => {
                 </div>
                 {/* Add Address Section */}
                 <div className="lg:col-span-4">
-                  <div className="border border-gray-300 rounded-lg p-4 h-36">
-                    <h3>Add Address</h3>
+                  <div className="flex flex-col items-center  justify-center gap-6 border border-gray-300 rounded-lg p-4 h-36">
+                    <h3 className="text-base md:text-xl  mb-2">Add Address</h3>
+                    <button
+                      onClick={handleSubmit}
+                      className="p-2 bgColor text-white rounded-full"
+                    >
+                      <HiPlus className="w-6 h-6" />
+                    </button>
                   </div>
                 </div>
               </div>
 
               {/* Address Form */}
               <div className="border border-gray-300 rounded-lg p-6 mt-6">
-                <h2 className="text-2xl  mb-4">
-                  Delivery Address
-                </h2>
+                <h2 className="text-base md:text-xl  mb-4">Delivery Address</h2>
                 <form>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-4">
                     {/* First Name */}
@@ -49,6 +80,8 @@ const Address = () => {
                         type="text"
                         id="firstName"
                         name="firstName"
+                        value={formData.firstName}
+                        onChange={handleInputChange}
                         className="w-full p-2 border border-gray-300 rounded-lg"
                         placeholder=" first name"
                       />
@@ -66,6 +99,8 @@ const Address = () => {
                         type="text"
                         id="lastName"
                         name="lastName"
+                        value={formData.lastName}
+                        onChange={handleInputChange}
                         className="w-full p-2 border border-gray-300 rounded-lg"
                         placeholder=" last name"
                       />
@@ -84,6 +119,8 @@ const Address = () => {
                       type="text"
                       id="company"
                       name="company"
+                      value={formData.company}
+                      onChange={handleInputChange}
                       className="w-full p-2 border border-gray-300 rounded-lg"
                       placeholder="company "
                     />
@@ -101,6 +138,8 @@ const Address = () => {
                       type="text"
                       id="streetAddress"
                       name="streetAddress"
+                      value={formData.streetAddress}
+                      onChange={handleInputChange}
                       className="w-full p-2 border border-gray-300 rounded-lg"
                       placeholder=" address"
                     />
@@ -119,6 +158,8 @@ const Address = () => {
                         type="text"
                         id="city"
                         name="city"
+                        value={formData.city}
+                        onChange={handleInputChange}
                         className="w-full p-2 border border-gray-300 rounded-lg"
                         placeholder=" city"
                       />
@@ -136,6 +177,8 @@ const Address = () => {
                         type="text"
                         id="pincode"
                         name="pincode"
+                        value={formData.pincode}
+                        onChange={handleInputChange}
                         className="w-full p-2 border border-gray-300 rounded-lg"
                         placeholder=" pincode"
                       />
@@ -153,6 +196,8 @@ const Address = () => {
                         type="tel"
                         id="mobileNumber"
                         name="mobileNumber"
+                        value={formData.mobileNumber}
+                        onChange={handleInputChange}
                         className="w-full p-2 border border-gray-300 rounded-lg"
                         placeholder=" mobile number"
                       />
@@ -172,10 +217,7 @@ const Address = () => {
                     checked={isChecked}
                     onChange={() => setIsChecked(!isChecked)}
                   />
-                  <label
-                    htmlFor="gstinToggle"
-                    className="text-lg "
-                  >
+                  <label htmlFor="gstinToggle" className="text-base ">
                     GSTIN Details
                   </label>
                 </div>
@@ -193,6 +235,8 @@ const Address = () => {
                         type="text"
                         id="gstin"
                         name="gstin"
+                        value={formData.gstin}
+                        onChange={handleInputChange}
                         className="w-full p-2 border border-gray-300 rounded-lg"
                         placeholder="Enter GSTIN Number"
                       />
@@ -209,6 +253,8 @@ const Address = () => {
                         type="text"
                         id="company"
                         name="company"
+                        value={formData.company}
+                        onChange={handleInputChange}
                         className="w-full p-2 border border-gray-300 rounded-lg"
                         placeholder="company "
                       />
@@ -216,10 +262,6 @@ const Address = () => {
                   </div>
                 )}
               </div>
-            </div>
-
-            <div className="lg:col-span-4">
-              <OrderSummary />
             </div>
           </div>
         </div>

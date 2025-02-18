@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import Cart from "./Cart";
 import Address from "./Address";
+import CheckoutAddress from "./CheckoutAddress";
 
 function Checkout() {
   const [step, setStep] = useState("cart");
@@ -16,7 +17,7 @@ function Checkout() {
   return (
     <>
       {/* Stepper */}
-      <div className="bg-white">
+      <div className="bg-white  ">
         <div className="flex items-center justify-center mb-12 pt-12">
           {["Cart", "Address", "Payment"].map((label, index) => (
             <div key={index} className="flex items-center">
@@ -37,7 +38,7 @@ function Checkout() {
           {/* Content Area */}
           <div className="w-full rounded-lg">
             {step === "cart" && <Cart />}
-            {step === "address" && <Address />}
+            {step === "address" && <CheckoutAddress />}
             {step === "payment" && (
               <div>
                 <h2 className="text-2xl mb-4">Payment Information</h2>

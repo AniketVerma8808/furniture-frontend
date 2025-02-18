@@ -50,7 +50,7 @@ const Cart = () => {
   };
 
   return (
-    <div className="">
+    <div className="pb-12">
       {cart.length > 0 ? (
         <div className="container mx-auto max-w-7xl">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
@@ -58,9 +58,7 @@ const Cart = () => {
             <div className="lg:col-span-8 bg-white p-6 rounded-lg border border-gray-200 shadow-md">
               <div className="border border-gray-300 rounded-lg px-6 mt-6">
                 <div className="p-4 border-b border-gray-200">
-                  <h3 className="text-xl  mb-2">
-                    My Cart ({cart.length})
-                  </h3>
+                  <h3 className="text-xl  mb-2">My Cart ({cart.length})</h3>
                 </div>
                 <div className="flex flex-col lg:flex-row">
                   <div className="flex-1 p-4">

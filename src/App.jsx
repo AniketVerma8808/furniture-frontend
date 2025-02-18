@@ -107,10 +107,10 @@ const App = () => {
           <Route path="/careers" element={<Careers />} />
 
           <Route path="/settings" element={<Setting />}>
+            <Route index element={<Profile />} />{" "}
             <Route path="/settings/profile" element={<Profile />} />
             <Route path="/settings/address" element={<Address />} />
             <Route path="/settings/orders" element={<Orders />} />
-            {/* <Route path="/settings/subscribe" element={<Subscribe />} /> */}
             <Route
               path="/settings/change-password"
               element={<ChangePassword />}

@@ -24,6 +24,14 @@ const Wishlist = () => {
       originalPrice: 34.99,
       image: reviewImg4,
     },
+    {
+      id: 3,
+      title: "Product Title 3",
+      collection: "Product Collection 3",
+      price: 24.99,
+      originalPrice: 34.99,
+      image: reviewImg4,
+    },
   ]);
 
   const [hoveredItem, setHoveredItem] = useState(null);
