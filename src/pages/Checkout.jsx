@@ -17,7 +17,7 @@ function Checkout() {
     <>
       {/* Stepper */}
       <div className="bg-white">
-        <div className="flex items-center justify-center mb-6 pt-12">
+        <div className="flex items-center justify-center mb-12 pt-12">
           {["Cart", "Address", "Payment"].map((label, index) => (
             <div key={index} className="flex items-center">
               <div

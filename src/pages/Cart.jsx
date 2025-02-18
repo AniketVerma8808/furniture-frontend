@@ -5,7 +5,7 @@ import reviewImg4 from "../assets/image/review/review4.jpg";
 import { AiOutlineDelete, AiOutlineHeart } from "react-icons/ai";
 import { TbTruckDelivery } from "react-icons/tb";
 import { toast } from "react-toastify";
-import noProductImage from "../assets/image/Furniture images/cart.jpeg";
+import noProductImage from "../assets/image/Furniture images/cart.png";
 import NoProduct from "./NoProduct";
 const Cart = () => {
   const navigate = useNavigate();
@@ -50,12 +50,12 @@ const Cart = () => {
   };
 
   return (
-    <div className="bg-gray-100 min-h-screen py-4">
+    <div className="">
       {cart.length > 0 ? (
         <div className="container mx-auto max-w-7xl">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
             {/* Cart Section */}
-            <div className="lg:col-span-8 bg-white p-6 rounded-lg shadow-md">
+            <div className="lg:col-span-8 bg-white p-6 rounded-lg border border-gray-200 shadow-md">
               <div className="border border-gray-300 rounded-lg px-6 mt-6">
                 <div className="p-4 border-b border-gray-200">
                   <h3 className="text-xl font-semibold mb-2">

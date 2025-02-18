@@ -5,11 +5,11 @@ const Address = () => {
   const [isChecked, setIsChecked] = useState(false);
   return (
     <div>
-      <div className="bg-gray-100 min-h-screen py-4">
+      <div className=" min-h-screen">
         <div className="container mx-auto max-w-7xl">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
             {/* Left Section */}
-            <div className="lg:col-span-8 bg-white p-6 rounded-lg shadow-md">
+            <div className="lg:col-span-8 bg-white p-6 rounded-lg  border border-gray-200 shadow-md">
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 ">
                 {/* Delivery Address Section */}
                 <div className="lg:col-span-8">

@@ -38,20 +38,20 @@ const Footer = () => {
               </Link>
             </li>
             <li className="footer-link">
-              <Link
+              {/* <Link
                 to="/stores"
                 className="hover:text-gray-400 text-[11px] md:text-[13px]"
               >
                 Bedslane Stores
-              </Link>
+              </Link> */}
             </li>
             <li className="footer-link">
-              <Link
+              {/* <Link
                 to="/media"
                 className="hover:text-gray-400 text-[11px] md:text-[13px]"
               >
                 Media
-              </Link>
+              </Link> */}
             </li>
             <li className="footer-link">
               <Link
@@ -77,12 +77,12 @@ const Footer = () => {
               </Link>
             </li>
             <li className="footer-link">
-              <Link
+              {/* <Link
                 to="/services/re-installation"
                 className="hover:text-gray-400 text-[11px] md:text-[13px]"
               >
                 Re-Installation
-              </Link>
+              </Link> */}
             </li>
             <li className="footer-link">
               <Link

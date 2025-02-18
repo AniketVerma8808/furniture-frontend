@@ -160,13 +160,17 @@ const Navbar = () => {
               {user?.name != null ? (
                 <div className="relative group flex items-center gap-4">
                   <div className="flex flex-col items-center relative">
-                    <BiUserCircle
-                      className="text-[20px]"
-                      onClick={handleDropdownToggle}
-                    />
-                    <span className="text-[8px] sm:text-xs">{user?.name}</span>
+                    <Link to="/settings" className="flex flex-col items-center">
+                      <BiUserCircle
+                        className="text-[20px]"
+                        // onClick={handleDropdownToggle}
+                      />
+                      <span className="text-[8px] sm:text-xs">
+                        {user?.name}
+                      </span>
+                    </Link>
                   </div>
-                  {isDropdownOpenUser && (
+                  {/* {isDropdownOpenUser && (
                     <div className="absolute  -right-3 z-50 top-10 w-48 bg-white text-[8px] sm:text-sm text-black rounded-lg shadow-lg">
                       <Link
                         onClick={() => setIsDropdownOpenUser(false)}
@@ -208,7 +212,7 @@ const Navbar = () => {
                         </div>
                       </button>
                     </div>
-                  )}
+                  )} */}
                 </div>
               ) : (
                 <Link to="/login" className="flex flex-col items-center">

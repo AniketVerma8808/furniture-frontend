@@ -40,6 +40,11 @@ import Media from "./pages/Media";
 import Ourstory from "./pages/Bedslane/Ourstory";
 import SellBedslane from "./pages/Bedslane/SellBedslane";
 import Careers from "./pages/Bedslane/Careers";
+import Setting from "./pages/Setting";
+import Address from "./pages/Address";
+import Profile from "./pages/Profile";
+import Orders from "./pages/Orders";
+import ChangePassword from "./pages/ChangePassword";
 
 const ScrollToTop = () => {
   const location = useLocation();
@@ -100,6 +105,17 @@ const App = () => {
           <Route path="/our-story" element={<Ourstory />} />
           <Route path="/sell-with-us" element={<SellBedslane />} />
           <Route path="/careers" element={<Careers />} />
+
+          <Route path="/settings" element={<Setting />}>
+            <Route path="/settings/profile" element={<Profile />} />
+            <Route path="/settings/address" element={<Address />} />
+            <Route path="/settings/orders" element={<Orders />} />
+            {/* <Route path="/settings/subscribe" element={<Subscribe />} /> */}
+            <Route
+              path="/settings/change-password"
+              element={<ChangePassword />}
+            />
+          </Route>
 
           {/* Define a route for a non-existent path (404) */}
           <Route path="*" element={<NotFound />} />
