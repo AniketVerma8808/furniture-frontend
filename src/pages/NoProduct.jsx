@@ -6,7 +6,7 @@ const NoProduct = ({ image }) => {
     <div>
       <div className="flex  flex-col items-center justify-center">
         <img src={image} alt="No Product" className="w-1/2 md:w-1/4" />
-        <Link to={"/"} className="text-xl md:text-3xl font-bold py-8">
+        <Link to={"/"} className="text-xl md:text-3xl  py-8">
           Please Add Some Product
         </Link>
       </div>

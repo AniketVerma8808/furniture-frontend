@@ -73,7 +73,7 @@ const Forms = ({ title, image, issueType }) => {
 
   return (
     <div className="py-12">
-      <h2 className="text-2xl font-semibold text-center text-gray-800">
+      <h2 className="text-2xl  text-center text-gray-800">
         {title}
       </h2>
 
@@ -88,7 +88,7 @@ const Forms = ({ title, image, issueType }) => {
             />
           ) : (
             <div>
-              <h2 className="text-2xl font-semibold text-gray-800">
+              <h2 className="text-2xl  text-gray-800">
                 Our Address
               </h2>
               <p className="mt-2 text-sm text-gray-600">
@@ -101,7 +101,7 @@ const Forms = ({ title, image, issueType }) => {
 
               {/* Google Map Embed */}
               <div className="w-full mt-4 h-[50vh]">
-                <h3 className="text-xl font-semibold text-gray-800 mb-2">
+                <h3 className="text-xl  text-gray-800 mb-2">
                   Find Us on Map
                 </h3>
                 <iframe
@@ -124,7 +124,7 @@ const Forms = ({ title, image, issueType }) => {
             <div>
               <label
                 htmlFor="name"
-                className="block text-sm font-medium text-gray-700"
+                className="block text-sm  text-gray-700"
               >
                 Name
               </label>
@@ -141,7 +141,7 @@ const Forms = ({ title, image, issueType }) => {
             <div>
               <label
                 htmlFor="email"
-                className="block text-sm font-medium text-gray-700"
+                className="block text-sm  text-gray-700"
               >
                 Email
               </label>
@@ -158,7 +158,7 @@ const Forms = ({ title, image, issueType }) => {
             <div>
               <label
                 htmlFor="phone"
-                className="block text-sm font-medium text-gray-700"
+                className="block text-sm  text-gray-700"
               >
                 Phone
               </label>
@@ -175,7 +175,7 @@ const Forms = ({ title, image, issueType }) => {
             <div>
               <label
                 htmlFor="message"
-                className="block text-sm font-medium text-gray-700"
+                className="block text-sm text-gray-700"
               >
                 Message
               </label>

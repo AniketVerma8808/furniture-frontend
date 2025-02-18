@@ -22,7 +22,7 @@ const RelatedProduct = ({ currentProductCategory }) => {
 
     return (
         <div className="container mx-auto px-4 relative">
-            <h3 className="font-roboto text-center font-medium text-[30px] text-[rgb(42,40,40)] leading-[45px]">
+            <h3 className=" text-center  text-[30px] text-[rgb(42,40,40)] leading-[45px]">
                 Related Products
             </h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 pt-8">

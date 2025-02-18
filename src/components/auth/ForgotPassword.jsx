@@ -23,17 +23,14 @@ const ForgotPassword = () => {
       <Layout />
       <div className="flex justify-center items-start w-full p-4">
         <form onSubmit={handleSubmit} className="w-full p-0 md:p-6 space-y-4">
-          <h2 className="text-2xl font-semibold text-center text-gray-800">
+          <h2 className="text-2xl  text-center text-gray-800">
             Forgot Password
           </h2>
           <p className="text-sm text-gray-600 text-center mt-2">
             Enter your registered email to receive a reset link.
           </p>
           <div className="mt-4">
-            <label
-              htmlFor="email"
-              className="block text-sm font-medium text-gray-700"
-            >
+            <label htmlFor="email" className="block text-sm  text-gray-700">
               Email Address
             </label>
             <input

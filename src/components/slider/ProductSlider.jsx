@@ -59,7 +59,7 @@ const ProductSlider = ({ title, data }) => {
 
   return (
     <div className="container mx-auto px-2 md:px-8 relative">
-      <h3 className="text-center font-roboto font-medium text-[20px] md:text-[30px] lg:text-[36px] text-[rgb(42,40,40)] leading-[45px]">
+      <h3 className="text-center text-[20px] md:text-[30px] lg:text-[36px] text-[rgb(42,40,40)] leading-[45px]">
         {title}
       </h3>
       <div className="py-8 md:py-12 relative">

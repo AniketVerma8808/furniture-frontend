@@ -44,9 +44,9 @@ const Wishlist = () => {
         {/* left Section */}
         {/* <div className="lg:col-span-4 ">
             <div className="border w-80 h-[480px] border-gray-200 rounded-md pt-12 p-6">
-              <h3 className="font-semibold text-lg">Aniket Verma</h3>
+              <h3 className=" text-lg">Aniket Verma</h3>
               <div className="mt-4 space-y-4">
-                <p className="text-black font-medium">Account Settings</p>
+                <p className="text-black ">Account Settings</p>
 
                 <Link
                   to={"/"}
@@ -90,9 +90,7 @@ const Wishlist = () => {
 
         {/* right Section */}
         <div className=" p-4">
-          <h3 className="text-2xl font-semibold text-gray-800 mb-4">
-            My Wishlist
-          </h3>
+          <h3 className="text-2xl  text-gray-800 mb-4">My Wishlist</h3>
 
           {/* Wishlist Total Items */}
           <p className="text-gray-600">
@@ -140,20 +138,20 @@ const Wishlist = () => {
                         e.stopPropagation();
                         handleAddToCart(item);
                       }}
-                      className="bg-black py-2 px-4 text-white text-sm font-semibold rounded-lg hover:bg-gray-800 transition"
+                      className="bg-black py-2 px-4 text-white text-sm  rounded-lg hover:bg-gray-800 transition"
                     >
                       Add to Cart
                     </button>
                   </div>
                   <div className="p-3 sm:p-4">
-                    <h3 className="text-gray-800 font-semibold text-[14px] truncate">
+                    <h3 className="text-gray-800  text-[14px] truncate">
                       {item.title}
                     </h3>
                     <p className="text-xs sm:text-sm text-gray-500 line-clamp-1">
                       {item.collection}
                     </p>
                     <div className="mt-2 flex items-center">
-                      <span className="text-[12px] sm:text-[14px] font-bold text-gray-900">
+                      <span className="text-[12px] sm:text-[14px]  text-gray-900">
                         ${item.price}
                       </span>
                       <span className="ml-2 text-sm text-gray-400 line-through">

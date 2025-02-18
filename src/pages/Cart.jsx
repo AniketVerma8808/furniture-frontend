@@ -58,7 +58,7 @@ const Cart = () => {
             <div className="lg:col-span-8 bg-white p-6 rounded-lg border border-gray-200 shadow-md">
               <div className="border border-gray-300 rounded-lg px-6 mt-6">
                 <div className="p-4 border-b border-gray-200">
-                  <h3 className="text-xl font-semibold mb-2">
+                  <h3 className="text-xl  mb-2">
                     My Cart ({cart.length})
                   </h3>
                 </div>
@@ -79,7 +79,7 @@ const Cart = () => {
                           />
                           {/* Product Details */}
                           <div className="flex flex-col ml-4">
-                            <h2 className="text-lg font-medium">{title}</h2>
+                            <h2 className="text-lg ">{title}</h2>
 
                             <div className="flex flex-wrap items-center gap-4 mt-2">
                               {/* Quantity Adjuster */}
@@ -95,7 +95,7 @@ const Cart = () => {
                                 >
                                   -
                                 </button>
-                                <span className="mx-3 text-lg font-medium">
+                                <span className="mx-3 text-lg ">
                                   {quantity}
                                 </span>
                                 <button
@@ -120,7 +120,7 @@ const Cart = () => {
                             </div>
 
                             {/* Actions */}
-                            <div className="flex space-x-4 mt-2 flex-wrap text-sm text-[#9A8B8B] font-medium cursor-pointer">
+                            <div className="flex space-x-4 mt-2 flex-wrap text-sm text-[#9A8B8B]  cursor-pointer">
                               <p
                                 className="flex items-center group"
                                 onClick={handleAddToWishlist}

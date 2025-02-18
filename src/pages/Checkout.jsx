@@ -21,7 +21,7 @@ function Checkout() {
           {["Cart", "Address", "Payment"].map((label, index) => (
             <div key={index} className="flex items-center">
               <div
-                className={`w-10 h-10 flex items-center justify-center rounded-full text-white font-bold ${
+                className={`w-10 h-10 flex items-center justify-center rounded-full text-white ${
                   step === label.toLowerCase() ? "bgColor" : "bg-gray-300"
                 }`}
                 onClick={() => setStep(label.toLowerCase())}

@@ -45,14 +45,9 @@ const Login = () => {
       <Layout />
       <div className="flex justify-center items-start w-full p-4">
         <form onSubmit={handleSubmit} className="w-full p-0 md:p-6 space-y-4">
-          <h2 className="text-3xl text-center font-semibold text-gray-800">
-            Login
-          </h2>
+          <h2 className="text-3xl text-center  text-gray-800">Login</h2>
           <div>
-            <label
-              htmlFor="email"
-              className="block text-sm font-medium text-gray-700"
-            >
+            <label htmlFor="email" className="block text-sm  text-gray-700">
               Email
             </label>
             <input
@@ -66,10 +61,7 @@ const Login = () => {
             />
           </div>
           <div className="relative">
-            <label
-              htmlFor="password"
-              className="block text-sm font-medium text-gray-700"
-            >
+            <label htmlFor="password" className="block text-sm  text-gray-700">
               Password
             </label>
             <input

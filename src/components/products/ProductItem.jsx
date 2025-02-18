@@ -86,7 +86,7 @@ const ProductItem = ({ product, label }) => {
               e.stopPropagation();
               handleAddToCart();
             }}
-            className="bg-black py-2 px-4 text-white text-sm font-semibold rounded-lg hover:bg-gray-800 transition"
+            className="bg-black py-2 px-4 text-white text-sm  rounded-lg hover:bg-gray-800 transition"
           >
             Add to Cart
           </button>
@@ -94,7 +94,7 @@ const ProductItem = ({ product, label }) => {
         {/* Dynamic Label */}
         {label && (
           <div
-            className={`absolute bottom-0 left-0 text-white text-xs font-semibold px-2 py-1 rounded-md ${getLabelColor(
+            className={`absolute bottom-0 left-0 text-white text-xs  px-2 py-1 rounded-md ${getLabelColor(
               label
             )}`}
           >
@@ -117,14 +117,14 @@ const ProductItem = ({ product, label }) => {
 
       {/* Product Details */}
       <div className="p-3 sm:p-4">
-        <h3 className="text-gray-800 font-semibold text-[14px]  truncate">
+        <h3 className="text-gray-800  text-[14px]  truncate">
           {product.title}
         </h3>
         <p className="text-xs sm:text-sm text-gray-500 line-clamp-1">
           {product.collection}
         </p>
         <div className="mt-2 flex items-center">
-          <span className="text-[12px] sm:text-[14px] font-bold text-gray-900">
+          <span className="text-[12px] sm:text-[14px] text-gray-900">
             {product.price}
           </span>
           <span className="ml-2 text-sm text-gray-400 line-through">

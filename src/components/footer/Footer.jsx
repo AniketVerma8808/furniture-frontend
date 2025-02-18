@@ -25,7 +25,7 @@ const Footer = () => {
       {/* Links Section */}
       <div className="container px-4 md:px-8 mx-auto grid grid-cols-2 sm:grid-cols-2 md:grid-cols-6 gap-6 py-8 border-gray-700 text-[14px] md:text-[16px]">
         <div>
-          <h3 className="font-normal mb-2 text-[13px] sm:text-[14px] md:text-[16px]">
+          <h3 className=" mb-2 text-[13px] sm:text-[14px] md:text-[16px]">
             QUICK LINKS
           </h3>
           <ul>
@@ -64,7 +64,7 @@ const Footer = () => {
           </ul>
         </div>
         <div>
-          <h3 className="font-normal mb-2 text-[13px] sm:text-[14px] md:text-[16px]">
+          <h3 className=" mb-2 text-[13px] sm:text-[14px] md:text-[16px]">
             SERVICES
           </h3>
           <ul>
@@ -103,7 +103,7 @@ const Footer = () => {
           </ul>
         </div>
         <div>
-          <h3 className="font-normal mb-2 text-[13px] sm:text-[14px] md:text-[16px]">
+          <h3 className=" mb-2 text-[13px] sm:text-[14px] md:text-[16px]">
             CORPORATE INFO
           </h3>
           <ul>
@@ -134,7 +134,7 @@ const Footer = () => {
           </ul>
         </div>
         <div>
-          <h3 className="font-normal uppercase mb-2 text-[13px] sm:text-[14px] md:text-[16px]">
+          <h3 className=" uppercase mb-2 text-[13px] sm:text-[14px] md:text-[16px]">
             Bedslane
           </h3>
           <ul>
@@ -173,7 +173,7 @@ const Footer = () => {
           </ul>
         </div>
         <div>
-          <h3 className="font-normal mb-2 text-[13px] sm:text-[14px] md:text-[16px]">
+          <h3 className=" mb-2 text-[13px] sm:text-[14px] md:text-[16px]">
             MY ACCOUNT
           </h3>
           <ul>
@@ -204,7 +204,7 @@ const Footer = () => {
           </ul>
         </div>
         <div>
-          <h3 className="font-normal mb-2 text-[13px] sm:text-[14px] md:text-[16px]">
+          <h3 className=" mb-2 text-[13px] sm:text-[14px] md:text-[16px]">
             Social Accounts
           </h3>
           <div className="flex flex-wrap gap-2 md:gap-4 mb-2">
@@ -246,7 +246,7 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* <h3 className="font-semibold mb-2 text-base uppercase">Pay Using</h3> */}
+          {/* <h3 className=" mb-2 text-base uppercase">Pay Using</h3> */}
           {/* Add payment icons here */}
         </div>
       </div>
@@ -258,7 +258,7 @@ const Footer = () => {
             <div className="flex md:flex-col items-center gap-2 text-base">
               <FaShippingFast className="text-[14px] md:text-xl" />
               <div>
-                <h4 className="font-normal text-[11px] md:text-[13px] ">
+                <h4 className=" text-[11px] md:text-[13px] ">
                   FREE DELIVERY
                 </h4>
                 <p className="text-[9px] md:text-[12px] ">
@@ -269,7 +269,7 @@ const Footer = () => {
             <div className="flex md:flex-col items-center gap-2 text-base">
               <FaExchangeAlt className="text-[14px] md:text-xl" />
               <div>
-                <h4 className="font-normal text-[11px] md:text-[13px] ">
+                <h4 className=" text-[11px] md:text-[13px] ">
                   EASY RETURNS
                 </h4>
                 <p className="text-[9px] md:text-[12px] ">
@@ -280,7 +280,7 @@ const Footer = () => {
             <div className="flex md:flex-col items-center gap-2 text-base">
               <FaLock className="text-[14px] md:text-xl" />
               <div>
-                <h4 className="font-normal text-[11px] md:text-[13px] ">
+                <h4 className=" text-[11px] md:text-[13px] ">
                   SECURE PAYMENT
                 </h4>
                 <p className="text-[9px] md:text-[12px] ">
@@ -291,7 +291,7 @@ const Footer = () => {
             <div className="flex md:flex-col items-center gap-2 text-base">
               <FaHeadphonesAlt className="text-[14px] md:text-xl" />
               <div>
-                <h4 className="font-normal text-[11px] md:text-[13px] ">
+                <h4 className=" text-[11px] md:text-[13px] ">
                   9 AM TO 6:30 PM | 7 DAYS
                 </h4>
                 <p className="text-[9px] md:text-[12px]  ">Dedicated support</p>

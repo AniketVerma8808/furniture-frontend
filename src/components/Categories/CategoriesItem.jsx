@@ -14,7 +14,7 @@ const CategoriesItem = ({ icon, name }) => {
                 {icon}
             </div>
             {/* Category Name */}
-            <span className="text-xs sm:text-sm font-semibold text-center">{name}</span>
+            <span className="text-xs sm:text-sm  text-center">{name}</span>
         </div>
     );
 };

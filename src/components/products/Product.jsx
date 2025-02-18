@@ -25,7 +25,7 @@ const Product = ({ category }) => {
     return (
         <div className="container mx-auto p-4">
             <div className="pb-8">
-                <h3 className="font-roboto text-center font-medium text-[30px] text-[rgb(42,40,40)] leading-[45px]">
+                <h3 className=" text-center text-[30px] text-[rgb(42,40,40)] leading-[45px]">
                     All Products
                 </h3>
             </div>

@@ -75,7 +75,7 @@ const CartCard = ({ initialCart = [] }) => {
             </p>
             <div>
               <p className="text-gray-500 text-xs">Subtotal</p>
-              <p className="font-semibold text-lg">${subtotal.toFixed(2)}</p>
+              <p className=" text-lg">${subtotal.toFixed(2)}</p>
             </div>
           </div>
 
@@ -92,7 +92,7 @@ const CartCard = ({ initialCart = [] }) => {
                   className="w-12 h-12 rounded-md"
                 />
                 <div className="flex-1">
-                  <p className="text-sm font-semibold">{item.name}</p>
+                  <p className="text-sm ">{item.name}</p>
                   <p className="text-xs text-gray-500">
                     ${item.price.toFixed(2)}
                   </p>
@@ -108,7 +108,7 @@ const CartCard = ({ initialCart = [] }) => {
                       >
                         -
                       </button>
-                      <span className="text-sm font-medium">
+                      <span className="text-sm">
                         {item.quantity}
                       </span>
                       <button

@@ -3,13 +3,13 @@ import React from "react";
 const Policies = () => {
   return (
     <div className="max-w-7xl mx-auto p-6 py-12 space-y-6 text-gray-800">
-      <h1 className="text-3xl sm:text-4xl font-semibold text-center">
+      <h1 className="text-3xl sm:text-4xl  text-center">
         Our Policies
       </h1>
 
       {/* Shipping Policy */}
       <div>
-        <h2 className="text-xl sm:text-2xl font-semibold">
+        <h2 className="text-xl sm:text-2xl ">
           Shipping & Delivery
         </h2>
         <p className="text-sm sm:text-base mt-2 leading-relaxed">
@@ -49,7 +49,7 @@ const Policies = () => {
 
       {/* Warranty Policy */}
       <div>
-        <h2 className="text-xl sm:text-2xl font-semibold">Warranty Policy</h2>
+        <h2 className="text-xl sm:text-2xl ">Warranty Policy</h2>
         <p className="text-sm sm:text-base mt-2 leading-relaxed">
           Your Beds Lane Products are covered by different warranty periods. If
           there is an issue with your product, please review the warranty
@@ -66,7 +66,7 @@ const Policies = () => {
 
       {/* Product Returns */}
       <div>
-        <h2 className="text-xl sm:text-2xl font-semibold">Product Returns</h2>
+        <h2 className="text-xl sm:text-2xl ">Product Returns</h2>
         <p className="text-sm sm:text-base mt-2 leading-relaxed">
           If you want to return any of the Products that have a valid return
           policy after your receipt of that particular product as mentioned on
@@ -80,7 +80,7 @@ const Policies = () => {
           If you want to return your Products within the allowed time limit
           after your receipt, to arrange a return pick-up.
         </p>
-        <p className="text-sm sm:text-lg font-medium mt-2 leading-relaxed">
+        <p className="text-sm sm:text-lg  mt-2 leading-relaxed">
           The following conditions also apply to Product returns:
         </p>
         <ul className="list-disc pl-6 mt-2">
@@ -110,7 +110,7 @@ const Policies = () => {
 
       {/* Cancellations */}
       <div>
-        <h2 className="text-xl sm:text-2xl font-semibold">Cancellations</h2>
+        <h2 className="text-xl sm:text-2xl ">Cancellations</h2>
         <p className="text-sm sm:text-base mt-2 leading-relaxed">
           You may cancel an order anytime prior to shipment. However, in case of
           orders for sofas or associated products such as recliners, wing
@@ -127,7 +127,7 @@ const Policies = () => {
 
       {/* Out of Stock */}
       <div>
-        <h2 className="text-xl sm:text-2xl font-semibold">Out of Stock</h2>
+        <h2 className="text-xl sm:text-2xl ">Out of Stock</h2>
         <p className="text-sm sm:text-base mt-2 leading-relaxed">
           We endeavour to ensure that all products listed on the Site are
           available in stock for dispatch to you. However, in case this is not
@@ -140,7 +140,7 @@ const Policies = () => {
 
       {/* Customer Support */}
       <div>
-        <h2 className="text-xl sm:text-2xl font-semibold">Customer Support</h2>
+        <h2 className="text-xl sm:text-2xl ">Customer Support</h2>
         <p className="text-sm sm:text-base mt-2 leading-relaxed">
           For any queries or issues, feel free to contact us at:
         </p>

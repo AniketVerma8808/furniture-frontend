@@ -72,7 +72,7 @@ const Review = () => {
 
   return (
     <div className="container mx-auto pb-12 px-4 md:px-8">
-      <h3 className="text-center font-roboto font-medium text-[20px] md:text-[30px] lg:text-[36px] text-[rgb(42,40,40)] leading-[45px] ">
+      <h3 className="text-center text-[20px] md:text-[30px] lg:text-[36px] text-[rgb(42,40,40)] leading-[45px] ">
         Customer Reviews
       </h3>
 
@@ -99,7 +99,7 @@ const Review = () => {
               </div>
 
               {/* Name and Location Section */}
-              <p className="text-gray-800 font-semibold text-base">{name}</p>
+              <p className="text-gray-800  text-base">{name}</p>
               <p className="text-gray-500 text-sm">{location}</p>
             </div>
           </div>

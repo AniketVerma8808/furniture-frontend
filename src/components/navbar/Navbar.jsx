@@ -365,7 +365,7 @@ const Navbar = () => {
                     <ul>
                       {category.subcategories.map((subcategory, subIndex) => (
                         <li key={subIndex} className="py-1">
-                          <h3 className="font-bold">{subcategory.title}</h3>
+                          <h3 className="-bold">{subcategory.title}</h3>
                           <ul className="pl-4">
                             {subcategory.items.map((item, itemIndex) => (
                               <li key={itemIndex} className="py-1">
@@ -394,7 +394,7 @@ const Navbar = () => {
                   onMouseEnter={() => setHoveredCategory(category.name)}
                   onMouseLeave={() => setHoveredCategory(null)}
                 >
-                  <Link to="#" className="text-[12px] font-normal">
+                  <Link to="#" className="text-[12px] -normal">
                     {category.name}
                   </Link>
                   {category.subcategories && <IoIosArrowDown />}
@@ -403,7 +403,7 @@ const Navbar = () => {
                       <div className="absolute top-full -left-60 w-[1200px] bg-white text-black p-8 shadow-lg grid grid-cols-5 gap-8">
                         {category.subcategories.map((subcategory, subIndex) => (
                           <div key={subIndex}>
-                            <h3 className="font-bold text-[12px] mb-4">
+                            <h3 className="-bold text-[12px] mb-4">
                               {subcategory.title}
                             </h3>
                             <ul>

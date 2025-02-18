@@ -51,7 +51,7 @@ const Register = () => {
     <div className="grid grid-cols-1 md:grid-cols-2  py-0 sm:py-4 md:py-8 lg:py-12">
       <Layout />
       <div className="flex justify-center flex-col w-full p-4">
-        <h2 className="text-3xl text-center font-semibold text-gray-800">
+        <h2 className="text-3xl text-center  text-gray-800">
           Register
         </h2>
         <form onSubmit={handleSubmit} className="w-full p-0 md:p-6 space-y-4">
@@ -59,7 +59,7 @@ const Register = () => {
             <div key={field}>
               <label
                 htmlFor={field}
-                className="block text-sm font-medium text-gray-700 capitalize"
+                className="block text-sm  text-gray-700 capitalize"
               >
                 {field}
               </label>
@@ -79,7 +79,7 @@ const Register = () => {
           <div className="relative">
             <label
               htmlFor="password"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm  text-gray-700"
             >
               Password
             </label>

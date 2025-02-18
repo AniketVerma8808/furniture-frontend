@@ -143,7 +143,7 @@ const Checkout2 = () => {
                       />
                       <div className="flex-1 flex flex-col justify-center">
                         <div className="flex justify-between items-start">
-                          <h3 className="font-semibold text-gray-800 text-lg">
+                          <h3 className=" text-gray-800 text-lg">
                             {address.name}
                           </h3>
                           <button

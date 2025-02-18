@@ -29,19 +29,19 @@ const ProductDetailsPage = () => {
             <div className="flex space-x-4">
                 <button
                     onClick={() => handleTabClick("productFeatures")}
-                    className={`py-2 px-4 ${activeTab === "productFeatures" ? "font-bold  bgColor text-white rounded-lg" : "text-gray-500"}`}
+                    className={`py-2 px-4 ${activeTab === "productFeatures" ? "  bgColor text-white rounded-lg" : "text-gray-500"}`}
                 >
                     Product Features
                 </button>
                 <button
                     onClick={() => handleTabClick("moreInfo")}
-                    className={`py-2 px-4 ${activeTab === "moreInfo" ? "font-bold bgColor text-white rounded-lg" : "text-gray-500"}`}
+                    className={`py-2 px-4 ${activeTab === "moreInfo" ? " bgColor text-white rounded-lg" : "text-gray-500"}`}
                 >
                     More Information
                 </button>
                 <button
                     onClick={() => handleTabClick("ratingsReviews")}
-                    className={`py-2 px-4 ${activeTab === "ratingsReviews" ? "font-bold bgColor text-white rounded-lg" : "text-gray-500"}`}
+                    className={`py-2 px-4 ${activeTab === "ratingsReviews" ? " bgColor text-white rounded-lg" : "text-gray-500"}`}
                 >
                     Ratings & Reviews
                 </button>
@@ -51,7 +51,7 @@ const ProductDetailsPage = () => {
             <div className="mt-4">
                 {activeTab === "productFeatures" && (
                     <div>
-                        <h3 className="text-xl font-bold text-gray-800">Product Features</h3>
+                        <h3 className="text-xl  text-gray-800">Product Features</h3>
                         <ul className="mt-2 list-disc pl-5 text-gray-600">
                             {product.features.map((feature, index) => (
                                 <li key={index} className="mb-2">{feature}</li>
@@ -62,21 +62,21 @@ const ProductDetailsPage = () => {
 
                 {activeTab === "moreInfo" && (
                     <div>
-                        <h3 className="text-xl font-bold text-gray-800">More Information</h3>
+                        <h3 className="text-xl  text-gray-800">More Information</h3>
                         <p className="mt-2 text-gray-600">{product.moreInfo}</p>
                     </div>
                 )}
 
                 {activeTab === "ratingsReviews" && (
                     <div>
-                        <h3 className="text-xl font-bold text-gray-800">Ratings & Reviews</h3>
+                        <h3 className="text-xl  text-gray-800">Ratings & Reviews</h3>
                         {product.reviews.length === 0 ? (
                             <p className="mt-2 text-gray-600">No reviews yet. Be the first to review!</p>
                         ) : (
                             <div>
                                 {product.reviews.map((review, index) => (
                                     <div key={index} className="border-b py-2">
-                                        <h4 className="text-gray-800 font-semibold">{review.user}</h4>
+                                        <h4 className="text-gray-800 ">{review.user}</h4>
                                         <p className="text-gray-600">{review.comment}</p>
                                         <div className="flex items-center mt-2">
                                             <span className="text-yellow-500">{"★".repeat(review.rating)}</span>

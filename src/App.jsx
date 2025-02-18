@@ -16,8 +16,8 @@ import Cart from "./pages/Cart";
 import Wishlist from "./pages/Wishlist";
 import Product from "./components/products/Product";
 import Checkout from "./pages/Checkout";
-import YourOrder from "./components/orders/YourOrder";
-import OrderDetails from "./components/orders/OrderDetails";
+// import YourOrder from "./components/orders/YourOrder";
+// import OrderDetails from "./components/orders/OrderDetails";
 import { useDispatch } from "react-redux";
 import { fetchBanners, fetchUserLocation } from "./redux/homeSlice";
 import { fetchProducts } from "./redux/productSlice";
@@ -84,8 +84,8 @@ const App = () => {
           <Route path="/cart" element={<Cart />} />
           <Route path="/wishlist" element={<Wishlist />} />
           <Route path="/checkout" element={<Checkout />} />
-          <Route path="/orders" element={<YourOrder />} />
-          <Route path="/order_details/:id" element={<OrderDetails />} />
+          {/* <Route path="/orders" element={<YourOrder />} /> */}
+          {/* <Route path="/order_details/:id" element={<OrderDetails />} /> */}
           <Route path="/policies" element={<Policies />} />
           <Route path="/terms&conditions" element={<TermsAndConditions />} />
           <Route path="/privacy&policy" element={<PrivacyPolicy />} />

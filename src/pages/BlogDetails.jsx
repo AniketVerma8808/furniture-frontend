@@ -46,7 +46,7 @@ const BlogDetails = () => {
       <p>{individual.content}</p> */}
       <div className="container mx-auto  py-8 px-4 sm:px-6 lg:px-8">
         {/* Blog Title */}
-        <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-gray-800 pb-2 mb-4 text-start">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl text-gray-800 pb-2 mb-4 text-start">
           {individual.title}
         </h1>
 

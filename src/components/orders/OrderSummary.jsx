@@ -4,7 +4,7 @@ const OrderSummary = () => {
   return (
     <div>
       <div className=" bg-white p-6 rounded-lg shadow-md border h-[500px] border-gray-200">
-        <h3 className="text-xl font-semibold mb-4 text-gray-700">
+        <h3 className="text-xl  mb-4 text-gray-700">
           Order Summary
         </h3>
 
@@ -33,7 +33,7 @@ const OrderSummary = () => {
         </div>
 
         {/* Total */}
-        <div className="flex justify-between text-lg font-semibold border-t pt-3 mt-4 text-gray-800">
+        <div className="flex justify-between text-lg  border-t pt-3 mt-4 text-gray-800">
           <span>Total Orders</span>
           <span className="text-xl text-green-600">₹10000</span>
         </div>
@@ -55,7 +55,7 @@ const OrderSummary = () => {
             />
           </div>
           <div className="mt-4 flex justify-end">
-            <button className="px-4 py-2 bgColor text-white text-sm font-semibold rounded-lg ">
+            <button className="px-4 py-2 bgColor text-white text-sm  rounded-lg ">
               Apply
             </button>
           </div>

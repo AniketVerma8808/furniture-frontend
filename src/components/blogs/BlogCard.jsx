@@ -29,12 +29,12 @@ const BlogCard = ({ blog }) => {
         className="w-full h-48 object-cover "
       />
       <div className="p-4">
-      <p className="text-sm text-gray-600 font-semibold flex items-center">
+      <p className="text-sm text-gray-600  flex items-center">
          <FaRegCalendarAlt className='mr-2 ml-1'/> {formatDate(blog.postedOn)} 
         </p>
-        <h2 className="text-lg font-semibold mt-2">{blog.title}</h2>
+        <h2 className="text-lg  mt-2">{blog.title}</h2>
         <p className="text-gray-600 text-sm line-clamp-4 mt-2">{blog.description}</p>
-        <Link to={`/blogdetails/${blog._id}`}  onClick={()=>handleChange(blog)} className="text-red-500 font-semibold mt-3 inline-block">
+        <Link to={`/blogdetails/${blog._id}`}  onClick={()=>handleChange(blog)} className="text-red-500  mt-3 inline-block">
           Read More
         </Link>
       </div>

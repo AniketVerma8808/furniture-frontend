@@ -44,7 +44,7 @@ const Newsletter = () => {
       <div className="py-6 border-b border-gray-700">
         <div className="container px-4 md:px-8 mx-auto flex flex-col sm:flex-row justify-between items-center">
           <div className="text-start md:text-center sm:text-left p-2">
-            <h2 className="text-[16px] md:text-[22px] font-normal ">
+            <h2 className="text-[16px] md:text-[22px] ">
               SUBSCRIBE TO NEWSLETTER
             </h2>
             <p className="text-[12px] md:text-[14px]">

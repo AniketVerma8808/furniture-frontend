@@ -14,7 +14,7 @@ const Address = () => {
                 {/* Delivery Address Section */}
                 <div className="lg:col-span-8">
                   <div className="border border-gray-300 rounded-lg p-4 h-36">
-                    <h3 className="text-xl font-semibold mb-2">
+                    <h3 className="text-xl  mb-2">
                       Delivery Address
                     </h3>
                     <p className="text-sm text-gray-600">
@@ -32,7 +32,7 @@ const Address = () => {
 
               {/* Address Form */}
               <div className="border border-gray-300 rounded-lg p-6 mt-6">
-                <h2 className="text-2xl font-semibold mb-4">
+                <h2 className="text-2xl  mb-4">
                   Delivery Address
                 </h2>
                 <form>
@@ -41,7 +41,7 @@ const Address = () => {
                     <div>
                       <label
                         htmlFor="firstName"
-                        className="block text-sm font-medium text-gray-700 mb-2"
+                        className="block text-sm  text-gray-700 mb-2"
                       >
                         First Name
                       </label>
@@ -58,7 +58,7 @@ const Address = () => {
                     <div>
                       <label
                         htmlFor="lastName"
-                        className="block text-sm font-medium text-gray-700 mb-2"
+                        className="block text-sm  text-gray-700 mb-2"
                       >
                         Last Name
                       </label>
@@ -76,7 +76,7 @@ const Address = () => {
                   <div className="mb-4">
                     <label
                       htmlFor="company"
-                      className="block text-sm font-medium text-gray-700 mb-2"
+                      className="block text-sm  text-gray-700 mb-2"
                     >
                       Company
                     </label>
@@ -93,7 +93,7 @@ const Address = () => {
                   <div className="mb-4">
                     <label
                       htmlFor="streetAddress"
-                      className="block text-sm font-medium text-gray-700 mb-2"
+                      className="block text-sm  text-gray-700 mb-2"
                     >
                       Street Address
                     </label>
@@ -111,7 +111,7 @@ const Address = () => {
                     <div>
                       <label
                         htmlFor="city"
-                        className="block text-sm font-medium text-gray-700 mb-2"
+                        className="block text-sm  text-gray-700 mb-2"
                       >
                         City
                       </label>
@@ -128,7 +128,7 @@ const Address = () => {
                     <div>
                       <label
                         htmlFor="pincode"
-                        className="block text-sm font-medium text-gray-700 mb-2"
+                        className="block text-sm  text-gray-700 mb-2"
                       >
                         Pincode
                       </label>
@@ -145,7 +145,7 @@ const Address = () => {
                     <div>
                       <label
                         htmlFor="mobileNumber"
-                        className="block text-sm font-medium text-gray-700 mb-2"
+                        className="block text-sm  text-gray-700 mb-2"
                       >
                         Mobile Number
                       </label>
@@ -174,7 +174,7 @@ const Address = () => {
                   />
                   <label
                     htmlFor="gstinToggle"
-                    className="text-lg font-semibold"
+                    className="text-lg "
                   >
                     GSTIN Details
                   </label>
@@ -185,7 +185,7 @@ const Address = () => {
                     <div className="mb-4">
                       <label
                         htmlFor="gstin"
-                        className="block text-sm font-medium text-gray-700 mb-2"
+                        className="block text-sm  text-gray-700 mb-2"
                       >
                         GSTIN Number
                       </label>
@@ -201,7 +201,7 @@ const Address = () => {
                     <div className="mb-4">
                       <label
                         htmlFor="company"
-                        className="block text-sm font-medium text-gray-700 mb-2"
+                        className="block text-sm  text-gray-700 mb-2"
                       >
                         Company
                       </label>

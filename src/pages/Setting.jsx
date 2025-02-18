@@ -20,9 +20,9 @@ const Setting = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
           <div className="lg:col-span-3">
             <div className="border  border-gray-200 rounded-md pt-12 p-6">
-              <h3 className="font-semibold text-lg">Aniket Verma</h3>
+              <h3 className=" text-lg">Aniket Verma</h3>
               <div className="mt-4 space-y-4">
-                <p className="text-black font-medium">Account Settings</p>
+                <p className="text-black ">Account Settings</p>
 
                 <Link
                   to="/settings/profile"

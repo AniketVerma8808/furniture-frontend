@@ -63,10 +63,10 @@ const ProductDetails = () => {
                 {/* Right Content Section */}
                 <div className="col-span-5 lg:col-span-3 pt-6">
                     <div className="space-y-4">
-                        <h3 className="font-roboto text-[26px] sm:text-[30px] text-[rgb(42,40,40)] leading-[45px]">
+                        <h3 className=" text-[26px] sm:text-[30px] text-[rgb(42,40,40)] leading-[45px]">
                             {product.title}
                         </h3>
-                        <h3 className="font-roboto font-medium text-[30px] text-[rgb(42,40,40)] leading-[45px]">
+                        <h3 className=" text-[30px] text-[rgb(42,40,40)] leading-[45px]">
                             {product.salePrice || product.price}
                         </h3>
                         <div className="flex items-center space-x-2">
@@ -85,11 +85,11 @@ const ProductDetails = () => {
 
                     {/* Quantity Selector */}
                     <div className="mt-6 flex items-center space-x-4">
-                        <p className="text-lg font-medium">Quantity:</p>
+                        <p className="text-lg ">Quantity:</p>
                         <button onClick={decrementQuantity} className="bg-gray-300 text-gray-700 rounded-full px-3 py-1">
                             -
                         </button>
-                        <span className="text-lg font-semibold">{quantity}</span>
+                        <span className="text-lg ">{quantity}</span>
                         <button onClick={incrementQuantity} className="bg-gray-300 text-gray-700 rounded-full px-3 py-1">
                             +
                         </button>
@@ -100,14 +100,14 @@ const ProductDetails = () => {
                     <div className="mt-8 flex flex-col sm:flex-row gap-4 sm:gap-10">
                         <button
                             onClick={handleAddToCart}
-                            className="flex items-center justify-center rounded-md px-5 py-2.5 text-center text-sm font-medium text-white bgColor transition duration-300 focus:outline-none"
+                            className="flex items-center justify-center rounded-md px-5 py-2.5 text-center text-sm  text-white bgColor transition duration-300 focus:outline-none"
                         >
                             <HiShoppingCart className="mr-2 h-6 w-6" />
                             Add to Cart
                         </button>
                         <button
                             onClick={handleAddToWishlist}
-                            className="flex items-center justify-center rounded-md px-5 py-2.5 text-center text-sm font-medium text-white bgColor transition duration-300 focus:outline-none"
+                            className="flex items-center justify-center rounded-md px-5 py-2.5 text-center text-sm  text-white bgColor transition duration-300 focus:outline-none"
                         >
                             <FaRegHeart className="mr-2 h-6 w-6" />
                             Add to Wishlist
