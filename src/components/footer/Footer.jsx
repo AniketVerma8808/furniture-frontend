@@ -194,12 +194,12 @@ const Footer = () => {
               </Link>
             </li>
             <li className="footer-link">
-              <Link
+              {/* <Link
                 to="/track-order"
                 className="hover:text-gray-400 text-[11px] md:text-[13px]"
               >
                 Track Order
-              </Link>
+              </Link> */}
             </li>
           </ul>
         </div>

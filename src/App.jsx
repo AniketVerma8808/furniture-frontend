@@ -32,6 +32,14 @@ import { fetchBlogs } from "./redux/blogSlice";
 import ComplaintsForm from "./pages/ComplaintsForm";
 import FranchiseForm from "./pages/FranchiseForm";
 import PropertyForm from "./pages/PropertyForm";
+import Loosefitting from "./pages/services/Loosefitting";
+import Reinstallation from "./pages/services/Reinstallation";
+import Dismantling from "./pages/services/Dismantling";
+import BedslaneStores from "./pages/BedslaneStores";
+import Media from "./pages/Media";
+import Ourstory from "./pages/Bedslane/Ourstory";
+import SellBedslane from "./pages/Bedslane/SellBedslane";
+import Careers from "./pages/Bedslane/Careers";
 
 const ScrollToTop = () => {
   const location = useLocation();
@@ -81,6 +89,17 @@ const App = () => {
           <Route path="/complaints" element={<ComplaintsForm />} />
           <Route path="/franchise" element={<FranchiseForm />} />
           <Route path="/rent-property" element={<PropertyForm />} />
+          <Route path="/services/loose-fitting" element={<Loosefitting />} />
+          <Route
+            path="/services/re-installation"
+            element={<Reinstallation />}
+          />
+          <Route path="/services/dismantling" element={<Dismantling />} />
+          <Route path="/stores" element={<BedslaneStores />} />
+          <Route path="/media" element={<Media />} />
+          <Route path="/our-story" element={<Ourstory />} />
+          <Route path="/sell-with-us" element={<SellBedslane />} />
+          <Route path="/careers" element={<Careers />} />
 
           {/* Define a route for a non-existent path (404) */}
           <Route path="*" element={<NotFound />} />
