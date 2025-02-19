@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { logoutUser } from "../redux/authSlice";
 import { Outlet } from "react-router-dom";
 import { HiMenu } from "react-icons/hi";
+import { toast } from "react-toastify";
 
 const Setting = () => {
   const dispatch = useDispatch();

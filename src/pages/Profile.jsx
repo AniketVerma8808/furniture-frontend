@@ -1,22 +1,27 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import Loader from "../components/loader/Loader";
 import { FaAddressBook, FaPhoneAlt, FaUser } from "react-icons/fa";
 import { MdOutlineMailOutline } from "react-icons/md";
+import {
+  profileUpdateService,
+  SubscribeService,
+} from "../services/api.service";
+import { useSelector } from "react-redux";
 
 const Profile = () => {
-  // Initial values
-  const initialState = {
-    firstName: "Aniket",
-    lastName: "Verma",
-    email: "aniket@example.com",
-    phone: "+91 9876543210",
-    userId: "USR123456",
-  };
+  const { user } = useSelector((state) => state.auth);
+  console.log("Redux User Data:", user);
 
-  // State for profile data
-  const [profile, setProfile] = useState(initialState);
+  const [profile, setProfile] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    userId: "",
+  });
   const [isEditable, setIsEditable] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [isOn, setIsOn] = useState(false);
 
   // Handle input change
@@ -28,20 +33,53 @@ const Profile = () => {
     });
   };
 
-  // Handle the update
-  const handleUpdate = () => {
-    toast.success("Profile updated successfully!");
-    setIsEditable(false);
+  useEffect(() => {
+    if (user) {
+      const nameParts = user.name ? user.name.split(" ") : ["", ""];
+      setProfile({
+        firstName: nameParts[0] || "",
+        lastName: nameParts.slice(1).join(" ") || "",
+        email: user.email || "",
+        phone: user.phone || "",
+        userId: user.id || "", 
+      });
+    }
+  }, [user]);
+
+  // Handle Profile Update
+  const handleUpdate = async () => {
+    setLoading(true);
+    try {
+      const response = await profileUpdateService(profile);
+      toast.success("Profile updated successfully!");
+      setIsEditable(false);
+    } catch (error) {
+      toast.error(error.response?.data?.message || "Failed to update profile");
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const toggleHandler = () => {
-    setIsOn(!isOn);
+  // Toggle Subscribe
+  const toggleHandler = async () => {
+    try {
+      const response = await SubscribeService();
+      setIsOn((prev) => !prev);
+      toast.success(
+        response.data.message ||
+          (isOn ? "Unsubscribed successfully!" : "Subscribed successfully!")
+      );
+    } catch (error) {
+      toast.error("Subscription update failed!");
+    }
   };
+
   return (
-    <div className="p-6 bg-white  rounded-lg border border-gray-200">
+    <div className="p-6 bg-white rounded-lg border border-gray-200">
+      {loading && <Loader />}
       <div className="flex justify-between items-center">
-        <h2 className="text-base md:text-[22px]  mb-4">My Profile</h2>
-        <div className=" flex justify-end">
+        <h2 className="text-base md:text-[22px] mb-4">My Profile</h2>
+        <div className="flex justify-end">
           <button
             type="button"
             onClick={() => {
@@ -50,14 +88,13 @@ const Profile = () => {
               }
               setIsEditable(!isEditable);
             }}
-            className="w-full bgColor text-white text-[12px]  p-1 rounded-sm px-3 flex justify-center items-center"
+            className="w-full bgColor text-white text-[12px] p-1 rounded-sm px-3 flex justify-center items-center"
           >
-            {isEditable ? "Update" : "update"}
+            {isEditable ? "Save" : "Update"}
           </button>
         </div>
       </div>
-
-      {/* Name & Last Name in One Row */}
+      {/* Name Fields */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
           <label className="block text-gray-400 text-[13px] mb-1">
@@ -93,8 +130,7 @@ const Profile = () => {
           </div>
         </div>
       </div>
-
-      {/* Email, Phone, User ID in Responsive Layout */}
+      {/* Email, Phone, User ID */}
       <div className="grid grid-cols-1 gap-4 mt-4">
         <div>
           <label className="block text-gray-400 text-[13px] mb-1">Email:</label>
@@ -134,13 +170,14 @@ const Profile = () => {
             <input
               type="text"
               value={profile.userId}
-              className="w-full border-b text-base  border-gray-300 pl-10 pr-2 py-2 focus:outline-none"
+              className="w-full border-b text-base border-gray-300 pl-10 pr-2 py-2 focus:outline-none"
               disabled
             />
             <FaAddressBook className="absolute left-2 top-1/2 transform -translate-y-1/2 text-gray-400 text-xl" />
           </div>
         </div>
       </div>
+      {/* Subscription Toggle */}
       <div className="mt-12">
         <h2 className="text-base md:text-[22px] mb-4">Subscribe</h2>
       </div>
@@ -157,8 +194,8 @@ const Profile = () => {
             }`}
           />
         </button>
-        <span className="text-[14px]  ">
-          {isOn ? "Subscribe" : "UnSubscribe"}
+        <span className="text-[14px]">
+          {isOn ? "Subscribe" : "Unsubscribe"}
         </span>
       </div>
     </div>

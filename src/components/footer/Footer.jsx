@@ -328,12 +328,12 @@ const Footer = () => {
       </div>
       {/* Floating Buttons */}
       {/* Uncomment if needed */}
-      <div className="fixed bottom-28 right-4 flex flex-col gap-3">
-        <button className="bg-green-500 p-3 rounded-full text-white">
-          <FaWhatsapp size={20} />
+      <div className="fixed bottom-24 right-6 flex flex-col gap-3 z-50">
+        <button className="bg-green-500 p-4 rounded-full text-white">
+          <FaWhatsapp size={28} />
         </button>
-        <button className="bg-orange-500 p-3 rounded-full text-white">
-          <FaPhoneAlt size={20} />
+        <button className="bg-orange-500 p-4 rounded-full text-white">
+          <FaPhoneAlt size={28} />
         </button>
         {/* <button className="bg-gray-500 p-3 rounded-full text-white">
           <FaCommentDots size={20} />
