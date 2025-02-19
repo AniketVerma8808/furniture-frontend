@@ -55,7 +55,7 @@ const Footer = () => {
             </li>
             <li className="footer-link">
               <Link
-                to="/feedback"
+                to="/"
                 className="hover:text-gray-400 text-[11px] md:text-[13px]"
               >
                 Share Feedback
@@ -187,7 +187,7 @@ const Footer = () => {
             </li>
             <li className="footer-link">
               <Link
-                to="/orders"
+                to="/"
                 className="hover:text-gray-400 text-[11px] md:text-[13px]"
               >
                 My Orders
@@ -258,9 +258,7 @@ const Footer = () => {
             <div className="flex md:flex-col items-center gap-2 text-base">
               <FaShippingFast className="text-[14px] md:text-xl" />
               <div>
-                <h4 className=" text-[11px] md:text-[13px] ">
-                  FREE DELIVERY
-                </h4>
+                <h4 className=" text-[11px] md:text-[13px] ">FREE DELIVERY</h4>
                 <p className="text-[9px] md:text-[12px] ">
                   When ordering from Rs. 2500.
                 </p>
@@ -269,9 +267,7 @@ const Footer = () => {
             <div className="flex md:flex-col items-center gap-2 text-base">
               <FaExchangeAlt className="text-[14px] md:text-xl" />
               <div>
-                <h4 className=" text-[11px] md:text-[13px] ">
-                  EASY RETURNS
-                </h4>
+                <h4 className=" text-[11px] md:text-[13px] ">EASY RETURNS</h4>
                 <p className="text-[9px] md:text-[12px] ">
                   If goods have problems
                 </p>
@@ -280,9 +276,7 @@ const Footer = () => {
             <div className="flex md:flex-col items-center gap-2 text-base">
               <FaLock className="text-[14px] md:text-xl" />
               <div>
-                <h4 className=" text-[11px] md:text-[13px] ">
-                  SECURE PAYMENT
-                </h4>
+                <h4 className=" text-[11px] md:text-[13px] ">SECURE PAYMENT</h4>
                 <p className="text-[9px] md:text-[12px] ">
                   100% secure payment
                 </p>
