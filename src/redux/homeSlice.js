@@ -8,7 +8,12 @@ const getCityFromCoordinates = async (latitude, longitude) => {
   try {
     const response = await fetch(url);
     const data = await response.json();
-    return data.address?.city || data.address?.town || data.address?.village || "Unknown Location";
+    return (
+      data.address?.city ||
+      data.address?.town ||
+      data.address?.village ||
+      "Unknown Location"
+    );
   } catch (error) {
     console.error("Error fetching city name:", error);
     return "Unknown Location";
@@ -30,7 +35,9 @@ export const fetchUserLocation = createAsyncThunk(
             resolve({ latitude, longitude, city });
           },
           (error) => {
-            reject(rejectWithValue(error.message || "Failed to retrieve location"));
+            reject(
+              rejectWithValue(error.message || "Failed to retrieve location")
+            );
           },
           { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
         );
@@ -40,15 +47,18 @@ export const fetchUserLocation = createAsyncThunk(
 );
 
 // Async thunk to fetch banner data
-export const fetchBanners = createAsyncThunk("home/fetchBanners", async (_, { rejectWithValue }) => {
-  try {
-    const { data } = await getBannerService(); // Ensure await is used
-    return data.banners;
-  } catch (error) {
-    console.error("Banner fetching error:", error);
-    return rejectWithValue(error.response?.data || "Failed to fetch banners");
+export const fetchBanners = createAsyncThunk(
+  "home/fetchBanners",
+  async (_, { rejectWithValue }) => {
+    try {
+      const { data } = await getBannerService(); // Ensure await is used
+      return data.banners;
+    } catch (error) {
+      console.error("Banner fetching error:", error);
+      return rejectWithValue(error.response?.data || "Failed to fetch banners");
+    }
   }
-});
+);
 
 // Initial state
 const initialState = {

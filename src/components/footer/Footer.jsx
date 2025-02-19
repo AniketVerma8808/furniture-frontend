@@ -16,7 +16,6 @@ import {
 } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import Newsletter from "../newletter/Newsletter";
-import TawkToComponent from "../tawkToComponent/TawkToComponent";
 
 const Footer = () => {
   return (
@@ -69,14 +68,14 @@ const Footer = () => {
             SERVICES
           </h3>
           <ul>
-            <li className="footer-link">
+            {/* <li className="footer-link">
               <Link
                 to="/services/dismantling"
                 className="hover:text-gray-400 text-[11px] md:text-[13px]"
               >
                 Dismantling Service
               </Link>
-            </li>
+            </li> */}
             <li className="footer-link">
               {/* <Link
                 to="/services/re-installation"
@@ -85,14 +84,14 @@ const Footer = () => {
                 Re-Installation
               </Link> */}
             </li>
-            <li className="footer-link">
+            {/* <li className="footer-link">
               <Link
                 to="/services/loose-fitting"
                 className="hover:text-gray-400 text-[11px] md:text-[13px]"
               >
                 Loose Fitting
               </Link>
-            </li>
+            </li> */}
             <li className="footer-link">
               <Link
                 to="/complaints"
@@ -327,16 +326,15 @@ const Footer = () => {
           </Link>
         </p>
       </div>
-      <TawkToComponent />
       {/* Floating Buttons */}
       {/* Uncomment if needed */}
-      <div className="fixed bottom-4 right-4 flex flex-col gap-3">
-        {/* <button className="bg-green-500 p-3 rounded-full text-white">
+      <div className="fixed bottom-28 right-4 flex flex-col gap-3">
+        <button className="bg-green-500 p-3 rounded-full text-white">
           <FaWhatsapp size={20} />
         </button>
         <button className="bg-orange-500 p-3 rounded-full text-white">
           <FaPhoneAlt size={20} />
-        </button> */}
+        </button>
         {/* <button className="bg-gray-500 p-3 rounded-full text-white">
           <FaCommentDots size={20} />
         </button> */}

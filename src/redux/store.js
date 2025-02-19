@@ -8,7 +8,7 @@ import productReducer from "./productSlice";
 import cartReducer from "./cartSlice";
 import wishlistReducer from "./wishlistSlice";
 import homeReducer from "./homeSlice";
-import blogReducer from "./blogSlice"
+import blogReducer from "./blogSlice";
 // Persist Config
 const persistConfig = {
   key: "root",

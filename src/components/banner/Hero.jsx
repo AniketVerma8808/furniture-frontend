@@ -62,7 +62,7 @@ const Hero = () => {
         {leftImages.map((img, index) => (
           <div
             key={index}
-            className="bg-gray-200 h-40 lg:h-[165px] xl:h-[250px] 2xl:h-[260px] rounded-lg overflow-hidden "
+            className="bg-gray-200 h-40 lg:h-[165px] xl:h-[250px] 2xl:h-[260px]  rounded-lg overflow-hidden "
           >
             <img
               src={img}

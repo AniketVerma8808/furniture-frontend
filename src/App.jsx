@@ -45,7 +45,7 @@ import Address from "./pages/Address";
 import Profile from "./pages/Profile";
 import Orders from "./pages/Orders";
 import ChangePassword from "./pages/ChangePassword";
-
+import TawkToComponent from "./components/tawkToComponent/TawkToComponent";
 
 const ScrollToTop = React.memo(() => {
   const { pathname } = useLocation();
@@ -71,7 +71,7 @@ const App = () => {
     <>
       <ScrollToTop />
       <Navbar />
-      <main className="overflow-y-hidden   antialiased">
+      <main className="overflow-y-hidden  antialiased">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
@@ -123,6 +123,8 @@ const App = () => {
         </Routes>
       </main>
       <Footer />
+      <TawkToComponent />
+
       {/* Toast container for notifications */}
       <ToastContainer
         position="top-right"
