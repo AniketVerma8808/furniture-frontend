@@ -34,6 +34,7 @@ export const profileUpdateService = (data) => {
 export const passwardChangeService = (data) => {
   return clientAxios.post("/users/change-password", data);
 };
+
 export const SubscribeService = () => {
   return clientAxios.patch(`/users/toggle-subscribe`);
 };

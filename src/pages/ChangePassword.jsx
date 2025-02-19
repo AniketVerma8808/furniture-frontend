@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 import { FiEye, FiEyeOff } from "react-icons/fi";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { logoutUser } from "../redux/authSlice";
+import { passwardChangeService } from "../services/api.service";
+import Loader from "../components/loader/Loader";
 
 const ChangePassword = () => {
   const [password, setPassword] = useState({
@@ -14,6 +19,10 @@ const ChangePassword = () => {
     newPassword: false,
     confirmPassword: false,
   });
+
+  const { token } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setPassword({
@@ -29,11 +38,42 @@ const ChangePassword = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    if (
+      !password.currentPassword ||
+      !password.newPassword ||
+      !password.confirmPassword
+    ) {
+      toast.error("Please fill in all fields.");
+      return;
+    }
+
+    if (password.newPassword !== password.confirmPassword) {
+      toast.error("New password and confirm password do not match.");
+      return;
+    }
     setLoading(true);
-    toast.success("Password changed successfully!");
-    setLoading(false);
+    try {
+      const response = await passwardChangeService(
+        {
+          currentPassword: password.currentPassword,
+          newPassword: password.newPassword,
+        },
+        token
+      );
+
+      toast.success(response.data.message || "Password changed successfully!");
+      dispatch(logoutUser());
+      navigate("/login");
+    } catch (error) {
+      console.error("Error Response:", error);
+      toast.error(
+        error.response?.data?.message || "Failed to change password!"
+      );
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (

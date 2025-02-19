@@ -10,16 +10,20 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     loginSuccess: (state, action) => {
-      console.log("Login API Response:", action.payload);
+      // console.log("Login API Response:", action.payload);
       state.user = action.payload.user;
       state.token = action.payload.token;
     },
     logoutUser: (state) => {
       state.user = null;
       state.token = null;
+      localStorage.removeItem("authToken");
+    },
+    updateProfile: (state, action) => {
+      state.user = { ...state.user, ...action.payload };
     },
   },
 });
 
-export const { loginSuccess, logoutUser } = authSlice.actions;
+export const { loginSuccess, logoutUser, updateProfile } = authSlice.actions;
 export default authSlice.reducer;
