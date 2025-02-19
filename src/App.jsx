@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import "./App.css";
 import { Routes, Route, useLocation } from "react-router-dom";
 import Navbar from "./components/navbar/Navbar";
@@ -46,26 +46,27 @@ import Profile from "./pages/Profile";
 import Orders from "./pages/Orders";
 import ChangePassword from "./pages/ChangePassword";
 
-const ScrollToTop = () => {
-  const location = useLocation();
+
+const ScrollToTop = React.memo(() => {
+  const { pathname } = useLocation();
   useEffect(() => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  }, [location.pathname]);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [pathname]);
   return null;
-};
+});
 
 const App = () => {
   const dispatch = useDispatch();
-  useEffect(() => {
+  const fetchData = useCallback(() => {
     dispatch(fetchUserLocation());
     dispatch(fetchBlogs());
     dispatch(fetchBanners());
     dispatch(fetchProducts());
-  }, []);
+  }, [dispatch]);
 
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
   return (
     <>
       <ScrollToTop />
