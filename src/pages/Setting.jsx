@@ -73,13 +73,12 @@ const Setting = () => {
                   Change Password
                 </Link>
 
-                <Link
-                  to="/"
+                <button
                   onClick={handleLogout}
                   className="block py-2 text-gray-600 hover:text-red-500"
                 >
                   Logout
-                </Link>
+                </button>
               </div>
             </div>
           </div>

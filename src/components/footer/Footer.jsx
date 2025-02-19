@@ -16,6 +16,7 @@ import {
 } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import Newsletter from "../newletter/Newsletter";
+import TawkToComponent from "../tawkToComponent/TawkToComponent";
 
 const Footer = () => {
   return (
@@ -326,19 +327,19 @@ const Footer = () => {
           </Link>
         </p>
       </div>
-
+      <TawkToComponent />
       {/* Floating Buttons */}
       {/* Uncomment if needed */}
       <div className="fixed bottom-4 right-4 flex flex-col gap-3">
-        <button className="bg-green-500 p-3 rounded-full text-white">
+        {/* <button className="bg-green-500 p-3 rounded-full text-white">
           <FaWhatsapp size={20} />
         </button>
         <button className="bg-orange-500 p-3 rounded-full text-white">
           <FaPhoneAlt size={20} />
-        </button>
-        <button className="bg-gray-500 p-3 rounded-full text-white">
+        </button> */}
+        {/* <button className="bg-gray-500 p-3 rounded-full text-white">
           <FaCommentDots size={20} />
-        </button>
+        </button> */}
       </div>
     </footer>
   );

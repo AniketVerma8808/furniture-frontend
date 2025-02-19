@@ -73,9 +73,7 @@ const Forms = ({ title, image, issueType }) => {
 
   return (
     <div className="py-12">
-      <h2 className="text-2xl  text-center text-gray-800">
-        {title}
-      </h2>
+      <h2 className="text-2xl  text-center text-gray-800">{title}</h2>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 p-4">
         {/* Left Side: Image or Address */}
@@ -88,9 +86,7 @@ const Forms = ({ title, image, issueType }) => {
             />
           ) : (
             <div>
-              <h2 className="text-2xl  text-gray-800">
-                Our Address
-              </h2>
+              <h2 className="text-2xl  text-gray-800">Our Address</h2>
               <p className="mt-2 text-sm text-gray-600">
                 123, Main Street, City, Country
               </p>
@@ -101,9 +97,7 @@ const Forms = ({ title, image, issueType }) => {
 
               {/* Google Map Embed */}
               <div className="w-full mt-4 h-[50vh]">
-                <h3 className="text-xl  text-gray-800 mb-2">
-                  Find Us on Map
-                </h3>
+                <h3 className="text-xl  text-gray-800 mb-2">Find Us on Map</h3>
                 <iframe
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3561.762527771376!2d80.97130937450004!3d26.783838665618674!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399bfbcbafef436d%3A0x98435c83639e8c67!2sTechxpert%20Digital%20Services%20%7C%20website%20Developer%20Lucknow%20%7C%20App%20Developer%20Lucknow%20%7C%20Website!5e0!3m2!1sen!2sin!4v1738137918846!5m2!1sen!2sin"
                   width="100%"
@@ -122,10 +116,7 @@ const Forms = ({ title, image, issueType }) => {
         <div className="p-2 md:p-6 rounded-lg">
           <form onSubmit={handleSubmit} className="space-y-4 mt-4">
             <div>
-              <label
-                htmlFor="name"
-                className="block text-sm  text-gray-700"
-              >
+              <label htmlFor="name" className="block text-sm  text-gray-700">
                 Name
               </label>
               <input
@@ -139,10 +130,7 @@ const Forms = ({ title, image, issueType }) => {
               />
             </div>
             <div>
-              <label
-                htmlFor="email"
-                className="block text-sm  text-gray-700"
-              >
+              <label htmlFor="email" className="block text-sm  text-gray-700">
                 Email
               </label>
               <input
@@ -156,10 +144,7 @@ const Forms = ({ title, image, issueType }) => {
               />
             </div>
             <div>
-              <label
-                htmlFor="phone"
-                className="block text-sm  text-gray-700"
-              >
+              <label htmlFor="phone" className="block text-sm  text-gray-700">
                 Phone
               </label>
               <input
@@ -173,10 +158,7 @@ const Forms = ({ title, image, issueType }) => {
               />
             </div>
             <div>
-              <label
-                htmlFor="message"
-                className="block text-sm text-gray-700"
-              >
+              <label htmlFor="message" className="block text-sm text-gray-700">
                 Message
               </label>
               <textarea
