@@ -1,51 +1,48 @@
+import axios from "axios";
+import {store} from "../redux/store";
+import { jwtDecode } from "jwt-decode";
+import { logoutUser } from "../redux/authSlice";
 
-import axios from 'axios'
-import { jwtDecode } from 'jwt-decode'
+const API_URL = import.meta.env.VITE_BACKEND_PORT_DEVELOPMENT;
 
-const API_URL = import.meta.env.VITE_BACKEND_PORT_DEVELOPMENT
-
-// Create Axios instance
 const clientAxios = axios.create({
   baseURL: API_URL,
   headers: {
-    'Content-Type': 'application/json'
-  }
-})
+    "Content-Type": "application/json",
+  },
+});
 
-// Utility function to decode the JWT token and check if it's expired
+// Function to check if token is expired
 const isTokenExpired = (token) => {
-  if (!token) return true
-
+  if (!token) return true;
   try {
-    const decodedToken = jwtDecode(token)
-    const currentTime = Date.now() / 1000 // Current time in seconds
-    return decodedToken.exp < currentTime // Return true if expired
+    const decoded = jwtDecode(token);
+    return decoded.exp * 1000 < Date.now();
   } catch (error) {
-    console.error('Error decoding token', error)
-    return true // Consider token expired if decoding fails
+    return true; // Treat any error as expired token
   }
-}
+};
 
 // Request Interceptor
 clientAxios.interceptors.request.use(
   (config) => {
-    const token =  localStorage.getItem('token')
-    // If token exists, add it to the Authorization header
-    if (token && !isTokenExpired(token)) {
-      config.headers['Authorization'] = `Bearer ${token}`
-    } 
+    let token = store.getState().auth.token;
 
-    // If the request is multipart/form-data, Axios will handle the content type automatically.
-    if (config.headers['Content-Type'] === 'multipart/form-data') {
-      delete config.headers['Content-Type'] // Allow Axios to set the correct Content-Type for multipart
+    if (isTokenExpired(token)) {
+      console.log("🚨 Token Expired! Logging out...");
+      store.dispatch(logoutUser()); // Clear token in Redux
+      token = null;
     }
 
-    return config
+    if (token) {
+      config.headers["Authorization"] = `Bearer ${token}`;
+    }
+
+    return config;
   },
   (error) => {
-    // Handle request error
-    return Promise.reject(error)
+    return Promise.reject(error);
   }
-)
+);
 
-export default clientAxios
+export default clientAxios;
