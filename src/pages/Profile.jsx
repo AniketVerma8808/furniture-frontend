@@ -13,6 +13,9 @@ import { updateProfile } from "../redux/authSlice";
 const Profile = () => {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
+
+  console.log(user);
+
   const [profile, setProfile] = useState({
     firstName: "",
     lastName: "",
@@ -36,14 +39,21 @@ const Profile = () => {
     setLoading(true);
     try {
       const response = await profileUpdateService(profile);
-      console.log("API Response Data:", response.data);
-      // dispatch(updateProfile(profile));
+      console.log(response);
       dispatch(updateProfile(response.data.updatedUser));
-      console.log("Updated Profile Data:", profile);
+
+      // Update the local profile state to reflect changes in input fields
+      setProfile({
+        firstName: response.data.updatedUser.firstName || "",
+        lastName: response.data.updatedUser.lastName || "",
+        email: response.data.updatedUser.email || "",
+        phone: response.data.updatedUser.phone || "",
+        userId: response.data.updatedUser.id || "",
+      });
+
       toast.success(response.data.message || "Profile updated successfully!");
       setIsEditable(false);
     } catch (error) {
-      console.error("Error Response:", error);
       toast.error(error.response?.data?.message || "Failed to update profile");
     } finally {
       setLoading(false);
@@ -51,7 +61,6 @@ const Profile = () => {
   };
 
   useEffect(() => {
-    console.log("Redux User Data Updated:", user);
     if (user) {
       const nameParts = user.name ? user.name.split(" ") : ["", ""];
       setProfile({
@@ -59,8 +68,9 @@ const Profile = () => {
         lastName: nameParts.slice(1).join(" ") || "",
         email: user.email || "",
         phone: user.phone || "",
-        userId: user.id || "",
+        userId: user._id || user.id || "",
       });
+      setIsSubscribed(user.subscribe || false);
     }
   }, [user]);
 
@@ -68,15 +78,16 @@ const Profile = () => {
   const toggleHandler = async () => {
     try {
       const response = await SubscribeService();
-      setIsSubscribed((prev) => !prev);
+      const newSubscriptionStatus = !isSubscribed;
+      setIsSubscribed(newSubscriptionStatus);
+      dispatch(updateProfile({ subscribe: newSubscriptionStatus }));
       toast.success(
         response.data.message ||
-          (isSubscribed
-            ? "Unsubscribed successfully!"
-            : "Subscribed successfully!")
+          (newSubscriptionStatus
+            ? "Subscribed successfully!"
+            : "Unsubscribed successfully!")
       );
     } catch (error) {
-      console.error("Error Response:", error);
       toast.error("Subscription update failed!");
     }
   };
@@ -173,13 +184,13 @@ const Profile = () => {
           onClick={toggleHandler}
           className={`w-12 h-6 rounded-full flex items-center p-1 transition-all ${
             isSubscribed
-              ? "bg-green-500 justify-end"
+              ? "bg-gray-300 justify-end"
               : "bg-gray-300 justify-start"
           }`}
         >
           <div
-            className={`w-6 h-6 rounded-full bg-white shadow-md transform transition-transform ${
-              isSubscribed ? "translate-x-6" : "translate-x-0"
+            className={`w-6 h-6 rounded-full bgColor shadow-md transform transition-transform ${
+              isSubscribed ? "translate-x-0" : "translate-x-0"
             }`}
           />
         </button>
@@ -192,3 +203,191 @@ const Profile = () => {
 };
 
 export default Profile;
+
+// import React, { useEffect, useState } from "react";
+// import { toast } from "react-toastify";
+// import Loader from "../components/loader/Loader";
+// import { FaAddressBook, FaPhoneAlt, FaUser } from "react-icons/fa";
+// import { MdOutlineMailOutline } from "react-icons/md";
+// import {
+//   profileUpdateService,
+//   SubscribeService,
+// } from "../services/api.service";
+// import { useDispatch, useSelector } from "react-redux";
+// import { updateProfile } from "../redux/authSlice";
+
+// const Profile = () => {
+//   const dispatch = useDispatch();
+//   const { user } = useSelector((state) => state.auth);
+
+//   const [profile, setProfile] = useState({
+//     name: "",
+//     email: "",
+//     phone: "",
+//     userId: "",
+//   });
+
+//   const [isEditable, setIsEditable] = useState(false);
+//   const [loading, setLoading] = useState(false);
+//   const [isSubscribed, setIsSubscribed] = useState(false);
+
+//   // Handle input change
+//   const handleChange = (e) => {
+//     const { name, value } = e.target;
+//     setProfile((prev) => ({ ...prev, [name]: value }));
+//   };
+
+//   // Handle Profile Update
+//   const handleUpdate = async () => {
+//     setLoading(true);
+//     try {
+//       const response = await profileUpdateService(profile);
+//       dispatch(updateProfile(response.data.updatedUser));
+//       toast.success(response.data.message || "Profile updated successfully!");
+//       setIsEditable(false);
+//     } catch (error) {
+//       toast.error(error.response?.data?.message || "Failed to update profile");
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
+
+//   useEffect(() => {
+//     if (user) {
+//       setProfile({
+//         name: user.name || "",
+//         email: user.email || "",
+//         phone: user.phone || "",
+//         userId: user._id || user.id || "",
+//       });
+//       setIsSubscribed(user.subscribe || false);
+//     }
+//   }, [user]);
+
+//   // Toggle Subscribe
+//   const toggleHandler = async () => {
+//     try {
+//       const response = await SubscribeService();
+//       const newSubscriptionStatus = !isSubscribed;
+//       setIsSubscribed(newSubscriptionStatus);
+//       dispatch(updateProfile({ subscribe: newSubscriptionStatus }));
+//       toast.success(
+//         response.data.message ||
+//           (newSubscriptionStatus
+//             ? "Subscribed successfully!"
+//             : "Unsubscribed successfully!")
+//       );
+//     } catch (error) {
+//       toast.error("Subscription update failed!");
+//     }
+//   };
+
+//   return (
+//     <div className="p-6 bg-white rounded-lg border border-gray-200">
+//       <div className="flex justify-between items-center">
+//         <h2 className="text-base md:text-[22px] mb-4">My Profile</h2>
+//         <button
+//           type="button"
+//           onClick={() => {
+//             if (isEditable) handleUpdate();
+//             else setIsEditable(true);
+//           }}
+//           className="bgColor text-white text-[12px] p-1 rounded-sm px-3"
+//           disabled={loading}
+//           style={{ height: "40px", width: "80px" }}
+//         >
+//           {loading ? (
+//             <Loader size={5} color="white" />
+//           ) : isEditable ? (
+//             "Save"
+//           ) : (
+//             "Update"
+//           )}
+//         </button>
+//       </div>
+
+//       {/* Name Field */}
+//       <div className="grid grid-cols-1 gap-4">
+//         <div>
+//           <label className="block text-gray-400 text-[13px] mb-1">
+//             Full Name:
+//           </label>
+//           <div className="relative">
+//             <input
+//               type="text"
+//               name="name"
+//               value={profile.name}
+//               onChange={handleChange}
+//               className="w-full border-b text-base border-gray-300 pl-10 pr-2 py-2 disabled:cursor-not-allowed"
+//               disabled={!isEditable}
+//             />
+//             <FaUser className="absolute left-2 top-1/2 transform -translate-y-1/2 text-gray-400 text-xl" />
+//           </div>
+//         </div>
+//       </div>
+
+//       {/* Email, Phone, User ID */}
+//       <div className="grid grid-cols-1 gap-4 mt-4">
+//         {[
+//           {
+//             label: "Email:",
+//             name: "email",
+//             Icon: MdOutlineMailOutline,
+//             type: "email",
+//           },
+//           { label: "Phone:", name: "phone", Icon: FaPhoneAlt, type: "text" },
+//           {
+//             label: "User ID:",
+//             name: "userId",
+//             Icon: FaAddressBook,
+//             type: "text",
+//             disabled: true,
+//           },
+//         ].map(({ label, name, Icon, type, disabled = false }, index) => (
+//           <div key={index}>
+//             <label className="block text-gray-400 text-[13px] mb-1">
+//               {label}
+//             </label>
+//             <div className="relative">
+//               <input
+//                 type={type}
+//                 name={name}
+//                 value={profile[name]}
+//                 onChange={handleChange}
+//                 className="w-full border-b text-base border-gray-300 pl-10 pr-2 py-2 disabled:cursor-not-allowed"
+//                 disabled={!isEditable || disabled}
+//               />
+//               <Icon className="absolute left-2 top-1/2 transform -translate-y-1/2 text-gray-400 text-xl" />
+//             </div>
+//           </div>
+//         ))}
+//       </div>
+
+//       {/* Subscription Toggle */}
+//       <div className="mt-12">
+//         <h2 className="text-base md:text-[22px] mb-4">Subscribe</h2>
+//       </div>
+//       <div className="flex items-center space-x-4 mt-6">
+//         <button
+//           onClick={toggleHandler}
+//           className={`w-12 h-6 rounded-full flex items-center p-1 transition-all ${
+//             isSubscribed
+//               ? "bg-gray-300 justify-end"
+//               : "bg-gray-300 justify-start"
+//           }`}
+//         >
+//           <div
+//             className={`w-6 h-6 rounded-full bg-white shadow-md transform transition-transform ${
+//               isSubscribed ? "translate-x-0" : "translate-x-0"
+//             }`}
+//           />
+//         </button>
+//         <span className="text-[14px]">
+//           {isSubscribed ? "Subscribed" : "Unsubscribed"}
+//         </span>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default Profile;

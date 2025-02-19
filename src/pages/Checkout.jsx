@@ -18,7 +18,7 @@ function Checkout() {
     <>
       {/* Stepper */}
       <div className="bg-white  ">
-        <div className="flex items-center justify-center mb-12 pt-12">
+        <div className="flex items-center justify-center  pt-12">
           {["Cart", "Address", "Payment"].map((label, index) => (
             <div key={index} className="flex items-center">
               <div
@@ -38,7 +38,11 @@ function Checkout() {
           {/* Content Area */}
           <div className="w-full rounded-lg">
             {step === "cart" && <Cart />}
-            {step === "address" && <CheckoutAddress />}
+            {step === "address" && (
+              <div className="pt-12">
+                <CheckoutAddress />
+              </div>
+            )}
             {step === "payment" && (
               <div>
                 <h2 className="text-2xl mb-4">Payment Information</h2>

@@ -187,7 +187,7 @@ const Footer = () => {
             </li>
             <li className="footer-link">
               <Link
-                to="/"
+                to="/orders"
                 className="hover:text-gray-400 text-[11px] md:text-[13px]"
               >
                 My Orders

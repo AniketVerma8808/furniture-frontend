@@ -50,7 +50,7 @@ const Cart = () => {
   };
 
   return (
-    <div className="pb-12">
+    <div className="py-12">
       {cart.length > 0 ? (
         <div className="container mx-auto max-w-7xl">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">

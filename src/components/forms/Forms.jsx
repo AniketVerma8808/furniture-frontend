@@ -79,11 +79,13 @@ const Forms = ({ title, image, issueType }) => {
         {/* Left Side: Image or Address */}
         <div className="hidden lg:block p-6 rounded-lg">
           {image ? (
-            <img
-              src={image}
-              alt={title}
-              className="w-full h-auto max-w-xs md:max-w-sm lg:max-w-md xl:max-w-lg rounded-lg"
-            />
+            <div className="flex justify-center">
+              <img
+                src={image}
+                alt={title}
+                className="w-full h-auto max-w-xs md:max-w-sm lg:max-w-md xl:max-w-lg rounded-lg"
+              />
+            </div>
           ) : (
             <div>
               <h2 className="text-2xl  text-gray-800">Our Address</h2>
@@ -96,7 +98,7 @@ const Forms = ({ title, image, issueType }) => {
               </p>
 
               {/* Google Map Embed */}
-              <div className="w-full mt-4 h-[50vh]">
+              <div className="w-full mt-4 h-[40vh]">
                 <h3 className="text-xl  text-gray-800 mb-2">Find Us on Map</h3>
                 <iframe
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3561.762527771376!2d80.97130937450004!3d26.783838665618674!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399bfbcbafef436d%3A0x98435c83639e8c67!2sTechxpert%20Digital%20Services%20%7C%20website%20Developer%20Lucknow%20%7C%20App%20Developer%20Lucknow%20%7C%20Website!5e0!3m2!1sen!2sin!4v1738137918846!5m2!1sen!2sin"

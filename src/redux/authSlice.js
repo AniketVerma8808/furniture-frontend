@@ -10,17 +10,16 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     loginSuccess: (state, action) => {
-      // console.log("Login API Response:", action.payload);
       state.user = action.payload.user;
       state.token = action.payload.token;
     },
     logoutUser: (state) => {
       state.user = null;
       state.token = null;
-      localStorage.removeItem("authToken");
     },
     updateProfile: (state, action) => {
       state.user = { ...state.user, ...action.payload };
+      // console.log("Updated Redux State in Reducer:", state.user);
     },
   },
 });

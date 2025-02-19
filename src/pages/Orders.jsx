@@ -12,7 +12,7 @@ const Orders = () => {
   };
 
   return (
-    <div className="min-h-screen py-4">
+    <div className="min-h-screen md:py-12 py-4">
       <div className="container mx-auto max-w-7xl px-2 md:px-8">
         <h3 className="text-sm md:text-[18px]  mb-4">My Orders</h3>
 
