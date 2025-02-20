@@ -28,8 +28,8 @@ export const NewsletterService = (data) => {
 export const TestimonialsService = () => {
   return clientAxios.get(`/testimonials`);
 };
-export const profileUpdateService = () => {
-  return clientAxios.put("/users/update-profile");
+export const profileUpdateService = (data) => {
+  return clientAxios.put("/users/update-profile" , data);
 };
 export const passwardChangeService = (data) => {
   return clientAxios.post("/users/change-password", data);
