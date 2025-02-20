@@ -11,7 +11,7 @@ const Address = () => {
     streetAddress: "",
     city: "",
     pincode: "",
-    mobileNumber: "",
+    phone: "",
     gstin: "",
   });
 
@@ -26,6 +26,16 @@ const Address = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (!/^\d{5,6}$/.test(formData.pincode)) {
+      toast.error("Invalid zip code. Please enter a valid 5-6 digit zip code.");
+      return;
+    }
+    if (!/^\d{10}$/.test(formData.phone)) {
+      toast.error(" Please enter a valid phone Number 10 digit");
+      return;
+    }
+
     console.log("Address Submitted:", formData);
     toast.success("Address Submitted:");
   };
@@ -35,7 +45,6 @@ const Address = () => {
       <div className=" min-h-screen pb-12">
         <div className="container mx-auto max-w-7xl">
           <div className="">
-            {/* Left Section */}
             <div className=" bg-white p-6 rounded-lg  border border-gray-200 shadow-md">
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 ">
                 {/* Delivery Address Section */}
@@ -51,7 +60,7 @@ const Address = () => {
                 </div>
                 {/* Add Address Section */}
                 <div className="lg:col-span-4">
-                  <div className="flex flex-col items-center  justify-center gap-6 border border-gray-300 rounded-lg p-4 h-36">
+                  <div className="flex flex-col items-center   justify-start md:justify-center gap-6 border border-gray-300 rounded-lg p-4 h-36">
                     <h3 className="text-base md:text-xl  mb-2">Add Address</h3>
                     <button
                       onClick={handleSubmit}
@@ -187,16 +196,16 @@ const Address = () => {
                     {/* Mobile Number */}
                     <div>
                       <label
-                        htmlFor="mobileNumber"
+                        htmlFor="phone"
                         className="block text-sm  text-gray-700 mb-2"
                       >
                         Mobile Number
                       </label>
                       <input
                         type="tel"
-                        id="mobileNumber"
-                        name="mobileNumber"
-                        value={formData.mobileNumber}
+                        id="phone"
+                        name="phone"
+                        value={formData.phone}
                         onChange={handleInputChange}
                         className="w-full p-2 border border-gray-300 rounded-lg"
                         placeholder=" mobile number"

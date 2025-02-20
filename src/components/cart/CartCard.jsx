@@ -31,10 +31,12 @@ const CartCard = ({ initialCart = [] }) => {
 
   // Navigate to Checkout with state
   const handleProceedToCheckout = () => {
+    setIsDropdownOpen(false);
     navigate("/checkout", { state: { step: "address" } });
   };
 
-  const handleViewCart = () => {
+  const handleViewCart = (event) => {
+    event.preventDefault(); 
     setIsDropdownOpen(false);
     navigate("/checkout", { state: { step: "cart" } });
   };

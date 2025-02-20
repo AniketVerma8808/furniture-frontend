@@ -1,24 +1,30 @@
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import Cart from "./Cart";
-import Address from "./Address";
 import CheckoutAddress from "./CheckoutAddress";
 
 function Checkout() {
-  const [step, setStep] = useState("cart");
+  const [step, setStep] = useState(
+    localStorage.getItem("checkoutStep") || "cart"
+  );
   const location = useLocation();
 
   useEffect(() => {
     if (location.state?.step) {
       setStep(location.state.step);
+      localStorage.setItem("checkoutStep", location.state.step);
     }
   }, [location.state]);
+
+  useEffect(() => {
+    localStorage.setItem("checkoutStep", step);
+  }, [step]);
 
   return (
     <>
       {/* Stepper */}
-      <div className="bg-white  ">
-        <div className="flex items-center justify-center  pt-12">
+      <div className="bg-white">
+        <div className="flex items-center justify-center pt-12">
           {["Cart", "Address", "Payment"].map((label, index) => (
             <div key={index} className="flex items-center">
               <div
@@ -44,9 +50,9 @@ function Checkout() {
               </div>
             )}
             {step === "payment" && (
-              <div>
+              <div className="container mx-auto max-w-7xl pt-12">
                 <h2 className="text-2xl mb-4">Payment Information</h2>
-                {/* Payment form content goes here */}
+                <p>Enter your payment details here.</p>
               </div>
             )}
           </div>
