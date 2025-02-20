@@ -166,7 +166,8 @@ const Navbar = () => {
                         // onClick={handleDropdownToggle}
                       />
                       <span className="text-[8px] sm:text-xs">
-                        {user?.name}
+                        {/* {user?.name} */}
+                        {user?.name?.split(" ")[0]}
                       </span>
                     </Link>
                   </div>
@@ -267,7 +268,11 @@ const Navbar = () => {
                     className="flex flex-col items-center text-white"
                   >
                     <BiUserCircle className="text-[20px]" />
-                    <span className="text-white text-[8px]">{user.name}</span>
+                    <span className="text-white text-[8px]">
+                      {/* {user.name}
+                       */}
+                      {user?.name?.split(" ")[0]}
+                    </span>
                   </Link>
                   {/* {isDropdownOpenUser && (
                     <div className="absolute right-0 top-12 z-50 w-48 bg-white border rounded-lg shadow-lg">
