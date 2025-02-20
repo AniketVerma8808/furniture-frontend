@@ -112,7 +112,6 @@ const App = () => {
             <Route path="/settings/profile" element={<Profile />} />
             <Route path="/settings/address" element={<Address />} />
             <Route path="/settings/orders" element={<Orders />} />
-            {/* <Route path="/orders" element={<Orders />} /> */}
             <Route
               path="/settings/change-password"
               element={<ChangePassword />}

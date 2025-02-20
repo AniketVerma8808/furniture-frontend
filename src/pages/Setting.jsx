@@ -61,7 +61,7 @@ const Setting = () => {
                 </Link>
 
                 <Link
-                  to="/orders"
+                  to="/settings/orders"
                   className="block py-2 text-gray-600 border-b border-gray-200 hover:text-black"
                 >
                   My Orders

@@ -39,7 +39,7 @@ const ResetPassword = () => {
       <Layout />
       <div className="flex justify-center items-start w-full p-4">
         <form onSubmit={handleSubmit} className="w-full p-0 md:p-6 space-y-4">
-          <h2 className="text-2xl  text-center text-gray-800">
+          <h2 className="text-base md:text-2xl  text-center text-gray-800">
             Reset Password
           </h2>
           <p className="text-sm text-gray-600 text-center mt-2">

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import orderImg from "../../assets/image/review/review4.jpg";
+import { useNavigate } from "react-router-dom";
 const completedOrders = [
   {
     id: 1,
@@ -28,6 +29,7 @@ const completedOrders = [
 ];
 
 const CompletedOrders = () => {
+  const navigate = useNavigate();
   return (
     <div className="min-h-screen ">
       <div className="container mx-auto max-w-7xl">
@@ -49,13 +51,14 @@ const CompletedOrders = () => {
                     <img
                       src={order.image}
                       alt={order.name}
-                      className="w-full h-full object-cover rounded-lg"
+                      className="w-full h-full object-cover rounded-lg cursor-pointer"
+                      onClick={() => navigate(`/product/${order.id}`)}
                     />
                   </div>
                   {/* Order Details */}
                   <div className="flex-grow">
                     <div className="flex justify-between items-center mb-2">
-                      <h4 className="text-[14px">{order.name}</h4>
+                      <h4 className="text-[14px] ">{order.name}</h4>
                       <span className="text-sm text-gray-500">
                         {order.date}
                       </span>

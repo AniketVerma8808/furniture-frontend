@@ -59,7 +59,7 @@ const CartCard = ({ initialCart = [] }) => {
 
       {/* Dropdown */}
       {isDropdownOpen && (
-        <div className="absolute right-0 z-50 top-10 w-80 md:w-96 bg-white text-sm text-black shadow-lg rounded-lg">
+        <div className="absolute right-0 z-50 top-10 w-72 md:w-96 bg-white text-sm text-black shadow-lg rounded-lg">
           {/* Close Button */}
           <div className="flex justify-end items-center px-4 py-2 border-b">
             <IoMdClose
@@ -75,7 +75,7 @@ const CartCard = ({ initialCart = [] }) => {
             </p>
             <div>
               <p className="text-gray-500 text-xs">Subtotal</p>
-              <p className=" text-lg">${subtotal.toFixed(2)}</p>
+              <p className=" text-[16px]">${subtotal.toFixed(2)}</p>
             </div>
           </div>
 
@@ -99,7 +99,7 @@ const CartCard = ({ initialCart = [] }) => {
 
                   {/* Quantity Control */}
                   <div className="flex items-center gap-3 mt-2">
-                    <span className="text-sm">Qty:</span>
+                    <span className="text-[12px]">Qty:</span>
                     <div className="flex items-center space-x-2">
                       <button
                         onClick={() => updateQuantity(item.id, -1)}
@@ -108,9 +108,7 @@ const CartCard = ({ initialCart = [] }) => {
                       >
                         -
                       </button>
-                      <span className="text-sm">
-                        {item.quantity}
-                      </span>
+                      <span className="text-[12px">{item.quantity}</span>
                       <button
                         onClick={() => updateQuantity(item.id, 1)}
                         className="bg-gray-200 px-3 py-1 rounded hover:bg-gray-300"
@@ -138,13 +136,13 @@ const CartCard = ({ initialCart = [] }) => {
               <>
                 <button
                   onClick={handleProceedToCheckout}
-                  className="w-full bgColor text-white py-3 rounded-lg mb-2"
+                  className="w-full bgColor text-white py-3 text-sm rounded-lg mb-2"
                 >
                   Proceed to Checkout
                 </button>
                 <Link
                   to="/checkout"
-                  className="block text-center bg-gray-200 text-gray-700 py-3 rounded-lg"
+                  className="block text-center bg-gray-200 text-sm text-gray-700 py-3 rounded-lg"
                   onClick={handleViewCart}
                 >
                   View & Edit Cart

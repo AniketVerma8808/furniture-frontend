@@ -39,7 +39,7 @@ function Checkout() {
           <div className="w-full rounded-lg">
             {step === "cart" && <Cart />}
             {step === "address" && (
-              <div className="pt-12">
+              <div className="container mx-auto max-w-7xl pt-12">
                 <CheckoutAddress />
               </div>
             )}

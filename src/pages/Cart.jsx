@@ -55,8 +55,8 @@ const Cart = () => {
         <div className="container mx-auto max-w-7xl">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
             {/* Cart Section */}
-            <div className="lg:col-span-8 bg-white p-6 rounded-lg border border-gray-200 shadow-md">
-              <div className="border border-gray-300 rounded-lg px-6 mt-6">
+            <div className="lg:col-span-8 bg-white p-2 md:p-6 rounded-lg border border-gray-200 shadow-md">
+              <div className="border border-gray-300 rounded-lg px-2 md:px-6 mt-6">
                 <div className="p-4 border-b border-gray-200">
                   <h3 className="text-xl  mb-2">My Cart ({cart.length})</h3>
                 </div>
@@ -81,27 +81,30 @@ const Cart = () => {
 
                             <div className="flex flex-wrap items-center gap-4 mt-2">
                               {/* Quantity Adjuster */}
-                              <div className="flex items-center">
-                                <span className="mr-5 text-[#9A8B8B]">
-                                  Quantity
-                                </span>
-
-                                <button
-                                  onClick={() => handleQuantityChange(id, -1)}
-                                  className="bg-gray-200 px-3 py-1 rounded hover:bg-gray-300"
-                                  disabled={quantity <= 1}
-                                >
-                                  -
-                                </button>
-                                <span className="mx-3 text-lg ">
-                                  {quantity}
-                                </span>
-                                <button
-                                  onClick={() => handleQuantityChange(id, 1)}
-                                  className="bg-gray-200 px-3 py-1 rounded hover:bg-gray-300"
-                                >
-                                  +
-                                </button>
+                              <div className="flex items-center flex-wrap">
+                                <p>
+                                  <span className="mr-5 text-[#9A8B8B]">
+                                    Quantity
+                                  </span>
+                                </p>
+                                <div className="flex items-center">
+                                  <button
+                                    onClick={() => handleQuantityChange(id, -1)}
+                                    className="bg-gray-200 px-3 py-1 rounded hover:bg-gray-300"
+                                    disabled={quantity <= 1}
+                                  >
+                                    -
+                                  </button>
+                                  <span className="mx-3 text-lg ">
+                                    {quantity}
+                                  </span>
+                                  <button
+                                    onClick={() => handleQuantityChange(id, 1)}
+                                    className="bg-gray-200 px-3 py-1 rounded hover:bg-gray-300"
+                                  >
+                                    +
+                                  </button>
+                                </div>
                               </div>
 
                               {/* Price Details */}

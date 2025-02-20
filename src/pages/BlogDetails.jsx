@@ -21,9 +21,9 @@ const BlogDetails = () => {
   if (loading)
     return (
       <>
-      <div className="flex items-center justify-center h-screen">
-          <Loader size={5} color={"gray"}  />
-      </div>
+        <div className="flex items-center justify-center h-screen">
+          <Loader size={5} color={"gray"} />
+        </div>
       </>
     );
   if (!individual) return <p>Blog not found</p>;
@@ -46,9 +46,9 @@ const BlogDetails = () => {
       <p>{individual.content}</p> */}
       <div className="container mx-auto  py-8 px-4 sm:px-6 lg:px-8">
         {/* Blog Title */}
-        <h1 className="text-2xl sm:text-3xl md:text-4xl text-gray-800 pb-2 mb-4 text-start">
+        <h3 className="text-xl md:text-2xl lg:text-3xl  text-gray-800 pb-2 mb-4 text-start">
           {individual.title}
-        </h1>
+        </h3>
 
         {/* Blog Metadata */}
         <p className="text-sm sm:text-base text-gray-600 flex items-center mb-4">

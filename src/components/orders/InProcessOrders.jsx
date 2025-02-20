@@ -1,5 +1,6 @@
 import React from "react";
 import orderImg from "../../assets/image/review/review4.jpg";
+import { useNavigate } from "react-router-dom";
 // Sample Data for In-Process Orders with Images
 const inProcessOrders = [
   {
@@ -29,6 +30,7 @@ const inProcessOrders = [
 ];
 
 const InProcessOrders = () => {
+  const navigate = useNavigate();
   return (
     <div className="min-h-screen">
       <div className="container mx-auto max-w-7xl">
@@ -50,7 +52,8 @@ const InProcessOrders = () => {
                     <img
                       src={order.image}
                       alt={order.name}
-                      className="w-full h-full object-cover rounded-lg"
+                      className="w-full h-full object-cover rounded-lg cursor-pointer"
+                      onClick={() => navigate(`/product/${order.id}`)}
                     />
                   </div>
                   {/* Order Details */}
