@@ -10,6 +10,9 @@ import Bannerimg2 from '../assets/image/banner/Bannerimg3.png';
 
 const Home = () => {
     const { bestseller, newarrival } = useSelector((state) => state.product);
+    console.log(bestseller);
+    console.log(newarrival);
+
 
     return (
         <>

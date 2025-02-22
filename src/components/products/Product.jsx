@@ -31,7 +31,7 @@ const Product = ({ category }) => {
             </div>
             <div className="grid grid-cols-2 md:grid-cols-3  gap-4">
                 {productList.map((product) => (
-                    <ProductItem key={product.id} product={product} />
+                    <ProductItem key={product._id} product={product} />
                 ))}
             </div>
         </div>

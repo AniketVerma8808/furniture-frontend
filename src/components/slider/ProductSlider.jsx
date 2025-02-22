@@ -65,7 +65,7 @@ const ProductSlider = ({ title, data }) => {
       <div className="py-8 md:py-12 relative">
         <Slider {...settings}>
           {data?.map((product) => (
-            <div key={product.id} className="md:px-8 px-1">
+            <div key={product._id} className="md:px-8 px-1">
               <ProductItem product={product} label="New Arrival" />
             </div>
           ))}

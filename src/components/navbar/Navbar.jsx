@@ -48,39 +48,15 @@ const Navbar = () => {
 
   const navigate = useNavigate();
   const categories = [
-    { name: "INTERNATIONAL COLLECTION", subcategories: null },
     {
       name: "BEDROOM",
-      subcategories: [
-        {
-          title: "BEDS",
-          items: ["King Size Bed", "Queen Size Bed", "Single Bed", "Bunk Bed"],
-        },
-        {
-          title: "MATTRESSES",
-          items: ["Memory Foam Mattress", "Spring Mattress", "Latex Mattress"],
-        },
-        {
-          title: "WARDROBES",
-          items: ["Sliding Wardrobe", "Hinged Wardrobe", "Walk-in Wardrobe"],
-        },
-        {
-          title: "DECOR",
-          items: ["Wall Art", "Vases & Planters", "Lamps & Lighting"],
-        },
-        {
-          title: "SIDE TABLES",
-          items: ["Bedside Table", "End Table", "Nesting Tables"],
-        },
-      ],
+      subcategories: null
     },
-    { name: "STUDY & OFFICE", subcategories: null },
-    { name: "OUTDOOR", subcategories: null },
+    { name: "BEDS", subcategories: null },
+    { name: "MATTRESSES", subcategories: null },
+    { name: "WARDROBES", subcategories: null },
     { name: "DECOR", subcategories: null },
-    { name: "FURNISHINGS", subcategories: null },
-    { name: "SMART STORAGE", subcategories: null },
-    { name: "NEW ARRIVALS", subcategories: null },
-    { name: "BULK ORDERS", subcategories: null },
+    { name: "SIDE TABLES", subcategories: null },
   ];
 
   const handleCategoryClick = (categoryName) => {
