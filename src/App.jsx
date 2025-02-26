@@ -46,6 +46,10 @@ import Profile from "./pages/Profile";
 import Orders from "./pages/Orders";
 import ChangePassword from "./pages/ChangePassword";
 import TawkToComponent from "./components/tawkToComponent/TawkToComponent";
+import { fetchWishlist } from "./redux/wishlistSlice";
+import {store} from "./redux/store";
+import { jwtDecode } from "jwt-decode";
+import { logoutUser } from "./redux/authSlice";
 
 const ScrollToTop = React.memo(() => {
   const { pathname } = useLocation();
@@ -55,13 +59,36 @@ const ScrollToTop = React.memo(() => {
   return null;
 });
 
+const isTokenExpired = (token) => {
+  if (!token) return true;
+  try {
+    const decoded = jwtDecode(token);
+    return decoded.exp * 1000 < Date.now();
+  } catch (error) {
+    return true; // Treat any error as expired token
+  }
+};
+
 const App = () => {
   const dispatch = useDispatch();
+  let token = store.getState().auth.token;
+  
+
+
   const fetchData = useCallback(() => {
+
+    if (!isTokenExpired(token)) {
+      dispatch(fetchWishlist())
+    
+    }else{
+      store.dispatch(logoutUser()); // Clear token in Redux
+      token = null;
+    }
     dispatch(fetchUserLocation());
     dispatch(fetchBlogs());
     dispatch(fetchBanners());
     dispatch(fetchProducts());
+  
   }, [dispatch]);
 
   useEffect(() => {

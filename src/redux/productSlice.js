@@ -10,9 +10,7 @@ export const fetchProducts = createAsyncThunk(
       const {
         data: { data },
       } = await GetProductService();
-      const newD = data.map((i) => {
-        console.log(i.newarrival);
-      });
+   
 
       const newarrival = data.filter((product) => product.newarrival);
       const bestseller = data.filter((product) => product.bestsellor); // Fix typo if needed
@@ -46,7 +44,6 @@ const productSlice = createSlice({
       })
       .addCase(fetchProducts.fulfilled, (state, action) => {
         const { bestseller, newarrival, data } = action.payload;
-        console.log(newarrival, "login from slice");
         state.loading = false;
         state.products = data;
         state.bestseller = bestseller;
