@@ -17,7 +17,7 @@ import {
 const ProductItem = ({ product }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  
+
   const { wishlistItems } = useSelector((state) => state.wishlist);
   const [isFavorite, setIsFavorite] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
@@ -64,6 +64,13 @@ const ProductItem = ({ product }) => {
     }
   };
 
+  const getLabelColor = () => {
+    if (product.bestsellor) return "bg-yellow-500";
+    if (product.trending) return "bg-green-500";
+    if (product.newarrival) return "bg-blue-500";
+    return "bg-red-500";
+  };
+
   return (
     <div
       onMouseEnter={() => setIsHovered(true)}
@@ -95,6 +102,17 @@ const ProductItem = ({ product }) => {
             Add to Cart
           </button>
         </div>
+        {(product.bestsellor || product.trending || product.newarrival) && (
+          <div
+            className={`absolute bottom-0 left-0 text-white text-xs px-2 py-1 rounded-md ${getLabelColor()}`}
+          >
+            {product.bestsellor
+              ? "Best Seller"
+              : product.trending
+              ? "Trending"
+              : "New Arrival"}
+          </div>
+        )}
       </div>
 
       {/* Wishlist Button */}

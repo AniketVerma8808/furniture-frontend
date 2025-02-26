@@ -29,7 +29,7 @@ clientAxios.interceptors.request.use(
     let token = store.getState().auth.token;
 
     if (isTokenExpired(token)) {
-      console.log("🚨 Token Expired! Logging out...");
+      // console.log("🚨 Token Expired! Logging out...");
       store.dispatch(logoutUser()); // Clear token in Redux
       token = null;
     }

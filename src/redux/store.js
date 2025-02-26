@@ -5,7 +5,7 @@ import { combineReducers } from "redux";
 import { thunk } from "redux-thunk"; // Correct import (no curly brackets)
 import authReducer, { logoutUser } from "./authSlice";
 import productReducer from "./productSlice";
-import cartReducer from "./cartSlice";
+import cartReducer, { clearCart } from "./cartSlice";
 import wishlistReducer, { clearWishlist } from "./wishlistSlice";
 import homeReducer from "./homeSlice";
 import blogReducer from "./blogSlice";
@@ -53,6 +53,7 @@ export const store = configureStore({
 export const logoutAndClearStore = () => async (dispatch) => {
   dispatch(logoutUser()); // Clear Redux auth state
   dispatch(clearWishlist()); // Clear wishlist state
+  dispatch(clearCart()); // Clear wishlist state
 
   persistor.pause();  // ✅ Pause persistor
   await persistor.flush().catch(() => {}); // ✅ Handle non-serializable warnings

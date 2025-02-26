@@ -1,5 +1,5 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { GETWishlistService } from '../services/api.service';
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { GETWishlistService } from "../services/api.service";
 
 // ✅ Thunk function to fetch wishlist from API
 export const fetchWishlist = createAsyncThunk(
@@ -7,7 +7,7 @@ export const fetchWishlist = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const { data } = await GETWishlistService();
-      return data.wishlist.products
+      return data.wishlist.products;
     } catch (error) {
       return rejectWithValue(error.message);
     }
@@ -19,23 +19,25 @@ const initialState = {
   loading: false,
   isError: false,
   error: null,
-  wishlistCount: 0
+  wishlistCount: 0,
 };
 
 const wishlistSlice = createSlice({
-  name: 'wishlist',
+  name: "wishlist",
   initialState,
   reducers: {
     addToWishlist: (state, action) => {
-      if (!state.wishlistItems.find((item) => item._id === action.payload._id)) {
+      if (
+        !state.wishlistItems.find((item) => item._id === action.payload._id)
+      ) {
         state.wishlistItems.push(action.payload);
       }
     },
     updateCount: (state, action) => {
-      if (action.payload === 'inc') {
-        state.wishlistCount = state.wishlistCount + 1
+      if (action.payload === "inc") {
+        state.wishlistCount = state.wishlistCount + 1;
       } else {
-        state.wishlistCount = state.wishlistCount - 1
+        state.wishlistCount = state.wishlistCount - 1;
       }
     },
     removeFromWishlist: (state, action) => {
@@ -71,5 +73,6 @@ const wishlistSlice = createSlice({
   },
 });
 
-export const { addToWishlist,clearWishlist , removeFromWishlist, updateCount } = wishlistSlice.actions;
+export const { addToWishlist, clearWishlist, removeFromWishlist, updateCount } =
+  wishlistSlice.actions;
 export default wishlistSlice.reducer;

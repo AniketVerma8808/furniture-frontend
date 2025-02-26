@@ -12,18 +12,23 @@ import { fetchProducts } from "../redux/productSlice";
 import { POSTWishlistService } from "../services/api.service";
 import { store } from "../redux/store";
 import { addToWishlist, updateCount } from "../redux/wishlistSlice";
+import { motion } from "framer-motion";
+import Skeleton from "../components/loader/Skeleton";
 
 const ProductDetails = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
-
-  const { products } = useSelector((state) => state.product);
+  const [activeIndex, setActiveIndex] = useState(null);
+  const { products, loading } = useSelector((state) => state.product);
 
   const [quantity, setQuantity] = useState(1);
 
   const product = products.find((p) => p._id === id);
 
   //   console.log("product details page", product);
+  const toggleAccordion = (index) => {
+    setActiveIndex(activeIndex === index ? null : index);
+  };
 
   useEffect(() => {
     if (!products.length) {
@@ -57,8 +62,12 @@ const ProductDetails = () => {
     }
   };
 
-  if (!product) {
-    return <div>Loading...</div>;
+  if (loading) {
+    return (
+      <div className="container min-h-screen mx-auto px-4 md:px-8 mt-10 mb-10">
+        <Skeleton cardCount={2} /> {/* Show 2 Skeleton cards during loading */}
+      </div>
+    );
   }
 
   if (!product) {
@@ -73,26 +82,29 @@ const ProductDetails = () => {
           <div className="h-auto">
             <ProductZoom images={product?.images} />
           </div>
+          <div className="hidden md:block">
+            <ProductDetailsPage />
+          </div>
         </div>
         {/* Right Content Section */}
         <div className=" pt-6">
           <div className="space-y-4">
-            <h3 className=" text-[26px] sm:text-[30px] text-[rgb(42,40,40)] leading-[45px]">
+            <h3 className="text-[20px] md:text-[24px]  text-[rgb(42,40,40)] leading-[30px] md:leading-[45px]">
               {product.name}
             </h3>
 
             <div className="mt-4 flex items-center gap-8">
-              <h3 className=" text-[30px] text-[rgb(42,40,40)] leading-[45px]">
-                {product.salePrice || product.price}
+              <h3 className="text-[20px] md:text-[26px] text-[rgb(42,40,40)] leading-[39px]">
+                ₹{product.price - 10000}
               </h3>
 
-              {product.discount > 0 && (
+              {product.price && (
                 <div className="flex items-center space-x-2">
                   <span className="text-md text-gray-400 line-through">
                     ₹{product.price}
                   </span>
-                  <span className="text-md rounded-md px-3 py-2 text-white bgColor  font-semibold">
-                    {Math.round((product.discount / product.price) * 100)}% OFF
+                  <span className="text-md rounded-md px-3 py-2 text-white bgColor text-[13px] md:text-[16px] font-semibold">
+                    {Math.round((10000 / product.price) * 100)}% OFF
                   </span>
                 </div>
               )}
@@ -103,18 +115,7 @@ const ProductDetails = () => {
                 ({product.rating || 0} out of 5)
               </span>
             </div>
-            <p className="text-gray-700 leading-relaxed">
-              {product.description}
-            </p>
           </div>
-
-          {/* Category and Subcategory */}
-          <div className="mt-4">
-            <p className="text-gray-600 text-lg">
-              {/* <strong>Category:</strong> {product.category.name || product.category} */}
-            </p>
-          </div>
-
           {/* Quantity Selector */}
           <div className="mt-6 flex items-center space-x-4">
             <p className="text-lg ">Quantity:</p>
@@ -150,13 +151,46 @@ const ProductDetails = () => {
               Add to Wishlist
             </button>
           </div>
+          <div
+            className={`mt-8 rounded-md transition-shadow duration-300 ${
+              activeIndex === 0 ? "custom-shadow" : "custom-shadow"
+            }`}
+          >
+            <button
+              onClick={() => toggleAccordion(0)}
+              className="w-full flex justify-between rounded-md items-center text-[22px] px-4 py-4 bg-white text-gray-700 transition"
+            >
+              <span>Description</span>
+              <span className="text-[22px]">
+                {activeIndex === 0 ? "-" : "+"}
+              </span>
+            </button>
+
+            <motion.div
+              initial={{ height: 0, opacity: 0 }}
+              animate={
+                activeIndex === 0
+                  ? { height: "auto", opacity: 1 }
+                  : { height: 0, opacity: 0 }
+              }
+              transition={{ duration: 0.3, ease: "easeInOut" }}
+              className="overflow-hidden bg-white"
+            >
+              <div className="px-4 py-3 text-gray-700 font-thin text-[16px] md:font-normal">
+                {product.description}
+              </div>
+            </motion.div>
+          </div>
+
+          <div className="custom-shadow flex flex-wrap justify-center md:justify-around border border-gray-300 p-4 mt-8 text-black rounded-md gap-x-6 gap-y-2 text-sm md:text-base">
+            <p className="!font-bold">✅ 100% Genuine Products</p>
+            <p className="!font-bold">💳 Easy EMI</p>
+            <p className="!font-bold">📞 Customer Support</p>
+          </div>
         </div>
       </div>
 
-      {/* <div className="py-8"> */}
-      {/* <RelatedProduct currentProductCategory={product.category} /> */}
-      {/* </div> */}
-      <div>
+      <div className="block md:hidden">
         <ProductDetailsPage />
       </div>
     </div>

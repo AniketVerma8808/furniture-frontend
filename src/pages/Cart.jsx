@@ -77,7 +77,7 @@ const Cart = () => {
                           />
                           {/* Product Details */}
                           <div className="flex flex-col ml-4">
-                            <h2 className="text-lg ">{title}</h2>
+                            <h2 className="text-base ">{title}</h2>
 
                             <div className="flex flex-wrap items-center gap-4 mt-2">
                               {/* Quantity Adjuster */}

@@ -117,9 +117,12 @@ const Navbar = () => {
             >
               <FaHeart />
               <span className="text-xs">WISHLIST.</span>
-              <span className="absolute -top-4 right-1 bg-red-500 text-white text-xs rounded-full px-2 py-1">
-                {wishlistCount}
-              </span>
+
+              {wishlistCount > 0 && (
+                <span className="absolute -top-4 right-1 bg-red-500 text-white text-xs rounded-full px-2 py-1">
+                  {wishlistCount}
+                </span>
+              )}
             </Link>
 
             <CartCard initialCart={dummyCart} />
@@ -173,9 +176,11 @@ const Navbar = () => {
             >
               <FaHeart />
               <span className="text-[8px]">WISHLIST</span>
-              <span className="absolute -top-3 right-1 bg-red-500 text-white text-xs rounded-full px-1 py-0">
-                {wishlistCount}
-              </span>
+              {wishlistCount > 0 && (
+                <span className="absolute -top-3 right-1 bg-red-500 text-white text-xs rounded-full px-1 py-0">
+                  {wishlistCount}
+                </span>
+              )}
             </Link>
 
             <CartCard initialCart={dummyCart} />

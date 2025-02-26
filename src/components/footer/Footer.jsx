@@ -296,7 +296,7 @@ const Footer = () => {
       </div>
 
       {/* Bottom Bar */}
-      <div className="container px-4 md:px-8 mx-auto flex flex-col sm:flex-row justify-between py-4 text-white text-[14px] md:text-[16px]">
+      <div className="container px-4 md:px-8 mx-auto flex flex-col sm:flex-row justify-around py-4 text-white text-[14px] md:text-[16px]">
         <p className="text-[11px] md:text-[12px]">
           © 2025, BedsLane | All rights reserved.
           <span>
@@ -312,7 +312,7 @@ const Footer = () => {
             </Link>
           </span>
         </p>
-        <p className="text-[11px] md:text-[12px]">
+        <div className="text-[11px] md:text-[12px]">
           <Link to="/privacy&policy" className="mx-2 hover:text-gray-400">
             Privacy Policy
           </Link>{" "}
@@ -324,20 +324,22 @@ const Footer = () => {
           <Link to="/policies" className="mx-2 hover:text-gray-400">
             Policies
           </Link>
-        </p>
+        </div>
       </div>
       {/* Floating Buttons */}
       {/* Uncomment if needed */}
-      <div className="fixed bottom-24 right-6 flex flex-col gap-3 z-50">
-        <button className="bg-green-500 p-4 rounded-full text-white">
-          <FaWhatsapp size={28} />
-        </button>
-        <button className="bg-orange-500 p-4 rounded-full text-white">
-          <FaPhoneAlt size={28} />
-        </button>
-        {/* <button className="bg-gray-500 p-3 rounded-full text-white">
+      <div className="hidden md:block">
+        <div className=" fixed bottom-24 right-6 flex flex-col gap-3 z-50">
+          <button className="bg-green-500 p-4 rounded-full text-white">
+            <FaWhatsapp size={28} />
+          </button>
+          <button className="bg-orange-500 p-4 rounded-full text-white">
+            <FaPhoneAlt size={28} />
+          </button>
+          {/* <button className="bg-gray-500 p-3 rounded-full text-white">
           <FaCommentDots size={20} />
         </button> */}
+        </div>
       </div>
     </footer>
   );

@@ -40,7 +40,7 @@ function Checkout() {
           ))}
         </div>
 
-        <div className="flex flex-col items-center justify-between gap-6">
+        <div className="flex flex-col items-center justify-between px-2 gap-6">
           {/* Content Area */}
           <div className="w-full rounded-lg">
             {step === "cart" && <Cart />}

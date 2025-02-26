@@ -63,7 +63,7 @@ const ProductSlider = ({ title, data }) => {
         <Slider {...settings}>
           {data?.map((product) => (
             <div key={product._id} className="md:px-8 px-1">
-              <ProductItem product={product} label={title} />
+              <ProductItem product={product} />
             </div>
           ))}
         </Slider>

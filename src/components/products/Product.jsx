@@ -1,26 +1,8 @@
-import React, { useContext } from "react";
+import React from "react";
 import ProductItem from "./ProductItem";
-import { ProductContext } from "../../context/ProductContext";
 
-const Product = ({ category }) => {
-//   const { products, newArrivals, bestSellers, recentlyViewed } =
-    // useContext(ProductContext);
-
-  // Determine the product list based on the category
-  let productList;
-  switch (category) {
-    case "newArrivals":
-      productList = newArrivals;
-      break;
-    case "bestSellers":
-      productList = bestSellers;
-      break;
-    case "recentlyViewed":
-      productList = recentlyViewed;
-      break;
-    default:
-      productList = products;
-  }
+const Product = ({ data }) => {
+  // console.log("product", data);
 
   return (
     <div className="container mx-auto p-4">
@@ -30,8 +12,8 @@ const Product = ({ category }) => {
         </h3>
       </div>
       <div className="grid grid-cols-2 md:grid-cols-3  gap-4">
-        {productList.map((product) => (
-          <ProductItem key={product._id} product={product} />
+        {data?.map((product) => (
+          <ProductItem product={product} />
         ))}
       </div>
     </div>

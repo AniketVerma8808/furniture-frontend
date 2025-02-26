@@ -47,7 +47,7 @@ import Orders from "./pages/Orders";
 import ChangePassword from "./pages/ChangePassword";
 import TawkToComponent from "./components/tawkToComponent/TawkToComponent";
 import { fetchWishlist } from "./redux/wishlistSlice";
-import {store} from "./redux/store";
+import { store } from "./redux/store";
 import { jwtDecode } from "jwt-decode";
 import { logoutUser } from "./redux/authSlice";
 
@@ -72,15 +72,11 @@ const isTokenExpired = (token) => {
 const App = () => {
   const dispatch = useDispatch();
   let token = store.getState().auth.token;
-  
-
 
   const fetchData = useCallback(() => {
-
     if (!isTokenExpired(token)) {
-      dispatch(fetchWishlist())
-    
-    }else{
+      dispatch(fetchWishlist());
+    } else {
       store.dispatch(logoutUser()); // Clear token in Redux
       token = null;
     }
@@ -88,7 +84,6 @@ const App = () => {
     dispatch(fetchBlogs());
     dispatch(fetchBanners());
     dispatch(fetchProducts());
-  
   }, [dispatch]);
 
   useEffect(() => {
@@ -107,7 +102,7 @@ const App = () => {
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/reset" element={<ResetPassword />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/products/:name" element={<Product />} />
+          <Route path="/products" element={<Product />} />
           <Route path="/product/:id" element={<ProductDetails />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/wishlist" element={<Wishlist />} />

@@ -5,12 +5,6 @@ import { fetchBlogs } from "../redux/blogSlice";
 
 const BlogPage = () => {
   const { blogs, loading, error } = useSelector((state) => state.blog);
-
-
-
-   console.log( blogs , "fetched blogs from blog component ");
-
-
   return (
     <>
       <div className="container mx-auto p-6">

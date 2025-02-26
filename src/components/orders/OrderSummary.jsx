@@ -7,25 +7,25 @@ const OrderSummary = () => {
         <h3 className="text-xl  mb-4 text-gray-700">Order Summary</h3>
 
         {/* Subtotal */}
-        <div className="flex justify-between text-lg mb-3 text-gray-600">
+        <div className="flex justify-between text-[14px] md:text-lg mb-3 text-gray-600">
           <span>Subtotal</span>
           <span>₹5000</span>
         </div>
 
         {/* Paytm Giftcard */}
-        <div className="flex justify-between text-lg mb-3 text-gray-600">
+        <div className="flex justify-between text-[14px] md:text-lg mb-3 text-gray-600">
           <span>Paytm Giftcard</span>
           <span>₹0.00</span>
         </div>
 
         {/* Shipping */}
-        <div className="flex justify-between text-lg mb-3 text-gray-600">
+        <div className="flex justify-between text-[14px] md:text-lg mb-3 text-gray-600">
           <span>Shipping</span>
           <span className="text-gray-500">Not yet calculated</span>
         </div>
 
         {/* Tax */}
-        <div className="flex justify-between text-lg mb-3 text-gray-600">
+        <div className="flex justify-between text-md mb-3 text-gray-600">
           <span>Tax</span>
           <span>₹2000</span>
         </div>
@@ -58,7 +58,9 @@ const OrderSummary = () => {
             </button>
           </div>
           <div className="mt-4 flex items-center">
-            <button className="bgColor w-full text-white p-3 text-sm rounded-lg">Proceed To CheckOut</button>
+            <button className="bgColor w-full text-white p-3 text-sm rounded-lg">
+              Proceed To CheckOut
+            </button>
           </div>
         </div>
       </div>
