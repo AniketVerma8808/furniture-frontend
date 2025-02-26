@@ -42,42 +42,36 @@ export const SubscribeService = () => {
 // products =>
 
 export const GetProductService = () => {
-  return clientAxios.get('/products')
-}
+  return clientAxios.get("/products");
+};
 
-// wishlist api 
+// wishlist api
 
 export const POSTWishlistService = (productId) => {
-  console.log(productId);
-  return clientAxios.post('/wishlist' , {productId})
-}
+  return clientAxios.post("/wishlist", { productId });
+};
 
 export const GETWishlistService = () => {
-  return clientAxios.get('/wishlist')
-}
+  return clientAxios.get("/wishlist");
+};
 
 export const DELETEWishlistService = (productId) => {
-  return clientAxios.delete(`/wishlist/${productId}`)
-}
+  return clientAxios.delete(`/wishlist/${productId}`);
+};
 
-
-// cart api 
+// cart api
 export const POSTCartService = (data) => {
-  return clientAxios.post('/cart' , data)
-}
-
+  return clientAxios.post("/cart", data);
+};
 
 export const GETCartService = () => {
-  return clientAxios.get('/cart')
-}
+  return clientAxios.get("/cart");
+};
 
-
-export const UPDATECartQuantityService = ( productId ,data) => {
-  return clientAxios.put(`/cart/${productId}` , data)
-}
+export const UPDATECartQuantityService = (productId, data) => {
+  return clientAxios.put(`/cart/${productId}`, data);
+};
 
 export const DELETECartService = (productId) => {
-  return clientAxios.delete(`/cart/${productId}`)
-}
-
-
+  return clientAxios.delete(`/cart/${productId}`);
+};

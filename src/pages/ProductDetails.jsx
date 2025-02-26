@@ -9,15 +9,22 @@ import ProductDetailsPage from "./ProductDetailsPage";
 import RelatedProduct from "../components/relatedProduct/RelatedProduct";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../redux/productSlice";
+import { POSTWishlistService } from "../services/api.service";
+import { store } from "../redux/store";
+import { addToWishlist, updateCount } from "../redux/wishlistSlice";
 
 const ProductDetails = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const { products, loading } = useSelector((state) => state.product);
+
+  const { products } = useSelector((state) => state.product);
 
   const [quantity, setQuantity] = useState(1);
+
   const product = products.find((p) => p._id === id);
-  console.log("product details page", product);
+
+  //   console.log("product details page", product);
+
   useEffect(() => {
     if (!products.length) {
       dispatch(fetchProducts());
@@ -31,8 +38,23 @@ const ProductDetails = () => {
     toast.success(`${quantity} item(s) added to cart!`);
   };
 
-  const handleAddToWishlist = () => {
-    toast.success("Added to Wishlist!");
+  const handleAddToWishlist = async () => {
+    let token = store.getState().auth.token;
+
+    if (!token) {
+      toast.error("Please log in to manage your wishlist.");
+      navigate("/login");
+      return;
+    } else {
+      await POSTWishlistService(product._id)
+        .then((res) => {
+          // we need to update wishlist => one is count another is product
+          dispatch(updateCount("inc"));
+          dispatch(addToWishlist(product));
+          toast.success("Added to Wishlist");
+        })
+        .catch((err) => console.log(err));
+    }
   };
 
   if (!product) {
