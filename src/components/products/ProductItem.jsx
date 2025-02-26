@@ -1,50 +1,67 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { toast } from "react-toastify";
 import { store } from "../../redux/store";
-import { useDispatch } from "react-redux";
-import { addToWishlist, updateCount } from "../../redux/wishlistSlice";
-import { POSTWishlistService } from "../../services/api.service";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addToWishlist,
+  removeFromWishlist,
+  updateCount,
+} from "../../redux/wishlistSlice";
+import {
+  POSTWishlistService,
+  DELETEWishlistService,
+} from "../../services/api.service";
 
 const ProductItem = ({ product }) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  
+  const { wishlistItems } = useSelector((state) => state.wishlist);
   const [isFavorite, setIsFavorite] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
+
+  useEffect(() => {
+    // Check if the product is already in the wishlist
+    const isInWishlist = wishlistItems.some((item) => item._id === product._id);
+    setIsFavorite(isInWishlist);
+  }, [wishlistItems, product._id]);
 
   const handleAddToCart = () => {
     toast.error("Please log in to add items to the cart.");
     navigate("/login");
-    return;
   };
 
-  const handleAddToWishlist = async (product) => {
+  const handleWishlistToggle = async () => {
     let token = store.getState().auth.token;
 
     if (!token) {
-      toast.error("Please log in to add items to the wishlist.");
+      toast.error("Please log in to manage your wishlist.");
       navigate("/login");
       return;
+    }
+
+    if (isFavorite) {
+      await DELETEWishlistService(product._id)
+        .then((res) => {
+          dispatch(updateCount("dec"));
+          dispatch(removeFromWishlist(product._id));
+          toast.info("Removed from Wishlist");
+          setIsFavorite(false);
+        })
+        .catch((err) => console.log(err));
     } else {
       await POSTWishlistService(product._id)
         .then((res) => {
           // we need to update wishlist => one is count another is product
           dispatch(updateCount("inc"));
           dispatch(addToWishlist(product));
-          toast.success("Add to Wishlist");
+          toast.success("Added to Wishlist");
+          setIsFavorite(true);
         })
-        .catch((err) => {
-          console.log(err);
-        });
+        .catch((err) => console.log(err));
     }
-  };
-
-  const getLabelColor = () => {
-    if (product.bestsellor) return "bg-yellow-500";
-    if (product.trending) return "bg-green-500";
-    if (product.newarrival) return "bg-blue-500";
-    return "bg-red-500";
   };
 
   return (
@@ -73,26 +90,16 @@ const ProductItem = ({ product }) => {
               e.stopPropagation();
               handleAddToCart();
             }}
-            className="bg-black py-2 px-4 text-white text-sm  rounded-lg hover:bg-gray-800 transition"
+            className="bg-black py-2 px-4 text-white text-sm rounded-lg hover:bg-gray-800 transition"
           >
             Add to Cart
           </button>
         </div>
-        {product.bestsellor || product.trending || product.newarrival ? (
-          <div
-            className={`absolute bottom-0 left-0 text-white text-xs px-2 py-1 rounded-md ${getLabelColor()}`}
-          >
-            {product.bestsellor
-              ? "Best Seller"
-              : product.trending
-              ? "Trending"
-              : "New Arrival"}
-          </div>
-        ) : null}
       </div>
 
+      {/* Wishlist Button */}
       <button
-        onClick={() => handleAddToWishlist(product)}
+        onClick={handleWishlistToggle}
         className="absolute top-2 right-2 p-3 sm:p-2"
       >
         {isFavorite ? (
