@@ -10,47 +10,28 @@ import { DELETEWishlistService } from "../services/api.service";
 import { removeFromWishlist, updateCount } from "../redux/wishlistSlice";
 
 const Wishlist = () => {
-
-  // {
-  //   id: 1,
-  //   title: "Product Title 1",
-  //   collection: "Product Collection 1",
-  //   price: 19.99,
-  //   originalPrice: 29.99,
-  //   image: reviewImg4,
-  // },
-
-  const {wishlistItems , wishlistCount} = useSelector((state)=>state.wishlist)
-
-
+  const { wishlistItems, wishlistCount } = useSelector(
+    (state) => state.wishlist
+  );
 
   const [hoveredItem, setHoveredItem] = useState(null);
-  const dispatch = useDispatch()
-
-  const handleRemoveItem = (id) => {
-    // setWishlistItems(wishlistItems.filter((item) => item.id !== id));
-    toast.info("Item removed from wishlist");
-  };
+  const dispatch = useDispatch();
 
   const handleAddToCart = () => {
     toast.success("add to cart");
   };
 
-
-
-  const handleRemovefromWishlist = async(productId)=>{
-   await DELETEWishlistService(productId)
-   dispatch(updateCount('dec'))
-   dispatch(removeFromWishlist(productId))
-
-  }
+  const handleRemovefromWishlist = async (productId) => {
+    await DELETEWishlistService(productId);
+    dispatch(updateCount("dec"));
+    dispatch(removeFromWishlist(productId));
+    toast.info("Item removed from wishlist");
+  };
   return (
     <div className="min-h-[420px] pb-12">
       <div className="container mx-auto max-w-7xl pt-12">
         <div className=" p-4">
           <h3 className="text-2xl  text-gray-800 mb-4">My Wishlist</h3>
-
-      
 
           {/* Conditionally render message if no items are in the wishlist */}
           {wishlistCount === 0 ? (

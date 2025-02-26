@@ -27,7 +27,7 @@ const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { user } = useSelector((state) => state.auth);
   const { city } = useSelector((state) => state.home);
-  const {  wishlistCount} = useSelector((state)=>state.wishlist)
+  const { wishlistCount } = useSelector((state) => state.wishlist);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -111,12 +111,15 @@ const Navbar = () => {
               </Link>
             )}
 
-            <Link to="/wishlist" className="relative flex flex-col items-center">
+            <Link
+              to="/wishlist"
+              className="relative flex flex-col items-center"
+            >
               <FaHeart />
               <span className="text-xs">WISHLIST.</span>
-              <span className="absolute -top-5 right-0 bg-red-500 text-white text-xs rounded-full px-2 py-1">{wishlistCount}</span>
-
-              
+              <span className="absolute -top-4 right-1 bg-red-500 text-white text-xs rounded-full px-2 py-1">
+                {wishlistCount}
+              </span>
             </Link>
 
             <CartCard initialCart={dummyCart} />
@@ -166,10 +169,13 @@ const Navbar = () => {
 
             <Link
               to="/wishlist"
-              className="flex flex-col items-center text-white"
+              className="flex flex-col items-center text-white relative"
             >
               <FaHeart />
               <span className="text-[8px]">WISHLIST</span>
+              <span className="absolute -top-3 right-1 bg-red-500 text-white text-xs rounded-full px-1 py-0">
+                {wishlistCount}
+              </span>
             </Link>
 
             <CartCard initialCart={dummyCart} />

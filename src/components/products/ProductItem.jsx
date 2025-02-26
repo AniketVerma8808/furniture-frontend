@@ -11,7 +11,7 @@ const ProductItem = ({ product }) => {
   const [isFavorite, setIsFavorite] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const navigate = useNavigate();
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const handleAddToCart = () => {
     toast.error("Please log in to add items to the cart.");
@@ -19,23 +19,24 @@ const ProductItem = ({ product }) => {
     return;
   };
 
-  const handleAddToWishlist = async(product) => {
-
+  const handleAddToWishlist = async (product) => {
     let token = store.getState().auth.token;
-    
-    if(!token){
+
+    if (!token) {
       toast.error("Please log in to add items to the wishlist.");
       navigate("/login");
       return;
-    }else{
-      await POSTWishlistService(product._id).then((res)=>{
-         // we need to update wishlist => one is count another is product
-         dispatch(updateCount('inc'))
-         dispatch(addToWishlist(product))
-
-      }).catch(((err)=>{
-        console.log(err);
-      }))
+    } else {
+      await POSTWishlistService(product._id)
+        .then((res) => {
+          // we need to update wishlist => one is count another is product
+          dispatch(updateCount("inc"));
+          dispatch(addToWishlist(product));
+          toast.success("Add to Wishlist");
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     }
   };
 
@@ -91,7 +92,7 @@ const ProductItem = ({ product }) => {
       </div>
 
       <button
-        onClick={()=>handleAddToWishlist(product)}
+        onClick={() => handleAddToWishlist(product)}
         className="absolute top-2 right-2 p-3 sm:p-2"
       >
         {isFavorite ? (

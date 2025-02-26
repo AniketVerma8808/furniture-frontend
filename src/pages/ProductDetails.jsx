@@ -1,75 +1,82 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { HiShoppingCart } from "react-icons/hi";
 import { FaRegHeart } from "react-icons/fa";
 import Rating from "../components/rating/Rating";
 import { toast } from "react-toastify";
 import ProductZoom from "../components/products/ProductZoom";
-import { ProductContext } from "../context/ProductContext";
 import { useParams } from "react-router-dom";
 import ProductDetailsPage from "./ProductDetailsPage";
 import RelatedProduct from "../components/relatedProduct/RelatedProduct";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchProducts } from "../redux/productSlice";
 
 const ProductDetails = () => {
   const { id } = useParams();
-  
-  const { getProductById, addToCart, addToWishlist } =
-    useContext(ProductContext);
+  const dispatch = useDispatch();
+  const { products, loading } = useSelector((state) => state.product);
 
   const [quantity, setQuantity] = useState(1);
-  const [product, setProduct] = useState(null);
-
+  const product = products.find((p) => p._id === id);
+  console.log("product details page", product);
   useEffect(() => {
-    const fetchedProduct = getProductById(parseInt(id));
-    // console.log(fetchedProduct)
-    if (fetchedProduct) {
-      setProduct(fetchedProduct);
-    } else {
-      toast.error("Product not found!");
+    if (!products.length) {
+      dispatch(fetchProducts());
     }
-  }, [id, getProductById]);
+  }, [dispatch, products.length]);
 
   const incrementQuantity = () => setQuantity((prev) => prev + 1);
   const decrementQuantity = () => setQuantity((prev) => Math.max(1, prev - 1));
 
   const handleAddToCart = () => {
-    if (product) {
-      addToCart(product, quantity);
-      toast.success(`${quantity} item(s) added to cart!`);
-    }
+    toast.success(`${quantity} item(s) added to cart!`);
   };
 
-  // Add to Wishlist
   const handleAddToWishlist = () => {
-    if (product) {
-      addToWishlist(product);
-      toast.success("Added to Wishlist!");
-    }
+    toast.success("Added to Wishlist!");
   };
 
   if (!product) {
     return <div>Loading...</div>;
   }
 
+  if (!product) {
+    return <div>Product not found!</div>;
+  }
+
   return (
-    <div className="container min-h-screen mx-auto px-4 mt-10 mb-10">
-      <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
+    <div className="container min-h-screen mx-auto px-4 md:px-8 mt-10 mb-10">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {/* Left Image Section */}
-        <div className="col-span-5 lg:col-span-2">
+        <div className="">
           <div className="h-auto">
             <ProductZoom images={product?.images} />
           </div>
         </div>
         {/* Right Content Section */}
-        <div className="col-span-5 lg:col-span-3 pt-6">
+        <div className=" pt-6">
           <div className="space-y-4">
             <h3 className=" text-[26px] sm:text-[30px] text-[rgb(42,40,40)] leading-[45px]">
-              {product.title}
+              {product.name}
             </h3>
-            <h3 className=" text-[30px] text-[rgb(42,40,40)] leading-[45px]">
-              {product.salePrice || product.price}
-            </h3>
+
+            <div className="mt-4 flex items-center gap-8">
+              <h3 className=" text-[30px] text-[rgb(42,40,40)] leading-[45px]">
+                {product.salePrice || product.price}
+              </h3>
+
+              {product.discount > 0 && (
+                <div className="flex items-center space-x-2">
+                  <span className="text-md text-gray-400 line-through">
+                    ₹{product.price}
+                  </span>
+                  <span className="text-md rounded-md px-3 py-2 text-white bgColor  font-semibold">
+                    {Math.round((product.discount / product.price) * 100)}% OFF
+                  </span>
+                </div>
+              )}
+            </div>
             <div className="flex items-center space-x-2">
-              <Rating rating={product.rating || 0} />
+              <Rating rating={product.ratings || 0} />
               <span className="text-lg text-gray-500">
                 ({product.rating || 0} out of 5)
               </span>
@@ -123,9 +130,10 @@ const ProductDetails = () => {
           </div>
         </div>
       </div>
-      <div className="py-8">
-        <RelatedProduct currentProductCategory={product.category} />
-      </div>
+
+      {/* <div className="py-8"> */}
+      {/* <RelatedProduct currentProductCategory={product.category} /> */}
+      {/* </div> */}
       <div>
         <ProductDetailsPage />
       </div>

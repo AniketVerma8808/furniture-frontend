@@ -36,7 +36,7 @@ const CartCard = ({ initialCart = [] }) => {
   };
 
   const handleViewCart = (event) => {
-    event.preventDefault(); 
+    event.preventDefault();
     setIsDropdownOpen(false);
     navigate("/checkout", { state: { step: "cart" } });
   };
@@ -48,7 +48,7 @@ const CartCard = ({ initialCart = [] }) => {
 
   return (
     <div className="relative">
-      <p className="absolute -top-4 md:-top-5 right-0 text-[12px] md:text-sm bg-red-500 text-white px-1 md:px-2 py-0.2 md:py-0.5 rounded-full">
+      <p className="absolute -top-3 md:-top-5 right-0 text-xs md:text-sm bg-red-500 text-white px-1 md:px-2 py-0 md:py-0.5 rounded-full">
         {cart.length}
       </p>
       <div
