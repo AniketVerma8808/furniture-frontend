@@ -7,6 +7,7 @@ import Layout from "./Layout";
 import { LoginService } from "../../services/api.service";
 import { useDispatch } from "react-redux";
 import { loginSuccess } from "../../redux/authSlice";
+import { fetchWishlist } from "../../redux/wishlistSlice";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -31,6 +32,8 @@ const Login = () => {
         console.log(res, "response from login api ");
         const { token, user } = res.data;
         dispatch(loginSuccess({ token, user }));
+        dispatch(fetchWishlist())
+
         navigate("/");
         setLoading(false);
       })

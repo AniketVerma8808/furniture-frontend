@@ -5,14 +5,16 @@ import { logoutUser } from "../redux/authSlice";
 import { Outlet } from "react-router-dom";
 import { HiMenu } from "react-icons/hi";
 import { toast } from "react-toastify";
+import { logoutAndClearStore } from "../redux/store";
 
 const Setting = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
 
-  const handleLogout = () => {
-    dispatch(logoutUser());
+  const handleLogout =  async() => {
+    // dispatch(logoutUser());
+   await dispatch(logoutAndClearStore()); // ✅ This clears everything
     toast.success("Logout successful!");
     navigate("/");
   };

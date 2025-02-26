@@ -154,7 +154,7 @@ const App = () => {
 
       {/* Toast container for notifications */}
       <ToastContainer
-        position="top-right"
+        position="top-left"
         autoClose={1000}
         hideProgressBar={false}
         newestOnTop={false}

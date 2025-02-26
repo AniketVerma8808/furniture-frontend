@@ -6,7 +6,7 @@ export const fetchWishlist = createAsyncThunk(
   "wishlist/fetchWishlist",
   async (_, { rejectWithValue }) => {
     try {
-      const  {data } = await GETWishlistService();
+      const { data } = await GETWishlistService();
       return data.wishlist.products
     } catch (error) {
       return rejectWithValue(error.message);
@@ -19,7 +19,7 @@ const initialState = {
   loading: false,
   isError: false,
   error: null,
-  wishlistCount : 0
+  wishlistCount: 0
 };
 
 const wishlistSlice = createSlice({
@@ -27,21 +27,28 @@ const wishlistSlice = createSlice({
   initialState,
   reducers: {
     addToWishlist: (state, action) => {
-      if (!state.wishlistItems.find((item) => item._id === action.payload._id )) {
+      if (!state.wishlistItems.find((item) => item._id === action.payload._id)) {
         state.wishlistItems.push(action.payload);
       }
     },
     updateCount: (state, action) => {
-      if(action.payload === 'inc') {
-        state.wishlistCount = state.wishlistCount + 1 
-      }else{
-        state.wishlistCount = state.wishlistCount -1
+      if (action.payload === 'inc') {
+        state.wishlistCount = state.wishlistCount + 1
+      } else {
+        state.wishlistCount = state.wishlistCount - 1
       }
     },
     removeFromWishlist: (state, action) => {
       state.wishlistItems = state.wishlistItems.filter(
         (item) => item._id !== action.payload
       );
+    },
+    clearWishlist: (state) => {
+      state.wishlistItems = [];
+      state.loading = false;
+      state.isError = false;
+      state.error = null;
+      state.wishlistCount = 0;
     },
   },
   extraReducers: (builder) => {
@@ -54,7 +61,7 @@ const wishlistSlice = createSlice({
       .addCase(fetchWishlist.fulfilled, (state, action) => {
         state.loading = false;
         state.wishlistItems = action.payload;
-        state.wishlistCount = action.payload.length  || 0 ;
+        state.wishlistCount = action.payload.length || 0;
       })
       .addCase(fetchWishlist.rejected, (state, action) => {
         state.loading = false;
@@ -64,5 +71,5 @@ const wishlistSlice = createSlice({
   },
 });
 
-export const { addToWishlist, removeFromWishlist , updateCount } = wishlistSlice.actions;
+export const { addToWishlist,clearWishlist , removeFromWishlist, updateCount } = wishlistSlice.actions;
 export default wishlistSlice.reducer;
