@@ -1,15 +1,10 @@
 import React from "react";
 import Slider from "react-slick";
 import CategoriesItem from "./CategoriesItem";
-import {
-  MdOutlineTableRestaurant,
-  MdOutlineWeekend,
-  MdOutlineStorage,
-  MdCheckroom,
-  MdTv,
-} from "react-icons/md";
-import { RiArmchairLine, RiSofaLine } from "react-icons/ri";
 import { LuBedSingle } from "react-icons/lu";
+import { MdOutlineTableRestaurant, MdOutlineStorage } from "react-icons/md";
+import { TbLamp2 } from "react-icons/tb";
+import { BiTable } from "react-icons/bi";
 
 const settings = {
   dots: false,
@@ -17,7 +12,7 @@ const settings = {
   speed: 500,
   autoplay: true,
   adaptiveHeight: true,
-  slidesToShow: 6,
+  slidesToShow: 5,
   slidesToScroll: 1,
   responsive: [
     {
@@ -40,7 +35,7 @@ const settings = {
     {
       breakpoint: 480,
       settings: {
-        slidesToShow: 2,
+        slidesToShow: 1,
         slidesToScroll: 1,
         centerMode: true,
         arrows: false,
@@ -51,19 +46,16 @@ const settings = {
 
 const CategoriesSlider = () => {
   const categories = [
-    { icon: <RiSofaLine />, name: "Sofas" },
-    { icon: <RiArmchairLine />, name: "Chairs" },
-    { icon: <LuBedSingle />, name: "Beds" },
-    { icon: <MdOutlineTableRestaurant />, name: "Tables" },
-    { icon: <MdOutlineWeekend />, name: "Couches" },
-    { icon: <MdOutlineStorage />, name: "Storage" },
-    { icon: <MdCheckroom />, name: "Furnishings" },
-    { icon: <MdTv />, name: "TV Units" },
+    { icon: <LuBedSingle />, name: "BEDS" },
+    { icon: <MdOutlineStorage />, name: "MATTRESSES" },
+    { icon: <MdOutlineTableRestaurant />, name: "WARDROBES" },
+    { icon: <TbLamp2 />, name: "DECOR" },
+    { icon: <BiTable />, name: "SIDE TABLES" },
   ];
 
   return (
     <div className="container mx-auto px-2 md:px-8 ">
-      <h3 className=" text-center  text-[30px] text-[rgb(42,40,40)] leading-[45px]">
+      <h3 className=" text-center text-[20px] md:text-[30px] lg:text-[36px] text-[rgb(42,40,40)] leading-[45px]">
         Shop By Categories
       </h3>
       <div className="py-6 sm:py-8 md:py-12">

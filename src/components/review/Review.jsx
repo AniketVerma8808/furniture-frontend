@@ -71,25 +71,27 @@ const Review = () => {
   }
 
   return (
-    <div className="container mx-auto pb-12 px-4 md:px-8">
+    <div className="container mx-auto px-4 md:px-8">
       <h3 className="text-center text-[20px] md:text-[30px] lg:text-[36px] text-[rgb(42,40,40)] leading-[45px] ">
         Customer Reviews
       </h3>
 
-      <Slider {...settings}>
+      <Slider {...settings} className="py-8 md:py-12">
         {reviews.map(({ _id, name, message, image, location, rating }) => (
           <div key={_id} className="px-0 py-4 sm:px-4 md:px-8 relative">
-            <div className="bg-white p-4 pb-6 md:p-6 rounded-lg shadow-md text-center flex flex-col justify-between h-full">
+            <div className="bg-white p-4 pb-6 md:p-6 rounded-lg shadow-lg border border-gray-200 transition duration-300 text-center flex flex-col justify-between h-full">
               {/* Image Section */}
-              <img
-                src={image}
-                alt={name}
-                className="w-full min-h-32 max-h-48 object-cover rounded-lg cursor-pointer md:mb-4 mb-2"
-                loading="lazy"
-              />
+              <div className="h-68">
+                <img
+                  src={image}
+                  alt={name}
+                  className="w-full h-full object-cover object-center rounded-lg cursor-pointer md:mb-4 mb-2"
+                  loading="lazy"
+                />
+              </div>
 
               {/* Message Section */}
-              <p className="text-sm text-gray-500 md:mb-4 mb-2 overflow-hidden line-clamp-2">
+              <p className="text-sm text-gray-600 md:mb-4 mb-2 overflow-hidden line-clamp-2 leading-relaxed">
                 {message}
               </p>
 
@@ -99,7 +101,9 @@ const Review = () => {
               </div>
 
               {/* Name and Location Section */}
-              <p className="text-gray-800  text-base">{name}</p>
+              <p className="text-gray-900 font-medium text-base tracking-wide">
+                {name}
+              </p>
               <p className="text-gray-500 text-sm">{location}</p>
             </div>
           </div>

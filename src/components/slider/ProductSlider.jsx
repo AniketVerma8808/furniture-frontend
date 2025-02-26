@@ -2,7 +2,6 @@ import React, { useContext } from "react";
 import Slider from "react-slick";
 import ProductItem from "../products/ProductItem";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
-// import { ProductContext } from '../../context/ProductContext';
 
 const NextArrow = ({ onClick }) => (
   <button
@@ -23,8 +22,6 @@ const PrevArrow = ({ onClick }) => (
 );
 
 const ProductSlider = ({ title, data }) => {
-  // const { newArrivals } = useContext(ProductContext);
-
   const settings = {
     dots: false,
     infinite: true,

@@ -7,19 +7,20 @@ export const fetchProducts = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       //  neds to have product api so that we can store data
-      const  {data : {data}} = await GetProductService()
-      const newD = data.map((i)=>{
-          console.log(i.newarrival);
-      })
+      const {
+        data: { data },
+      } = await GetProductService();
+      const newD = data.map((i) => {
+        console.log(i.newarrival);
+      });
 
-     
       const newarrival = data.filter((product) => product.newarrival);
       const bestseller = data.filter((product) => product.bestsellor); // Fix typo if needed
 
       return {
         bestseller,
         newarrival,
-        data
+        data,
       };
     } catch (error) {
       return rejectWithValue(error.message);
@@ -44,8 +45,8 @@ const productSlice = createSlice({
         state.error = null;
       })
       .addCase(fetchProducts.fulfilled, (state, action) => {
-        const { bestseller, newarrival , data } = action.payload;
-        console.log(newarrival , "login from slice");
+        const { bestseller, newarrival, data } = action.payload;
+        console.log(newarrival, "login from slice");
         state.loading = false;
         state.products = data;
         state.bestseller = bestseller;

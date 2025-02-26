@@ -31,7 +31,7 @@ const ProductItem = ({ product }) => {
     <div
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className="bg-white shadow-md rounded-lg overflow-hidden relative transition-transform duration-300"
+      className="bg-white custom-shadow rounded-lg overflow-hidden relative transition-transform duration-300"
     >
       <div
         className="block relative"
@@ -62,7 +62,11 @@ const ProductItem = ({ product }) => {
           <div
             className={`absolute bottom-0 left-0 text-white text-xs px-2 py-1 rounded-md ${getLabelColor()}`}
           >
-            {product.bestsellor ? "Best Seller" : product.trending ? "Trending" : "New Arrival"}
+            {product.bestsellor
+              ? "Best Seller"
+              : product.trending
+              ? "Trending"
+              : "New Arrival"}
           </div>
         ) : null}
       </div>
