@@ -28,7 +28,7 @@ const ProductDetails = () => {
   const { products, loading } = useSelector((state) => state.product);
   const product = products.find((p) => p._id === id);
 
-  console.log("product details page", product);
+  // console.log("product details page", product);
 
   useEffect(() => {
     if (!products.length) {

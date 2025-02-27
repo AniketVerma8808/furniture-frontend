@@ -6,6 +6,7 @@ export const fetchCart = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const { data } = await GETCartService();
+      console.log("cart product", data);
       return data.cart.products;
     } catch (error) {
       return rejectWithValue(error.message);

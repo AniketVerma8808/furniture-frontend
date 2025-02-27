@@ -14,6 +14,7 @@ import { fetchWishlist } from "./redux/wishlistSlice";
 import { store } from "./redux/store";
 import { jwtDecode } from "jwt-decode";
 import { logoutUser } from "./redux/authSlice";
+import { fetchCart } from "./redux/cartSlice";
 // import Skeleton from "./components/loader/Skeleton";
 
 // lazy loading for good perfomance
@@ -111,6 +112,7 @@ const App = () => {
   const fetchData = useCallback(() => {
     if (!isTokenExpired(token)) {
       dispatch(fetchWishlist());
+      dispatch(fetchCart());
     } else {
       store.dispatch(logoutUser()); // Clear token in Redux
       token = null;
