@@ -13,7 +13,7 @@ import { updateProfile } from "../redux/authSlice";
 const Profile = () => {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
-  console.log(user, "from store");
+  // console.log(user, "from store");
 
   const [profile, setProfile] = useState({
     name: "",
@@ -37,7 +37,7 @@ const Profile = () => {
     setLoading(true);
     try {
       const response = await profileUpdateService(profile);
-      console.log(response, "response from updated profile");
+      // console.log(response, "response from updated profile");
       dispatch(updateProfile(response.data.data));
       toast.success(response.data.message || "Profile updated successfully!");
       setIsEditable(false);
@@ -163,25 +163,7 @@ const Profile = () => {
       <div className="mt-12">
         <h2 className="text-base md:text-[22px] mb-4">Subscribe</h2>
       </div>
-      {/* <div className="flex items-center space-x-4 mt-6">
-        <button
-          onClick={toggleHandler}
-          className={`w-12 h-6 rounded-full flex items-center p-1 transition-all ${
-            isSubscribed
-              ? "bg-gray-300 justify-end"
-              : "bg-gray-300 justify-start"
-          }`}
-        >
-          <div
-            className={`w-6 h-6 rounded-full bg-white shadow-md transform transition-transform ${
-              isSubscribed ? "translate-x-0" : "translate-x-0"
-            }`}
-          />
-        </button>
-        <span className="text-[14px]">
-          {isSubscribed ? "Subscribed" : "Unsubscribed"}
-        </span>
-      </div> */}
+
       <div className="flex items-center space-x-4 mt-6">
         <label className="relative inline-flex items-center cursor-pointer">
           <input
@@ -190,7 +172,13 @@ const Profile = () => {
             onChange={toggleHandler}
             className="sr-only peer"
           />
-          <div className="w-12 h-6 bgColor rounded-full peer peer-checked:bg-gray-300 after:content-[''] after:absolute after:w-5 after:h-5 after:bg-white after:rounded-full after:transition-all after:left-0.5 after:top-0.5 peer-checked:after:translate-x-6"></div>
+          <div
+            className={`w-12 h-6 rounded-full transition-colors 
+        ${isSubscribed ? "bgColor" : "bg-gray-300"} 
+        peer after:content-[''] after:absolute after:w-5 after:h-5 
+        after:bg-white after:rounded-full after:transition-all 
+        after:left-0.5 after:top-0.5 peer-checked:after:translate-x-6`}
+          ></div>
         </label>
         <span className="text-[14px]">
           {isSubscribed ? "Subscribed" : "Unsubscribed"}

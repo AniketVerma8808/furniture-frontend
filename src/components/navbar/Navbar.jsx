@@ -51,8 +51,8 @@ const Navbar = () => {
       <div className="border-b border-gray-700">
         <div className="container px-4 md:px-8 mx-auto flex justify-center md:justify-between items-center py-2 text-sm flex-wrap">
           {/* Location */}
-          <div className="flex items-center gap-2">
-            <FaMapMarkerAlt />
+          <div className="flex items-center gap-2 pb-2 md:pb-0">
+            <FaMapMarkerAlt className=""/>
             <span className="text-[8px] md:text-[12px]">
               Deliver to - <span className="text-red-400">{city || "N/A"}</span>
             </span>
@@ -190,7 +190,7 @@ const Navbar = () => {
 
       <nav className="hidden md:block py-2 border-t border-gray-700 z-40 relative">
         <div className="max-w-7xl px-2">
-          <ul className="flex justify-around text-sm text-gray-300">
+          <ul className="flex justify-center gap-12 text-sm text-gray-300">
             {categories.map((category, index) => (
               <li
                 key={index}

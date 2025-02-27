@@ -12,9 +12,9 @@ const Setting = () => {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
 
-  const handleLogout =  async() => {
+  const handleLogout = async () => {
     // dispatch(logoutUser());
-   await dispatch(logoutAndClearStore()); // ✅ This clears everything
+    await dispatch(logoutAndClearStore()); // ✅ This clears everything
     toast.success("Logout successful!");
     navigate("/");
   };
@@ -50,6 +50,7 @@ const Setting = () => {
               >
                 <Link
                   to="/settings/profile"
+                  onClick={() => setIsOpen(false)}
                   className="block py-2 text-gray-600 border-b  border-gray-200 hover:text-black"
                 >
                   My Profile
@@ -57,6 +58,7 @@ const Setting = () => {
 
                 <Link
                   to="/settings/address"
+                  onClick={() => setIsOpen(false)}
                   className="block py-2 text-gray-600 border-b border-gray-200 hover:text-black"
                 >
                   My Address
@@ -64,6 +66,7 @@ const Setting = () => {
 
                 <Link
                   to="/settings/orders"
+                  onClick={() => setIsOpen(false)}
                   className="block py-2 text-gray-600 border-b border-gray-200 hover:text-black"
                 >
                   My Orders
@@ -71,6 +74,7 @@ const Setting = () => {
 
                 <Link
                   to="/settings/change-password"
+                  onClick={() => setIsOpen(false)}
                   className="block py-2 text-gray-600 border-b border-gray-200 hover:text-black"
                 >
                   Change Password
