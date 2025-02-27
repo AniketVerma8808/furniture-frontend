@@ -48,7 +48,7 @@ const Register = () => {
   };
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2  py-0 sm:py-4 md:py-8 lg:py-12">
+    <div className="grid grid-cols-1 lg:grid-cols-2  py-0 sm:py-4 md:py-8 lg:py-12">
       <Layout />
       <div className="flex justify-center flex-col w-full p-4">
         <h2 className="text-base md:text-2xl text-center  text-gray-800">
@@ -77,10 +77,7 @@ const Register = () => {
 
           {/* Password Field */}
           <div className="relative">
-            <label
-              htmlFor="password"
-              className="block text-sm  text-gray-700"
-            >
+            <label htmlFor="password" className="block text-sm  text-gray-700">
               Password
             </label>
             <input

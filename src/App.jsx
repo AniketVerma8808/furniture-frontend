@@ -80,13 +80,20 @@ const isTokenExpired = (token) => {
 };
 
 const Loader = () => {
-  <>
-    {/* <Skeleton /> */}
-    <div className="h-screen flex justify-center items-center text-5xl text-black">
-      {" "}
-      Loading..........
+  return (
+    <div className="min-h-screen flex flex-col justify-center items-center space-y-4 bg-gray-100">
+      {/* Skeleton for the Page Header */}
+      <div className="w-48 h-6 bg-gray-300 animate-pulse rounded"></div>
+
+      {/* Skeleton for Content Blocks */}
+      <div className="w-3/4 max-w-lg h-4 bg-gray-300 animate-pulse rounded"></div>
+      <div className="w-2/3 max-w-md h-4 bg-gray-300 animate-pulse rounded"></div>
+      <div className="w-5/6 max-w-xl h-4 bg-gray-300 animate-pulse rounded"></div>
+
+      {/* Skeleton for Button */}
+      <div className="w-32 h-10 bg-gray-300 animate-pulse rounded-lg"></div>
     </div>
-  </>;
+  );
 };
 
 // const wait = (time) => {

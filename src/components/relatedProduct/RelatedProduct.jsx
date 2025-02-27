@@ -11,14 +11,14 @@ const RelatedProduct = ({ currentProductCategory }) => {
             const filteredProducts = products.filter((product) => {
                 return product?.category === currentProductCategory && product?.id !== currentProduct?.id;
             });
-            console.log("Filtered products:", filteredProducts);
+            // console.log("Filtered products:", filteredProducts);
 
             setRelatedProducts(filteredProducts);
         }
     }, [currentProductCategory, products, currentProduct]);
 
-    console.log("Current Product:", currentProduct);
-    console.log("All products:", products);
+    // console.log("Current Product:", currentProduct);
+    // console.log("All products:", products);
 
     return (
         <div className="container mx-auto px-4 relative">

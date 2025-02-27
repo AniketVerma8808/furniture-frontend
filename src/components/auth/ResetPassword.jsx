@@ -28,14 +28,14 @@ const ResetPassword = () => {
       return;
     }
 
-    console.log("Reset Password Request:", { password });
+    // console.log("Reset Password Request:", { password });
     toast.success("Password reset successfully!");
     navigate("/login");
     setLoading(false);
   };
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2  py-0 sm:py-4 md:py-8 lg:py-12">
+    <div className="grid grid-cols-1 lg:grid-cols-2  py-0 sm:py-4 md:py-8 lg:py-12">
       <Layout />
       <div className="flex justify-center items-start w-full p-4">
         <form onSubmit={handleSubmit} className="w-full p-0 md:p-6 space-y-4">
@@ -48,10 +48,7 @@ const ResetPassword = () => {
 
           {/* Password Field */}
           <div className="relative mt-4">
-            <label
-              htmlFor="password"
-              className="block text-sm  text-gray-700"
-            >
+            <label htmlFor="password" className="block text-sm  text-gray-700">
               New Password
             </label>
             <input

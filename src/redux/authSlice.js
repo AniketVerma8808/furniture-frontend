@@ -18,7 +18,7 @@ const authSlice = createSlice({
       state.token = null;
     },
     updateProfile: (state, action) => {
-      console.log("action received ====>" , action);
+      // console.log("action received ====>" , action);
       state.user = { ...state.user, ...action.payload };
       // console.log("Updated Redux State in Reducer:", state.user);
     },

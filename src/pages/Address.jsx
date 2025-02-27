@@ -36,7 +36,7 @@ const Address = () => {
       return;
     }
 
-    console.log("Address Submitted:", formData);
+    // console.log("Address Submitted:", formData);
     toast.success("Address Submitted:");
   };
 
