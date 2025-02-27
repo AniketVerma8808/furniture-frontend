@@ -4,7 +4,7 @@ import { FaRegHeart } from "react-icons/fa";
 import Rating from "../components/rating/Rating";
 import { toast } from "react-toastify";
 import ProductZoom from "../components/products/ProductZoom";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import ProductDetailsPage from "./ProductDetailsPage";
 // import RelatedProduct from "../components/relatedProduct/RelatedProduct";
 import { useDispatch, useSelector } from "react-redux";
@@ -16,30 +16,19 @@ import { motion } from "framer-motion";
 import Skeleton from "../components/loader/Skeleton";
 
 const ProductDetails = () => {
-  const options = ["Option 1", "Option 2", "Option 3", "Option 4"];
-  const [selected, setSelected] = useState([]);
-  const [isOpen, setIsOpen] = useState(false);
-  const handleSelect = (option) => {
-    if (selected.includes(option)) {
-      setSelected(selected.filter((item) => item !== option));
-    } else {
-      setSelected([...selected, option]);
-    }
-  };
-
   const { id } = useParams();
   const dispatch = useDispatch();
-  const [activeIndex, setActiveIndex] = useState(null);
-  const { products, loading } = useSelector((state) => state.product);
+  const navigate = useNavigate();
 
   const [quantity, setQuantity] = useState(1);
+  const [activeIndex, setActiveIndex] = useState(null);
+  const [isOpen, setIsOpen] = useState(false);
+  const [selected, setSelected] = useState([]);
 
+  const { products, loading } = useSelector((state) => state.product);
   const product = products.find((p) => p._id === id);
 
   console.log("product details page", product);
-  const toggleAccordion = (index) => {
-    setActiveIndex(activeIndex === index ? null : index);
-  };
 
   useEffect(() => {
     if (!products.length) {
@@ -47,13 +36,30 @@ const ProductDetails = () => {
     }
   }, [dispatch, products.length]);
 
+  const handleSelect = (optionId) => {
+    // console.log("hello");
+    setSelected((prevSelected) =>
+      prevSelected.includes(optionId)
+        ? prevSelected.filter((id) => id !== optionId)
+        : [...prevSelected, optionId]
+    );
+  };
+
+  // toggle descripton
+  const toggleAccordion = (index) => {
+    setActiveIndex(activeIndex === index ? null : index);
+  };
+
+  // quantity inc & dec
   const incrementQuantity = () => setQuantity((prev) => prev + 1);
   const decrementQuantity = () => setQuantity((prev) => Math.max(1, prev - 1));
 
+  // add to cart
   const handleAddToCart = () => {
     toast.success(`${quantity} item(s) added to cart!`);
   };
 
+  // add to wihslist
   const handleAddToWishlist = async () => {
     let token = store.getState().auth.token;
 
@@ -106,7 +112,7 @@ const ProductDetails = () => {
 
             <div className="mt-4 flex items-center gap-8">
               <h3 className="text-[20px] md:text-[26px] text-[rgb(42,40,40)] leading-[39px]">
-                ₹{product.price - 10000}
+                ₹{product.price - product.discount}
               </h3>
 
               {product.price && (
@@ -115,7 +121,7 @@ const ProductDetails = () => {
                     ₹{product.price}
                   </span>
                   <span className="text-md rounded-md px-3 py-2 text-white bgColor text-[13px] md:text-[16px] font-semibold">
-                    {Math.round((10000 / product.price) * 100)}% OFF
+                    {Math.round((product.discount / product.price) * 100)}% OFF
                   </span>
                 </div>
               )}
@@ -127,6 +133,7 @@ const ProductDetails = () => {
               </span>
             </div>
           </div>
+
           {/* Quantity Selector */}
           <div className="mt-6 flex items-center space-x-4">
             <p className="text-lg ">Quantity:</p>
@@ -146,47 +153,70 @@ const ProductDetails = () => {
           </div>
 
           {/* Add to Cart and Add to Wishlist Buttons */}
-          <div className="mt-8 flex flex-col sm:flex-row gap-4 sm:gap-10">
+          <div className="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            {/* Add to Cart Button */}
             <button
               onClick={handleAddToCart}
-              className="flex items-center justify-center rounded-md px-5 py-2.5 text-center text-sm  text-white bgColor transition duration-300 focus:outline-none"
+              className="flex items-center justify-center w-full rounded-md px-5 py-2.5 text-center text-[13px] lg:text-sm text-white bgColor transition duration-300 focus:outline-none 
+    md:col-span-1 lg:col-span-1 lg:w-full"
             >
-              <HiShoppingCart className="mr-2 h-6 w-6" />
+              <HiShoppingCart className="mr-2 text-base lg:text-2xl" />
               Add to Cart
             </button>
+
+            {/* Add to Wishlist Button */}
             <button
               onClick={handleAddToWishlist}
-              className="flex items-center justify-center rounded-md px-5 py-2.5 text-center text-sm  text-white bgColor transition duration-300 focus:outline-none"
+              className="flex items-center justify-center w-full rounded-md px-5 py-2 md:py-2.5 text-center text-[13px] lg:text-sm text-white bgColor transition duration-300 focus:outline-none 
+    md:col-span-1  lg:col-span-1 lg:w-full"
             >
-              <FaRegHeart className="mr-2 h-6 w-6" />
+              <FaRegHeart className="mr-2 text-base lg:text-2xl" />
               Add to Wishlist
             </button>
-            {/* Dropdown Button */}
 
+            {/* Dropdown for Customization */}
             {product.isCustomized && (
-              <div className="relative w-64">
+              <div className="relative w-full md:col-span-2 lg:col-span-2">
                 <div
                   className="border border-gray-300 rounded-lg px-4 py-2 cursor-pointer flex justify-between items-center bg-white"
                   onClick={() => setIsOpen(!isOpen)}
                 >
-                  Customized Beds
+                  <span>Customized Beds</span>
+                  <HiChevronDown
+                    className={`w-5 h-5 transition-transform ${
+                      isOpen ? "rotate-180" : ""
+                    }`}
+                  />
                 </div>
-
-                {/* Dropdown Menu */}
                 {isOpen && (
-                  <div className="absolute mt-2 w-full bg-white border border-gray-300 rounded-lg shadow-lg z-10">
-                    {options.map((option) => (
+                  <div
+                    className="absolute mt-2 w-full bg-white border border-gray-300 rounded-lg shadow-lg z-10 max-h-60 overflow-auto"
+                    style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+                  >
+                    {product.custom.map((option) => (
                       <label
-                        key={option}
-                        className="flex items-center px-4 py-2 cursor-pointer hover:bg-gray-100"
+                        key={option._id}
+                        className="flex items-center p-2 border-b border-gray-200 cursor-pointer hover:bg-gray-100"
                       >
                         <input
                           type="checkbox"
-                          checked={selected.includes(option)}
-                          onChange={() => handleSelect(option)}
+                          checked={selected.includes(option._id)}
+                          onChange={() => handleSelect(option._id)}
                           className="mr-2"
                         />
-                        {option}
+                        <img
+                          src={option.image}
+                          alt={option.title}
+                          className="w-12 h-12 object-cover rounded-lg mr-3"
+                        />
+                        <div>
+                          <p className="text-sm font-semibold">
+                            {option.title}
+                          </p>
+                          <p className="text-xs text-gray-500">
+                            ₹{option.price.toFixed(2)}
+                          </p>
+                        </div>
                       </label>
                     ))}
                   </div>
