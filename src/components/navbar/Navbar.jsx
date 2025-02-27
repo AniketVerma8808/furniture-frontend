@@ -28,6 +28,8 @@ const Navbar = () => {
   const { user } = useSelector((state) => state.auth);
   const { city } = useSelector((state) => state.home);
   const { wishlistCount } = useSelector((state) => state.wishlist);
+
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -183,7 +185,7 @@ const Navbar = () => {
               )}
             </Link>
 
-            <CartCard initialCart={dummyCart} />
+            <CartCard  initialCart={dummyCart} />
           </div>
         </div>
       </div>

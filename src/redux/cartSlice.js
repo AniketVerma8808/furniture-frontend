@@ -7,7 +7,7 @@ export const fetchCart = createAsyncThunk(
     try {
       const { data } = await GETCartService();
       console.log("cart product", data);
-      return data.cart.products;
+      return data.cart.items;
     } catch (error) {
       return rejectWithValue(error.message);
     }
@@ -18,6 +18,7 @@ const initialState = {
   cartItems: [],
   loading: false,
   isError: false,
+  cartCount :  0,
   error: null,
 };
 
@@ -52,6 +53,7 @@ const cartSlice = createSlice({
       .addCase(fetchCart.fulfilled, (state, action) => {
         state.loading = false;
         state.cartItems = action.payload;
+        state.cartCount = action.payload.length;
       })
       .addCase(fetchCart.rejected, (state, action) => {
         state.loading = false;

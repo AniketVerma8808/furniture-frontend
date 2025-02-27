@@ -2,10 +2,12 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { IoIosTrash, IoMdClose } from "react-icons/io";
 import { FaShoppingCart } from "react-icons/fa";
+import { useSelector } from "react-redux";
 
 const CartCard = ({ initialCart = [] }) => {
   const [cart, setCart] = useState(initialCart);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const { cartCount } = useSelector((state) => state.cart);
   const navigate = useNavigate();
 
   const updateQuantity = (id, change) => {
@@ -49,7 +51,7 @@ const CartCard = ({ initialCart = [] }) => {
   return (
     <div className="relative">
       <p className="absolute -top-3 md:-top-5 right-0 text-xs md:text-sm bg-red-500 text-white px-1 md:px-2 py-0 md:py-0.5 rounded-full">
-        {cart.length}
+        {cartCount}
       </p>
       <div
         className="flex flex-col items-center cursor-pointer"
