@@ -33,7 +33,7 @@ const wishlistSlice = createSlice({
         state.wishlistItems.push(action.payload);
       }
     },
-    updateCount: (state, action) => {
+    updateCountWishlist: (state, action) => {
       if (action.payload === "inc") {
         state.wishlistCount = state.wishlistCount + 1;
       } else {
@@ -73,6 +73,10 @@ const wishlistSlice = createSlice({
   },
 });
 
-export const { addToWishlist, clearWishlist, removeFromWishlist, updateCount } =
-  wishlistSlice.actions;
+export const {
+  addToWishlist,
+  clearWishlist,
+  removeFromWishlist,
+  updateCountWishlist,
+} = wishlistSlice.actions;
 export default wishlistSlice.reducer;

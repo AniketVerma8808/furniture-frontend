@@ -9,11 +9,12 @@ import ProductDetailsPage from "./ProductDetailsPage";
 // import RelatedProduct from "../components/relatedProduct/RelatedProduct";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../redux/productSlice";
-import { POSTWishlistService } from "../services/api.service";
+import { POSTCartService, POSTWishlistService } from "../services/api.service";
 import { store } from "../redux/store";
-import { addToWishlist, updateCount } from "../redux/wishlistSlice";
+import { addToWishlist, updateCountWishlist } from "../redux/wishlistSlice";
 import { motion } from "framer-motion";
 import Skeleton from "../components/loader/Skeleton";
+import { addToCart, updateCountCart } from "../redux/cartSlice";
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -55,14 +56,26 @@ const ProductDetails = () => {
   const decrementQuantity = () => setQuantity((prev) => Math.max(1, prev - 1));
 
   // add to cart
-  const handleAddToCart = () => {
-    toast.success(`${quantity} item(s) added to cart!`);
+  const handleAddToCart = async () => {
+    let token = store.getState().auth.token;
+    if (!token) {
+      toast.error("Please log in to manage your cart.");
+      navigate("/login");
+      return;
+    } else {
+      await POSTCartService({ productId: product._id, quantity: 1 })
+        .then((res) => {
+          dispatch(updateCountCart("inc"));
+          dispatch(addToCart(product));
+          toast.success("Added to Cart");
+        })
+        .catch((err) => console.log(err));
+    }
   };
 
   // add to wihslist
   const handleAddToWishlist = async () => {
     let token = store.getState().auth.token;
-
     if (!token) {
       toast.error("Please log in to manage your wishlist.");
       navigate("/login");
@@ -71,7 +84,7 @@ const ProductDetails = () => {
       await POSTWishlistService(product._id)
         .then((res) => {
           // we need to update wishlist => one is count another is product
-          dispatch(updateCount("inc"));
+          dispatch(updateCountWishlist("inc"));
           dispatch(addToWishlist(product));
           toast.success("Added to Wishlist");
         })

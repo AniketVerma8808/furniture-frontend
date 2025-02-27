@@ -1,13 +1,14 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import reviewImg4 from "../assets/image/review/review4.jpg";
 import { AiOutlineClose } from "react-icons/ai";
 import { toast } from "react-toastify";
 import NoProduct from "./NoProduct";
 import noProductImage from "../assets/image/Furniture images/wishlit.png";
 import { useDispatch, useSelector } from "react-redux";
 import { DELETEWishlistService } from "../services/api.service";
-import { removeFromWishlist, updateCount } from "../redux/wishlistSlice";
+import {
+  removeFromWishlist,
+  updateCountWishlist,
+} from "../redux/wishlistSlice";
 
 const Wishlist = () => {
   const { wishlistItems, wishlistCount } = useSelector(
@@ -23,7 +24,7 @@ const Wishlist = () => {
 
   const handleRemovefromWishlist = async (productId) => {
     await DELETEWishlistService(productId);
-    dispatch(updateCount("dec"));
+    dispatch(updateCountWishlist("dec"));
     dispatch(removeFromWishlist(productId));
     toast.info("Item removed from wishlist");
   };

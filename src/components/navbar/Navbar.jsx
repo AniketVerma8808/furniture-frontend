@@ -2,42 +2,15 @@ import { FaUser, FaHeart, FaMapMarkerAlt, FaBars } from "react-icons/fa";
 import { BiUserCircle } from "react-icons/bi";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { logoutUser } from "../../redux/authSlice";
+import { useSelector } from "react-redux";
 import CartCard from "../cart/CartCard";
-
-const dummyCart = [
-  {
-    id: 1,
-    name: "Nike Shoes",
-    price: 99.99,
-    quantity: 2,
-    image: "https://via.placeholder.com/50",
-  },
-  {
-    id: 2,
-    name: "Adidas Sneakers",
-    price: 89.99,
-    quantity: 1,
-    image: "https://via.placeholder.com/50",
-  },
-];
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { user } = useSelector((state) => state.auth);
   const { city } = useSelector((state) => state.home);
+
   const { wishlistCount } = useSelector((state) => state.wishlist);
-
-
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-
-  const handleLogout = () => {
-    dispatch(logoutUser());
-    toast.success("Logout successful!");
-    navigate("/");
-  };
 
   const categories = [
     { name: "BEDS", path: "/categories/beds" },
@@ -54,7 +27,7 @@ const Navbar = () => {
         <div className="container px-4 md:px-8 mx-auto flex justify-center md:justify-between items-center py-2 text-sm flex-wrap">
           {/* Location */}
           <div className="flex items-center gap-2 pb-2 md:pb-0">
-            <FaMapMarkerAlt className=""/>
+            <FaMapMarkerAlt className="" />
             <span className="text-[8px] md:text-[12px]">
               Deliver to - <span className="text-red-400">{city || "N/A"}</span>
             </span>
@@ -127,7 +100,7 @@ const Navbar = () => {
               )}
             </Link>
 
-            <CartCard initialCart={dummyCart} />
+            <CartCard />
           </div>
         </div>
 
@@ -185,11 +158,11 @@ const Navbar = () => {
               )}
             </Link>
 
-            <CartCard  initialCart={dummyCart} />
+            <CartCard />
           </div>
         </div>
       </div>
-
+      {/* desktop menu */}
       <nav className="hidden md:block py-2 border-t border-gray-700 z-40 relative">
         <div className="max-w-7xl px-2">
           <ul className="flex justify-center gap-12 text-sm text-gray-300">

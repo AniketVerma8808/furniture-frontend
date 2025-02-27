@@ -6,7 +6,7 @@ export const fetchCart = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const { data } = await GETCartService();
-      console.log("cart product", data);
+      // console.log("cart product", data);
       return data.cart.items;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -18,10 +18,9 @@ const initialState = {
   cartItems: [],
   loading: false,
   isError: false,
-  cartCount :  0,
+  cartCount: 0,
   error: null,
 };
-
 const cartSlice = createSlice({
   name: "cart",
   initialState,
@@ -34,13 +33,36 @@ const cartSlice = createSlice({
         state.cartItems.push({ ...action.payload, quantity: 1 });
       }
     },
+
+    updateCountCart: (state, action) => {
+      if (action.payload === "inc") {
+        state.cartCount = state.cartCount + 1;
+      } else {
+        state.cartCount = state.cartCount - 1;
+      }
+    },
+    updateCartquantity: (state, action) => {
+      const { productId, change } = action.payload;
+      const item = state.cartItems.find(
+        (item) => item.product._id === productId
+      );
+      if (item) {
+        item.quantity = Math.max(1, item.quantity + change);
+      }
+    },
+
     removeFromCart: (state, action) => {
       state.cartItems = state.cartItems.filter(
         (item) => item._id !== action.payload
       );
     },
+
     clearCart: (state) => {
       state.cartItems = [];
+      state.loading = false;
+      state.isError = false;
+      state.error = null;
+      state.cartCount = 0;
     },
   },
   extraReducers: (builder) => {
@@ -63,5 +85,11 @@ const cartSlice = createSlice({
   },
 });
 
-export const { addToCart, removeFromCart, clearCart } = cartSlice.actions;
+export const {
+  addToCart,
+  removeFromCart,
+  updateCountCart,
+  clearCart,
+  updateCartquantity,
+} = cartSlice.actions;
 export default cartSlice.reducer;

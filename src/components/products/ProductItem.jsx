@@ -7,12 +7,14 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   addToWishlist,
   removeFromWishlist,
-  updateCount,
+  updateCountWishlist,
 } from "../../redux/wishlistSlice";
 import {
   POSTWishlistService,
   DELETEWishlistService,
+  POSTCartService,
 } from "../../services/api.service";
+import { addToCart, fetchCart, updateCountCart } from "../../redux/cartSlice";
 
 const ProductItem = ({ product }) => {
   const dispatch = useDispatch();
@@ -28,9 +30,21 @@ const ProductItem = ({ product }) => {
     setIsFavorite(isInWishlist);
   }, [wishlistItems, product._id]);
 
-  const handleAddToCart = () => {
-    toast.error("Please log in to add items to the cart.");
-    navigate("/login");
+  const handleAddToCart = async () => {
+    let token = store.getState().auth.token;
+    if (!token) {
+      toast.error("Please log in to manage your cart.");
+      navigate("/login");
+      return;
+    }
+    await POSTCartService({ productId: product._id, quantity: 1 })
+      .then((res) => {
+        dispatch(updateCountCart("inc"));
+        dispatch(fetchCart());
+        dispatch(addToCart(product));
+        toast.success("Product added to cart successfully");
+      })
+      .catch((err) => console.log(err));
   };
 
   const handleWishlistToggle = async () => {
@@ -45,7 +59,7 @@ const ProductItem = ({ product }) => {
     if (isFavorite) {
       await DELETEWishlistService(product._id)
         .then((res) => {
-          dispatch(updateCount("dec"));
+          dispatch(updateCountWishlist("dec"));
           dispatch(removeFromWishlist(product._id));
           toast.info("Removed from Wishlist");
           setIsFavorite(false);
@@ -55,7 +69,7 @@ const ProductItem = ({ product }) => {
       await POSTWishlistService(product._id)
         .then((res) => {
           // we need to update wishlist => one is count another is product
-          dispatch(updateCount("inc"));
+          dispatch(updateCountWishlist("inc"));
           dispatch(addToWishlist(product));
           toast.success("Added to Wishlist");
           setIsFavorite(true);

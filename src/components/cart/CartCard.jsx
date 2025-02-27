@@ -2,34 +2,42 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { IoIosTrash, IoMdClose } from "react-icons/io";
 import { FaShoppingCart } from "react-icons/fa";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { DELETECartService } from "../../services/api.service";
+import {
+  fetchCart,
+  removeFromCart,
+  updateCartquantity,
+  updateCountCart,
+} from "../../redux/cartSlice";
+import { toast } from "react-toastify";
 
-const CartCard = ({ initialCart = [] }) => {
-  const [cart, setCart] = useState(initialCart);
+const CartCard = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const { cartCount } = useSelector((state) => state.cart);
+
+  const { cartItems, cartCount } = useSelector((state) => state.cart);
+
+  // console.log("cart product", cartItems);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  const updateQuantity = (id, change) => {
-    setCart((prevCart) =>
-      prevCart
-        .map((item) =>
-          item.id === id
-            ? { ...item, quantity: Math.max(1, item.quantity + change) }
-            : item
-        )
-        .filter((item) => item.quantity > 0)
-    );
+  const updateQuantity = (productId, change) => {
+    dispatch(updateCartquantity({ productId, change }));
   };
 
-  const removeItem = (id) => {
-    setCart((prevCart) => prevCart.filter((item) => item.id !== id));
+  const removeItem = async (productId) => {
+    await DELETECartService(productId);
+    dispatch(updateCountCart("dec"));
+    dispatch(removeFromCart(productId));
+    toast.info("Item removed from cart");
   };
 
-  const subtotal = cart.reduce(
-    (acc, item) => acc + item.price * item.quantity,
-    0
-  );
+  const subtotal = cartItems.reduce((acc, item) => {
+    if (item.product && item.product.price) {
+      return acc + item.product.price * (item.quantity || 1);
+    }
+    return acc;
+  }, 0);
 
   // Navigate to Checkout with state
   const handleProceedToCheckout = () => {
@@ -50,14 +58,16 @@ const CartCard = ({ initialCart = [] }) => {
 
   return (
     <div className="relative">
-      <p className="absolute -top-3 md:-top-5 right-0 text-xs md:text-sm bg-red-500 text-white px-1 md:px-2 py-0 md:py-0.5 rounded-full">
-        {cartCount}
-      </p>
+      {cartCount > 0 && (
+        <span className="absolute -top-3 md:-top-5 right-0 bg-red-500 text-white text-xs rounded-full px-2 py-1">
+          {cartCount}
+        </span>
+      )}
       <div
         className="flex flex-col items-center cursor-pointer"
         onClick={() => setIsDropdownOpen(!isDropdownOpen)}
       >
-        <FaShoppingCart className="text-[16px] md:text-[16px]" />
+        <FaShoppingCart />
         <span className="text-[8px] md:text-xs">CART</span>
       </div>
 
@@ -75,59 +85,72 @@ const CartCard = ({ initialCart = [] }) => {
           {/* Cart Summary */}
           <div className="flex justify-between px-4 py-2 border-b">
             <p>
-              {cart.length} {cart.length === 1 ? "item" : "items"}
+              {cartItems.length} {cartItems.length === 1 ? "item" : "items"}
             </p>
             <div>
               <p className="text-gray-500 text-xs">Subtotal</p>
-              <p className=" text-[16px]">${subtotal.toFixed(2)}</p>
+              <p className="text-[16px]">
+                ${subtotal ? subtotal.toFixed(2) : "0.00"}
+              </p>
             </div>
           </div>
 
           {/* Cart Items */}
-          {cart.length > 0 ? (
-            cart.map((item, index) => (
-              <div
-                key={index}
-                className="flex items-center gap-3 px-4 py-3 border-b"
-              >
-                <img
-                  src={item.image}
-                  alt={item.name}
-                  className="w-12 h-12 rounded-md"
-                />
-                <div className="flex-1">
-                  <p className="text-sm ">{item.name}</p>
-                  <p className="text-xs text-gray-500">
-                    ${item.price.toFixed(2)}
-                  </p>
+          {cartItems.length > 0 ? (
+            cartItems.map((item, index) => {
+              if (!item.product) return null;
 
-                  {/* Quantity Control */}
-                  <div className="flex items-center gap-3 mt-2">
-                    <span className="text-[12px]">Qty:</span>
-                    <div className="flex items-center space-x-2">
-                      <button
-                        onClick={() => updateQuantity(item.id, -1)}
-                        className="bg-gray-200 px-3 py-1 rounded hover:bg-gray-300"
-                        disabled={item.quantity <= 1}
-                      >
-                        -
-                      </button>
-                      <span className="text-[12px">{item.quantity}</span>
-                      <button
-                        onClick={() => updateQuantity(item.id, 1)}
-                        className="bg-gray-200 px-3 py-1 rounded hover:bg-gray-300"
-                      >
-                        +
-                      </button>
+              return (
+                <div
+                  key={item._id}
+                  className="flex items-center gap-3 px-4 py-3 border-b"
+                >
+                  {/* Product Image */}
+                  <img
+                    src={item.product.images?.[0]}
+                    alt={item.product.name}
+                    className="w-12 h-12 rounded-md"
+                  />
+
+                  {/* Product Details */}
+                  <div className="flex-1">
+                    <p className="text-sm line-clamp-1">{item.product.name}</p>
+                    <p className="text-xs text-gray-500">
+                      $
+                      {item.product.price
+                        ? item.product.price.toFixed(2)
+                        : "0.00"}
+                    </p>
+
+                    {/* Quantity Control */}
+                    <div className="flex items-center gap-3 mt-2">
+                      <span className="text-[12px]">Qty:</span>
+                      <div className="flex items-center space-x-2">
+                        <button
+                          onClick={() => updateQuantity(item.product._id, -1)}
+                          className="bg-gray-200 px-3 py-1 rounded hover:bg-gray-300"
+                          disabled={item.quantity <= 1}
+                        >
+                          -
+                        </button>
+                        <span className="text-[12px]">{item.quantity}</span>
+                        <button
+                          onClick={() => updateQuantity(item.product._id, 1)}
+                          className="bg-gray-200 px-3 py-1 rounded hover:bg-gray-300"
+                        >
+                          +
+                        </button>
+                      </div>
+                      {/* Remove Item */}
+                      <IoIosTrash
+                        className="text-red-500 w-5 h-5 cursor-pointer hover:text-red-600"
+                        onClick={() => removeItem(item.product._id)}
+                      />
                     </div>
-                    <IoIosTrash
-                      className="text-red-500 w-5 h-5 cursor-pointer hover:text-red-600"
-                      onClick={() => removeItem(item.id)}
-                    />
                   </div>
                 </div>
-              </div>
-            ))
+              );
+            })
           ) : (
             <p className="px-4 py-4 text-gray-500 text-center">
               You have no items in your shopping cart.
@@ -136,7 +159,7 @@ const CartCard = ({ initialCart = [] }) => {
 
           {/* Checkout & View Cart Buttons */}
           <div className="p-4">
-            {cart.length > 0 ? (
+            {cartItems.length > 0 ? (
               <>
                 <button
                   onClick={handleProceedToCheckout}
