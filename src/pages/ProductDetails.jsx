@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { HiShoppingCart } from "react-icons/hi";
+import { HiChevronDown, HiShoppingCart } from "react-icons/hi";
 import { FaRegHeart } from "react-icons/fa";
 import Rating from "../components/rating/Rating";
 import { toast } from "react-toastify";
 import ProductZoom from "../components/products/ProductZoom";
 import { useParams } from "react-router-dom";
 import ProductDetailsPage from "./ProductDetailsPage";
-import RelatedProduct from "../components/relatedProduct/RelatedProduct";
+// import RelatedProduct from "../components/relatedProduct/RelatedProduct";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../redux/productSlice";
 import { POSTWishlistService } from "../services/api.service";
@@ -16,6 +16,17 @@ import { motion } from "framer-motion";
 import Skeleton from "../components/loader/Skeleton";
 
 const ProductDetails = () => {
+  const options = ["Option 1", "Option 2", "Option 3", "Option 4"];
+  const [selected, setSelected] = useState([]);
+  const [isOpen, setIsOpen] = useState(false);
+  const handleSelect = (option) => {
+    if (selected.includes(option)) {
+      setSelected(selected.filter((item) => item !== option));
+    } else {
+      setSelected([...selected, option]);
+    }
+  };
+
   const { id } = useParams();
   const dispatch = useDispatch();
   const [activeIndex, setActiveIndex] = useState(null);
@@ -25,7 +36,7 @@ const ProductDetails = () => {
 
   const product = products.find((p) => p._id === id);
 
-  //   console.log("product details page", product);
+  console.log("product details page", product);
   const toggleAccordion = (index) => {
     setActiveIndex(activeIndex === index ? null : index);
   };
@@ -65,7 +76,7 @@ const ProductDetails = () => {
   if (loading) {
     return (
       <div className="container min-h-screen mx-auto px-4 md:px-8 mt-10 mb-10">
-        <Skeleton cardCount={2} /> {/* Show 2 Skeleton cards during loading */}
+        <Skeleton cardCount={2} />
       </div>
     );
   }
@@ -150,7 +161,41 @@ const ProductDetails = () => {
               <FaRegHeart className="mr-2 h-6 w-6" />
               Add to Wishlist
             </button>
+            {/* Dropdown Button */}
+
+            {product.isCustomized && (
+              <div className="relative w-64">
+                <div
+                  className="border border-gray-300 rounded-lg px-4 py-2 cursor-pointer flex justify-between items-center bg-white"
+                  onClick={() => setIsOpen(!isOpen)}
+                >
+                  Customized Beds
+                </div>
+
+                {/* Dropdown Menu */}
+                {isOpen && (
+                  <div className="absolute mt-2 w-full bg-white border border-gray-300 rounded-lg shadow-lg z-10">
+                    {options.map((option) => (
+                      <label
+                        key={option}
+                        className="flex items-center px-4 py-2 cursor-pointer hover:bg-gray-100"
+                      >
+                        <input
+                          type="checkbox"
+                          checked={selected.includes(option)}
+                          onChange={() => handleSelect(option)}
+                          className="mr-2"
+                        />
+                        {option}
+                      </label>
+                    ))}
+                  </div>
+                )}
+              </div>
+            )}
           </div>
+
+          {/* description section */}
           <div
             className={`mt-8 rounded-md transition-shadow duration-300 ${
               activeIndex === 0 ? "custom-shadow" : "custom-shadow"
