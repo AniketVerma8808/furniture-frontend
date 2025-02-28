@@ -21,7 +21,6 @@ const ProductItem = ({ product }) => {
   const navigate = useNavigate();
 
   const { wishlistItems } = useSelector((state) => state.wishlist);
-  const { cartItems } = useSelector((state) => state.cart);
 
   const [isFavorite, setIsFavorite] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
@@ -39,9 +38,6 @@ const ProductItem = ({ product }) => {
       navigate("/login");
       return;
     }
- 
-
-    
 
     await POSTCartService({ productId: product._id, quantity: 1 })
       .then((res) => {
@@ -50,14 +46,6 @@ const ProductItem = ({ product }) => {
         toast.success("Product added to cart successfully");
       })
       .catch((err) => console.log(err));
-      // try {
-      //     await POSTCartService({ productId: product._id, quantity: 1 });
-      //     dispatch(updateCountCart("inc"));
-      //     dispatch(addToCart({ product, quantity: 1 }));
-      //     toast.success("Product added to cart successfully");
-      //   } catch (err) {
-      //     console.log(err);
-      //   }
   };
 
   const handleWishlistToggle = async () => {

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import OrderSummary from "../components/orders/OrderSummary";
 import { AiOutlineDelete, AiOutlineHeart } from "react-icons/ai";
@@ -7,62 +7,20 @@ import { toast } from "react-toastify";
 import noProductImage from "../assets/image/Furniture images/cart.png";
 import NoProduct from "./NoProduct";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  DELETECartService,
-  DELETEWishlistService,
-  POSTWishlistService,
-} from "../services/api.service";
+import { DELETECartService } from "../services/api.service";
 import {
   removeFromCart,
   updateCartquantity,
   updateCountCart,
 } from "../redux/cartSlice";
-import {
-  addToWishlist,
-  removeFromWishlist,
-  updateCountWishlist,
-} from "../redux/wishlistSlice";
-import { store } from "../redux/store";
 
 const Cart = () => {
   const navigate = useNavigate();
   const { cartItems } = useSelector((state) => state.cart);
-  const { wishlistItems } = useSelector((state) => state.wishlist);
   const dispatch = useDispatch();
-  const [isFavorite, setIsFavorite] = useState(false);
 
   const handleQuantityChange = (productId, change) => {
     dispatch(updateCartquantity({ productId, change }));
-  };
-
-  const handleAddToWishlist = async (product) => {
-    let token = store.getState().auth.token;
-
-    if (!token) {
-      toast.error("Please log in to manage your wishlist.");
-      navigate("/login");
-      return;
-    }
-
-    const isInWishlist = wishlistItems.some((item) => item._id === product._id);
-
-    if (isInWishlist) {
-      await DELETEWishlistService(product._id)
-        .then(() => {
-          dispatch(updateCountWishlist("dec"));
-          dispatch(removeFromWishlist(product._id));
-          toast.info("Removed from Wishlist");
-        })
-        .catch((err) => console.log(err));
-    } else {
-      await POSTWishlistService(product._id)
-        .then(() => {
-          dispatch(updateCountWishlist("inc"));
-          dispatch(addToWishlist(product));
-          toast.success("Added to Wishlist");
-        })
-        .catch((err) => console.log(err));
-    }
   };
 
   const removeItem = async (productId) => {
@@ -87,9 +45,9 @@ const Cart = () => {
                 </div>
                 <div className="flex flex-col lg:flex-row">
                   <div className="flex-1 p-4">
-                    {cartItems?.map(({ product, quantity }) => (
+                    {cartItems.map(({ product, quantity, _id }) => (
                       <div
-                        key={product._id}
+                        key={_id}
                         className="flex border-b border-gray-200 py-4 flex-nowrap"
                       >
                         {/* Product Image */}
@@ -150,18 +108,6 @@ const Cart = () => {
 
                           {/* Actions */}
                           <div className="flex space-x-4 mt-2 flex-wrap text-sm text-[#9A8B8B]  cursor-pointer">
-                            <p
-                              className="flex items-center group"
-                              onClick={() => handleAddToWishlist(product)}
-                            >
-                              {isFavorite ? (
-                                <AiFillHeart className="mr-2 text-gray-600 group-hover:text-red-600 transition-colors duration-200" />
-                              ) : (
-                                <AiOutlineHeart className="mr-2 text-gray-600 group-hover:text-red-600 transition-colors duration-200" />
-                              )}
-                              Add to Wishlist
-                            </p>
-
                             <p
                               className="flex items-center hover:text-red-600 transition-colors duration-200"
                               onClick={() => removeItem(product._id)}

@@ -26,9 +26,7 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     addToCart: (state, action) => {
-      // console.log(action , action.payload._id);
-      // console.log(state.cartItems);
-
+  
       const item = state.cartItems.find((i) => i.product._id === action.payload._id);
       // console.log(item , "item that we found");
       if (item) {

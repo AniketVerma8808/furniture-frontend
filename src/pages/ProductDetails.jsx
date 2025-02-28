@@ -56,21 +56,22 @@ const ProductDetails = () => {
   const decrementQuantity = () => setQuantity((prev) => Math.max(1, prev - 1));
 
   // add to cart
+
   const handleAddToCart = async () => {
     let token = store.getState().auth.token;
     if (!token) {
       toast.error("Please log in to manage your cart.");
       navigate("/login");
       return;
-    } else {
-      await POSTCartService({ productId: product._id, quantity: 1 })
-        .then((res) => {
-          dispatch(updateCountCart("inc"));
-          dispatch(addToCart(product));
-          toast.success("Added to Cart");
-        })
-        .catch((err) => console.log(err));
     }
+
+    await POSTCartService({ productId: product._id, quantity: 1 })
+      .then((res) => {
+        // dispatch(updateCountCart("inc"));
+        dispatch(addToCart(product));
+        toast.success("Product added to cart successfully");
+      })
+      .catch((err) => console.log(err));
   };
 
   // add to wihslist

@@ -91,7 +91,7 @@ const Navbar = () => {
               className="relative flex flex-col items-center"
             >
               <FaHeart />
-              <span className="text-xs">WISHLIST.</span>
+              <span className="text-xs">WISHLIST</span>
 
               {wishlistCount > 0 && (
                 <span className="absolute -top-4 right-1 bg-red-500 text-white text-xs rounded-full px-2 py-1">

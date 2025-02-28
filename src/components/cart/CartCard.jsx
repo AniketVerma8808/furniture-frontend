@@ -56,19 +56,19 @@ const CartCard = () => {
   };
 
   return (
-    <div className="relative">
+    <div className="relative cursor-pointer">
       {cartCount > 0 && (
-        <span className="absolute -top-3 md:-top-5 right-0 bg-red-500 text-white text-xs rounded-full px-2 py-1">
+        <span className="absolute -top-3 md:-top-4 -right-1 bg-red-500 text-white text-xs rounded-full px-2 py-1">
           {cartCount}
         </span>
       )}
-      <div
+      <p
         className="flex flex-col items-center cursor-pointer"
         onClick={() => setIsDropdownOpen(!isDropdownOpen)}
       >
         <FaShoppingCart />
         <span className="text-[8px] md:text-xs">CART</span>
-      </div>
+      </p>
 
       {/* Dropdown */}
       {isDropdownOpen && (

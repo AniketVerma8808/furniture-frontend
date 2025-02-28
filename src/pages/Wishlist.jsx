@@ -14,7 +14,7 @@ import {
 } from "../redux/wishlistSlice";
 import { store } from "../redux/store";
 import { useNavigate } from "react-router-dom";
-import { addToCart, updateCountCart } from "../redux/cartSlice";
+import { addToCart } from "../redux/cartSlice";
 
 const Wishlist = () => {
   const { wishlistItems, wishlistCount } = useSelector(
@@ -33,14 +33,13 @@ const Wishlist = () => {
       return;
     }
 
-    try {
-      await POSTCartService({ productId: product._id, quantity: 1 });
-      dispatch(updateCountCart("inc"));
-      dispatch(addToCart({ product, quantity: 1 }));
-      toast.success("Product added to cart successfully");
-    } catch (err) {
-      console.log(err);
-    }
+    await POSTCartService({ productId: product._id, quantity: 1 })
+      .then((res) => {
+        // dispatch(updateCountCart("inc"));
+        dispatch(addToCart(product));
+        toast.success("Product added to cart successfully");
+      })
+      .catch((err) => console.log(err));
   };
 
   const handleRemovefromWishlist = async (productId) => {

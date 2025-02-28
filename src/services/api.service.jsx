@@ -68,10 +68,26 @@ export const GETCartService = () => {
   return clientAxios.get("/cart");
 };
 
-export const UPDATECartQuantityService = (productId, data) => {
-  return clientAxios.put(`/cart/${productId}`, data);
+export const UPDATECartQuantityService = (data) => {
+  return clientAxios.put(`/cart/quantity`, data);
 };
 
 export const DELETECartService = (productId) => {
   return clientAxios.delete(`/cart/${productId}`);
+};
+
+export const POSTAddressService = (data) => {
+  return clientAxios.post("/address", data);
+};
+
+export const GETAddressService = () => {
+  return clientAxios.get("/address");
+};
+
+export const UPDATEAddressService = (_id, data) => {
+  return clientAxios.patch(`/address/${_id}`, data);
+};
+
+export const DELETEAddressService = (_id) => {
+  return clientAxios.delete(`/address/${_id}`);
 };
