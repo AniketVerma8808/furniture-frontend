@@ -3,7 +3,10 @@ import { Link, useNavigate } from "react-router-dom";
 import { IoIosTrash, IoMdClose } from "react-icons/io";
 import { FaShoppingCart } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-import { DELETECartService } from "../../services/api.service";
+import {
+  DELETECartService,
+  UPDATECartQuantityService,
+} from "../../services/api.service";
 import {
   removeFromCart,
   updateCartquantity,
@@ -20,8 +23,18 @@ const CartCard = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const updateQuantity = (productId, change) => {
-    dispatch(updateCartquantity({ productId, change }));
+  const updateQuantity = async (productId, change) => {
+    const payload = {
+      productId,
+      quantity: change > 0 ? 1 : -1,
+      type: change > 0 ? "increase" : "decrease",
+    };
+    try {
+      await UPDATECartQuantityService(payload);
+      dispatch(updateCartquantity({ productId, change }));
+    } catch (error) {
+      console.error("Error Updating Quantity:", error);
+    }
   };
 
   const removeItem = async (productId) => {

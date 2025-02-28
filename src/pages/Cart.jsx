@@ -7,7 +7,10 @@ import { toast } from "react-toastify";
 import noProductImage from "../assets/image/Furniture images/cart.png";
 import NoProduct from "./NoProduct";
 import { useDispatch, useSelector } from "react-redux";
-import { DELETECartService } from "../services/api.service";
+import {
+  DELETECartService,
+  UPDATECartQuantityService,
+} from "../services/api.service";
 import {
   removeFromCart,
   updateCartquantity,
@@ -19,8 +22,18 @@ const Cart = () => {
   const { cartItems } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
 
-  const handleQuantityChange = (productId, change) => {
-    dispatch(updateCartquantity({ productId, change }));
+  const handleQuantityChange = async (productId, change) => {
+    const payload = {
+      productId,
+      quantity: change > 0 ? 1 : -1,
+      type: change > 0 ? "increase" : "decrease",
+    };
+    try {
+      await UPDATECartQuantityService(payload);
+      dispatch(updateCartquantity({ productId, change }));
+    } catch (error) {
+      console.error("Error Updating Quantity:", error);
+    }
   };
 
   const removeItem = async (productId) => {

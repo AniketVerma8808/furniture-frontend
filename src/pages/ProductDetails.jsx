@@ -9,12 +9,20 @@ import ProductDetailsPage from "./ProductDetailsPage";
 // import RelatedProduct from "../components/relatedProduct/RelatedProduct";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../redux/productSlice";
-import { POSTCartService, POSTWishlistService } from "../services/api.service";
+import {
+  POSTCartService,
+  POSTWishlistService,
+  UPDATECartQuantityService,
+} from "../services/api.service";
 import { store } from "../redux/store";
 import { addToWishlist, updateCountWishlist } from "../redux/wishlistSlice";
 import { motion } from "framer-motion";
 import Skeleton from "../components/loader/Skeleton";
-import { addToCart, updateCountCart } from "../redux/cartSlice";
+import {
+  addToCart,
+  updateCartquantity,
+  updateCountCart,
+} from "../redux/cartSlice";
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -51,10 +59,16 @@ const ProductDetails = () => {
     setActiveIndex(activeIndex === index ? null : index);
   };
 
-  // quantity inc & dec
-  const incrementQuantity = () => setQuantity((prev) => prev + 1);
-  const decrementQuantity = () => setQuantity((prev) => Math.max(1, prev - 1));
-
+  // Handle quantity change
+  const handleQuantityChange = async (productId, change) => {
+    const payload = {
+      productId,
+      quantity: change > 0 ? 1 : -1,
+      type: change > 0 ? "increase" : "decrease",
+    };
+    await UPDATECartQuantityService(payload);
+    dispatch(updateCartquantity({ productId, change }));
+  };
   // add to cart
 
   const handleAddToCart = async () => {
@@ -152,14 +166,15 @@ const ProductDetails = () => {
           <div className="mt-6 flex items-center space-x-4">
             <p className="text-lg ">Quantity:</p>
             <button
-              onClick={decrementQuantity}
+              onClick={() => handleQuantityChange(product._id, -1)}
               className="bg-gray-300 text-gray-700 rounded-full px-3 py-1"
+              disabled={quantity === 1}
             >
               -
             </button>
             <span className="text-lg ">{quantity}</span>
             <button
-              onClick={incrementQuantity}
+              onClick={() => handleQuantityChange(product._id, 1)}
               className="bg-gray-300 text-gray-700 rounded-full px-3 py-1"
             >
               +
