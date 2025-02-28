@@ -5,7 +5,6 @@ import { FaShoppingCart } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { DELETECartService } from "../../services/api.service";
 import {
-  fetchCart,
   removeFromCart,
   updateCartquantity,
   updateCountCart,
@@ -102,7 +101,7 @@ const CartCard = () => {
 
               return (
                 <div
-                  key={item._id}
+                  key={index}
                   className="flex items-center gap-3 px-4 py-3 border-b"
                 >
                   {/* Product Image */}

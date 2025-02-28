@@ -4,11 +4,17 @@ import { toast } from "react-toastify";
 import NoProduct from "./NoProduct";
 import noProductImage from "../assets/image/Furniture images/wishlit.png";
 import { useDispatch, useSelector } from "react-redux";
-import { DELETEWishlistService } from "../services/api.service";
+import {
+  DELETEWishlistService,
+  POSTCartService,
+} from "../services/api.service";
 import {
   removeFromWishlist,
   updateCountWishlist,
 } from "../redux/wishlistSlice";
+import { store } from "../redux/store";
+import { useNavigate } from "react-router-dom";
+import { addToCart, updateCountCart } from "../redux/cartSlice";
 
 const Wishlist = () => {
   const { wishlistItems, wishlistCount } = useSelector(
@@ -17,9 +23,24 @@ const Wishlist = () => {
 
   const [hoveredItem, setHoveredItem] = useState(null);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const handleAddToCart = () => {
-    toast.success("add to cart");
+  const handleAddToCart = async (product) => {
+    let token = store.getState().auth.token;
+    if (!token) {
+      toast.error("Please log in to manage your cart.");
+      navigate("/login");
+      return;
+    }
+
+    try {
+      await POSTCartService({ productId: product._id, quantity: 1 });
+      dispatch(updateCountCart("inc"));
+      dispatch(addToCart({ product, quantity: 1 }));
+      toast.success("Product added to cart successfully");
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const handleRemovefromWishlist = async (productId) => {
@@ -60,7 +81,7 @@ const Wishlist = () => {
                   </button>
 
                   <img
-                    src={item.images[0]} // Replace with actual image URL
+                    src={item.images[0]}
                     alt="Product"
                     className="w-full h-auto object-cover rounded-lg cursor-pointer"
                   />

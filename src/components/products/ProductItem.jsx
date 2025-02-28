@@ -14,7 +14,7 @@ import {
   DELETEWishlistService,
   POSTCartService,
 } from "../../services/api.service";
-import { addToCart, fetchCart, updateCountCart } from "../../redux/cartSlice";
+import { addToCart, updateCountCart } from "../../redux/cartSlice";
 
 const ProductItem = ({ product }) => {
   const dispatch = useDispatch();
@@ -37,14 +37,21 @@ const ProductItem = ({ product }) => {
       navigate("/login");
       return;
     }
-    await POSTCartService({ productId: product._id, quantity: 1 })
-      .then((res) => {
-        dispatch(updateCountCart("inc"));
-        dispatch(fetchCart());
-        dispatch(addToCart(product));
-        toast.success("Product added to cart successfully");
-      })
-      .catch((err) => console.log(err));
+    // await POSTCartService({ productId: product._id, quantity: 1 })
+    //   .then((res) => {
+    //     dispatch(updateCountCart("inc"));
+    //     dispatch(addToCart(product));
+    //     toast.success("Product added to cart successfully");
+    //   })
+    //   .catch((err) => console.log(err));
+      try {
+          await POSTCartService({ productId: product._id, quantity: 1 });
+          dispatch(updateCountCart("inc"));
+          dispatch(addToCart({ product, quantity: 1 }));
+          toast.success("Product added to cart successfully");
+        } catch (err) {
+          console.log(err);
+        }
   };
 
   const handleWishlistToggle = async () => {

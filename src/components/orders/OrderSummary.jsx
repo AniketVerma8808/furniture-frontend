@@ -1,6 +1,16 @@
 import React from "react";
+import { useSelector } from "react-redux";
 
 const OrderSummary = () => {
+  const { cartItems } = useSelector((state) => state.cart);
+
+  const subtotal = cartItems.reduce(
+    (acc, { product, quantity }) => acc + product.price * quantity,
+    0
+  );
+
+  const total = subtotal;
+
   return (
     <div>
       <div className=" bg-white p-6 rounded-lg shadow-md border h-[500px] border-gray-200">
@@ -9,7 +19,7 @@ const OrderSummary = () => {
         {/* Subtotal */}
         <div className="flex justify-between text-[14px] md:text-lg mb-3 text-gray-600">
           <span>Subtotal</span>
-          <span>₹5000</span>
+          <span>₹{subtotal.toFixed(2)}</span>
         </div>
 
         {/* Paytm Giftcard */}
@@ -33,7 +43,7 @@ const OrderSummary = () => {
         {/* Total */}
         <div className="flex justify-between text-lg  border-t pt-3 mt-4 text-gray-800">
           <span>Total Orders</span>
-          <span className="text-xl text-green-600">₹10000</span>
+          <span className="text-xl text-green-600">₹{total.toFixed(2)}</span>
         </div>
 
         {/* Discount Code Section */}
