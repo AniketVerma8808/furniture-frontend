@@ -8,6 +8,7 @@ import { LoginService } from "../../services/api.service";
 import { useDispatch } from "react-redux";
 import { loginSuccess } from "../../redux/authSlice";
 import { fetchWishlist } from "../../redux/wishlistSlice";
+import { fetchCart } from "../../redux/cartSlice";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -33,6 +34,8 @@ const Login = () => {
         const { token, user } = res.data;
         dispatch(loginSuccess({ token, user }));
         dispatch(fetchWishlist());
+      dispatch(fetchCart());
+
 
         navigate("/");
         setLoading(false);
