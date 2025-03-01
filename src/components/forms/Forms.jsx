@@ -58,7 +58,6 @@ const Forms = ({ title, image, issueType }) => {
       issue: message,
     };
 
-    // console.log("Payload being sent:", payload);
     try {
       await FormService(payload);
       toast.success("Help request submitted successfully");
@@ -85,7 +84,7 @@ const Forms = ({ title, image, issueType }) => {
               <img
                 src={image}
                 alt={title}
-                className="w-full h-auto max-w-xs md:max-w-sm lg:max-w-md xl:max-w-lg rounded-lg"
+                className="w-full rounded-lg"
               />
             </div>
           ) : (
@@ -184,7 +183,6 @@ const Forms = ({ title, image, issueType }) => {
               style={{ height: "40px", width: "100%" }}
             >
               {loading ? <Loader size={5} color="white" /> : "Send Message"}
-              {/* {loading ? "Submitting..." : "Send Message"} */}
             </button>
           </form>
         </div>

@@ -33,7 +33,6 @@ const ProductDetails = () => {
   const [activeIndex, setActiveIndex] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
   const [selected, setSelected] = useState([]);
-
   const { products, loading } = useSelector((state) => state.product);
   const product = products.find((p) => p._id === id);
 
@@ -69,6 +68,7 @@ const ProductDetails = () => {
     await UPDATECartQuantityService(payload);
     dispatch(updateCartquantity({ productId, change }));
   };
+
   // add to cart
 
   const handleAddToCart = async () => {

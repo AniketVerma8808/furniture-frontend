@@ -13,8 +13,7 @@ const Setting = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleLogout = async () => {
-    // dispatch(logoutUser());
-    await dispatch(logoutAndClearStore()); // ✅ This clears everything
+    await dispatch(logoutAndClearStore());
     toast.success("Logout successful!");
     navigate("/");
   };

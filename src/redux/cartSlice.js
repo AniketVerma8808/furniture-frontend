@@ -26,14 +26,15 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     addToCart: (state, action) => {
-  
-      const item = state.cartItems.find((i) => i.product._id === action.payload._id);
+      const item = state.cartItems.find(
+        (i) => i.product._id === action.payload._id
+      );
       // console.log(item , "item that we found");
       if (item) {
         item.quantity += 1;
       } else {
-        state.cartCount += 1
-        state.cartItems.push({  product : action.payload , quantity: 1 });
+        state.cartCount += 1;
+        state.cartItems.push({ product: action.payload, quantity: 1 });
       }
     },
 

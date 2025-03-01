@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { IoIosTrash, IoMdClose } from "react-icons/io";
 import { FaShoppingCart } from "react-icons/fa";
@@ -8,6 +8,7 @@ import {
   UPDATECartQuantityService,
 } from "../../services/api.service";
 import {
+  clearCart,
   removeFromCart,
   updateCartquantity,
   updateCountCart,
@@ -16,12 +17,18 @@ import { toast } from "react-toastify";
 
 const CartCard = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-
+  const { user } = useSelector((state) => state.auth);
   const { cartItems, cartCount } = useSelector((state) => state.cart);
 
   // console.log("cart product", cartItems);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (!user) {
+      dispatch(clearCart());
+    }
+  }, [user, dispatch]);
 
   const updateQuantity = async (productId, change) => {
     const payload = {
@@ -128,7 +135,7 @@ const CartCard = () => {
                   <div className="flex-1">
                     <p className="text-sm line-clamp-1">{item.product.name}</p>
                     <p className="text-xs text-gray-500">
-                      $
+                      ₹
                       {item.product.price
                         ? item.product.price.toFixed(2)
                         : "0.00"}

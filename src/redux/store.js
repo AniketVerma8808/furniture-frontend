@@ -38,7 +38,7 @@ export const store = configureStore({
         ignoredActions: [
           "persist/PERSIST",
           "persist/REHYDRATE",
-          "persist/FLUSH",   // ✅ Add FLUSH to ignored actions
+          "persist/FLUSH", // ✅ Add FLUSH to ignored actions
           "persist/PAUSE",
           "persist/PURGE",
           "persist/REGISTER",
@@ -49,18 +49,14 @@ export const store = configureStore({
     }).concat(thunk),
 });
 
-
 export const logoutAndClearStore = () => async (dispatch) => {
   dispatch(logoutUser()); // Clear Redux auth state
   dispatch(clearWishlist()); // Clear wishlist state
   dispatch(clearCart()); // Clear wishlist state
 
-  persistor.pause();  // ✅ Pause persistor
+  persistor.pause(); // ✅ Pause persistor
   await persistor.flush().catch(() => {}); // ✅ Handle non-serializable warnings
   await persistor.purge().catch(() => {}); // ✅ Handle potential errors
 };
-
-
-
 
 export const persistor = persistStore(store);

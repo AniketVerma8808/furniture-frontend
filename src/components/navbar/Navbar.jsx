@@ -1,16 +1,24 @@
 import { FaUser, FaHeart, FaMapMarkerAlt, FaBars } from "react-icons/fa";
 import { BiUserCircle } from "react-icons/bi";
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import CartCard from "../cart/CartCard";
+import { clearWishlist } from "../../redux/wishlistSlice";
 
 const Navbar = () => {
+  const dispatch = useDispatch();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { user } = useSelector((state) => state.auth);
   const { city } = useSelector((state) => state.home);
 
   const { wishlistCount } = useSelector((state) => state.wishlist);
+
+  useEffect(() => {
+    if (!user) {
+      dispatch(clearWishlist());
+    }
+  }, [user, dispatch]);
 
   const categories = [
     { name: "BEDS", path: "/categories/beds" },
@@ -162,6 +170,7 @@ const Navbar = () => {
           </div>
         </div>
       </div>
+
       {/* desktop menu */}
       <nav className="hidden md:block py-2 border-t border-gray-700 z-40 relative">
         <div className="max-w-7xl px-2">
@@ -171,9 +180,8 @@ const Navbar = () => {
                 key={index}
                 className="relative flex items-center gap-1 cursor-pointer"
               >
-                <Link to={category.path} className="text-[12px]">
-                  {category.name}
-                </Link>
+                {/* <Link to={category.path} className="text-[12px]"> */}
+                <Link className="text-[12px]">{category.name}</Link>
               </li>
             ))}
           </ul>
@@ -187,7 +195,7 @@ const Navbar = () => {
               {categories.slice(0, 5).map((category, index) => (
                 <li key={index} className="py-2 px-6 border-b border-gray-700">
                   <Link
-                    to={category.path}
+                    // to={category.path}
                     onClick={() => setIsMenuOpen(false)}
                     className="block text-[12px] text-white"
                   >

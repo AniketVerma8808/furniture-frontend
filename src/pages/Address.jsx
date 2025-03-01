@@ -24,6 +24,7 @@ const Address = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [editingId, setEditingId] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [selectedAddress, setSelectedAddress] = useState(null);
 
   useEffect(() => {
     fetchAddresses();
@@ -40,6 +41,12 @@ const Address = () => {
         toast.error("Failed to fetch addresses.");
       })
       .finally(() => setLoading(false));
+  };
+
+  const handleAddressSelect = (addressId) => {
+    setSelectedAddress((prevSelected) =>
+      prevSelected === addressId ? null : addressId
+    );
   };
 
   const handleInputChange = (e) => {
@@ -117,9 +124,21 @@ const Address = () => {
                   savedAddresses.map((address) => (
                     <div
                       key={address._id}
-                      className="mb-4 p-4 flex justify-between border rounded-lg"
+                      className="mb-4 p-4 flex items-center border border-gray-200 rounded-lg gap-4"
                     >
-                      <div>
+                      {/* Radio Button Centered */}
+                      <div className="flex flex-col items-center">
+                        <input
+                          type="radio"
+                          value={address._id}
+                          checked={selectedAddress === address._id}
+                          onClick={() => handleAddressSelect(address._id)}
+                          className="w-5 h-5 cursor-pointer accent-blue-500"
+                        />
+                      </div>
+
+                      {/* Address Details */}
+                      <div className="flex-1">
                         <p className="text-[14px]">
                           <strong>
                             {address.firstName} {address.lastName}
@@ -140,7 +159,9 @@ const Address = () => {
                           </p>
                         )}
                       </div>
-                      <div className="flex flex-col gap-2 mt-2">
+
+                      {/* Edit & Delete Buttons */}
+                      <div className="flex flex-col gap-2">
                         <button
                           onClick={() => handleEdit(address)}
                           className="p-2 bgColor text-white rounded"

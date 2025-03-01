@@ -34,8 +34,7 @@ const Login = () => {
         const { token, user } = res.data;
         dispatch(loginSuccess({ token, user }));
         dispatch(fetchWishlist());
-      dispatch(fetchCart());
-
+        dispatch(fetchCart());
 
         navigate("/");
         setLoading(false);

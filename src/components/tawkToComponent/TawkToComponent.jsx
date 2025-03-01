@@ -18,5 +18,3 @@ const TawkToComponent = () => {
 };
 
 export default TawkToComponent;
-// 536489
-

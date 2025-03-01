@@ -1,7 +1,10 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const OrderSummary = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
   const { cartItems } = useSelector((state) => state.cart);
 
   const subtotal = cartItems.reduce(
@@ -11,10 +14,13 @@ const OrderSummary = () => {
 
   const total = subtotal;
 
+  const currentStep = location.state?.step || "cart";
+  const nextStep = currentStep === "address" ? "payment" : "address";
+
   return (
     <div>
-      <div className=" bg-white p-6 rounded-lg shadow-md border h-[500px] border-gray-200">
-        <h3 className="text-xl  mb-4 text-gray-700">Order Summary</h3>
+      <div className="bg-white p-6 rounded-lg shadow-md border h-[500px] border-gray-200">
+        <h3 className="text-xl mb-4 text-gray-700">Order Summary</h3>
 
         {/* Subtotal */}
         <div className="flex justify-between text-[14px] md:text-lg mb-3 text-gray-600">
@@ -41,7 +47,7 @@ const OrderSummary = () => {
         </div>
 
         {/* Total */}
-        <div className="flex justify-between text-lg  border-t pt-3 mt-4 text-gray-800">
+        <div className="flex justify-between text-lg border-t pt-3 mt-4 text-gray-800">
           <span>Total Orders</span>
           <span className="text-xl text-green-600">₹{total.toFixed(2)}</span>
         </div>
@@ -63,13 +69,22 @@ const OrderSummary = () => {
             />
           </div>
           <div className="mt-4 flex justify-end">
-            <button className="px-4 py-2 bgColor text-white text-sm  rounded-lg ">
+            <button className="px-4 py-2 bgColor text-white text-sm rounded-lg">
               Apply
             </button>
           </div>
+
+          {/* ✅ Fixed Navigation Button */}
           <div className="mt-4 flex items-center">
-            <button className="bgColor w-full text-white p-3 text-sm rounded-lg">
-              Proceed To CheckOut
+            <button
+              onClick={() =>
+                navigate("/checkout", { state: { step: nextStep } })
+              }
+              className="bgColor w-full text-white cursor-pointer p-3 text-sm rounded-lg"
+            >
+              {nextStep === "payment"
+                ? "Proceed to Payment"
+                : "Proceed to Checkout"}
             </button>
           </div>
         </div>
