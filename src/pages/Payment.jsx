@@ -36,7 +36,7 @@ const Payment = () => {
   }, [cartItems]);
 
   const handlePaymentSelection = (method) => {
-    setSelectedPayment(method);
+    setSelectedPayment((prev) => (prev === method ? null : method));
   };
 
   const handleProceedToPayment = () => {
@@ -50,81 +50,94 @@ const Payment = () => {
   };
 
   const initiateRazorpayPayment = async () => {
-    try {
-      setIsDelivering(true);
-      const razorpayOrderResponse = await CreateRazorpayOrderService({
-        amount: totalAmount,
-      });
-      const order_id = razorpayOrderResponse.data.id;
+    // try {
+    //   setIsDelivering(true);
+    //   const razorpayOrderResponse = await CreateRazorpayOrderService({
+    //     amount: totalAmount,
+    //   });
+    //   const order_id = razorpayOrderResponse.data.id;
 
-      const options = {
-        key: "rzp_test_GJHHBFZE4O8Ub6",
-        amount: totalAmount,
-        currency: "INR",
-        order_id,
-        handler: async (response) => {
-          try {
-            const paymentValidation = await VerifyRazorpayPaymentService(
-              response
-            );
-            if (paymentValidation.data.success) {
-              const payload = {
-                products: cartItems.map((item) => ({
-                  product: item.product._id,
-                  quantity: item.quantity,
-                })),
-                order_id,
-                totalAmount,
-                address: selectedAddress,
-                paymentType: "Online",
-                transactionId: response.razorpay_payment_id,
-              };
+    //   const options = {
+    //     key: "rzp_test_GJHHBFZE4O8Ub6",
+    //     amount: totalAmount,
+    //     currency: "INR",
+    //     order_id,
+    //     handler: async (response) => {
+    //       try {
+    //         const paymentValidation = await VerifyRazorpayPaymentService(
+    //           response
+    //         );
+    //         if (paymentValidation.data.success) {
+    //           const payload = {
+    //             products: cartItems.map((item) => ({
+    //               product: item.product._id,
+    //               quantity: item.quantity,
+    //             })),
+    //             order_id,
+    //             totalAmount,
+    //             address: selectedAddress,
+    //             paymentType: "Online",
+    //             transactionId: response.razorpay_payment_id,
+    //           };
 
-              await CreateOrderService(payload)
-                .then(() => {
-                  toast.success("Order placed successfully!");
-                  navigate("/orders");
-                })
-                .catch(() => {
-                  toast.error(
-                    "Something went wrong, but your payment is secure!"
-                  );
-                });
-            } else {
-              toast.error("Payment verification failed");
-            }
-          } catch (error) {
-            console.error("Payment verification error:", error);
-            toast.error("Error during payment verification.");
-          }
-        },
-        prefill: {
-          email: "Techxpert@example.com",
-          contact: "9000000000",
-        },
-        theme: {
-          color: "#3399cc",
-        },
-      };
+    //           await CreateOrderService(payload)
+    //             .then(() => {
+    //               toast.success("Order placed successfully!");
+    //               navigate("/orders");
+    //             })
+    //             .catch(() => {
+    //               toast.error(
+    //                 "Something went wrong, but your payment is secure!"
+    //               );
+    //             });
+    //         } else {
+    //           toast.error("Payment verification failed");
+    //         }
+    //       } catch (error) {
+    //         console.error("Payment verification error:", error);
+    //         toast.error("Error during payment verification.");
+    //       }
+    //     },
+    //     prefill: {
+    //       email: "Techxpert@example.com",
+    //       contact: "9000000000",
+    //     },
+    //     theme: {
+    //       color: "#3399cc",
+    //     },
+    //   };
 
-      const rzp1 = new Razorpay(options);
-      rzp1.open();
-    } catch (error) {
-      console.error("Error during order process:", error);
-      toast.error("Failed to place order.");
-    } finally {
-      setIsDelivering(false);
-    }
+    //   const rzp1 = new Razorpay(options);
+    //   rzp1.open();
+    // } catch (error) {
+    //   console.error("Error during order process:", error);
+    //   toast.error("Failed to place order.");
+    // } finally {
+    //   setIsDelivering(false);
+    // }
+    toast.success("order Place ");
   };
 
   return (
     <div className="container mx-auto px-4 py-8 grid grid-cols-1 lg:grid-cols-3 gap-6">
       <div className="lg:col-span-2 space-y-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 bg-white p-6 rounded-lg shadow-md border">
+        {/* Billing & Shipping Section */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 bg-white  rounded-lg shadow-md border border-gray-200">
           {selectedAddress ? (
             <>
-              <div>
+              <div className="border-r border-gray-200 p-6">
                 <h3 className="text-lg font-semibold mb-2">Bill To</h3>
+                <p className="text-gray-600">
+                  {selectedAddress.firstName} {selectedAddress.lastName}
+                </p>
+                <p className="text-gray-600">{selectedAddress.address}</p>
+                <p className="text-gray-600">
+                  {selectedAddress.city} - {selectedAddress.pincode}
+                </p>
+                <p className="text-gray-600">Phone: {selectedAddress.phone}</p>
+              </div>
+              <div className=" p-6">
+                <h3 className="text-lg font-semibold mb-2">Ship To</h3>
                 <p className="text-gray-600">
                   {selectedAddress.firstName} {selectedAddress.lastName}
                 </p>
