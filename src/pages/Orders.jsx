@@ -7,10 +7,7 @@ import ReturnsAndRefunds from "../components/orders/ReturnsAndRefunds";
 const Orders = () => {
   const [activeTab, setActiveTab] = useState("inProcess");
 
-  const switchTab = (tab) => {
-    setActiveTab(tab);
-  };
-
+  const switchTab = (tab) => setActiveTab(tab);
   return (
     <div className="min-h-screen md:py-12 py-4">
       <div className="container mx-auto max-w-7xl px-2 md:px-8">

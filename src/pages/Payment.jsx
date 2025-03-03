@@ -115,7 +115,7 @@ const Payment = () => {
     // } finally {
     //   setIsDelivering(false);
     // }
-    toast.success("order Place ");
+    toast.success("order Placed successfully ");
   };
 
   return (
