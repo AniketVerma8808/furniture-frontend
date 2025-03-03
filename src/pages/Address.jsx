@@ -37,16 +37,24 @@ const Address = () => {
         // console.log("Fetched addresses:", response);
         setSavedAddresses(response.data.data);
       })
-      .catch(() => {
-        toast.error("Failed to fetch addresses.");
+      .catch((error) => {
+        console.log(error);
+        // toast.error("Failed to fetch addresses.");
       })
       .finally(() => setLoading(false));
   };
 
   const handleAddressSelect = (addressId) => {
-    setSelectedAddress((prevSelected) =>
-      prevSelected === addressId ? null : addressId
-    );
+    if (selectedAddress === addressId) {
+      localStorage.removeItem("selectedAddress");
+      setSelectedAddress(null);
+    } else {
+      const selected = savedAddresses.find((addr) => addr._id === addressId);
+      if (selected) {
+        localStorage.setItem("selectedAddress", JSON.stringify(selected));
+        setSelectedAddress(addressId);
+      }
+    }
   };
 
   const handleInputChange = (e) => {
@@ -57,12 +65,37 @@ const Address = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!/\d{6}$/.test(formData.pincode)) {
-      toast.error("Invalid zip code. Enter a valid 6 digit zip code.");
+    // Validation checks
+    if (!formData.firstName.trim()) {
+      toast.error("First name is required.");
       return;
     }
-    if (!/\d{10}$/.test(formData.phone)) {
-      toast.error("Enter a valid 10-digit phone number.");
+    if (!formData.lastName.trim()) {
+      toast.error("Last name is required.");
+      return;
+    }
+    if (!formData.address.trim()) {
+      toast.error("Address is required.");
+      return;
+    }
+    if (!formData.city.trim()) {
+      toast.error("City is required.");
+      return;
+    }
+    if (!formData.pincode.trim()) {
+      toast.error("Pincode is required.");
+      return;
+    }
+    if (!/\d{6}$/.test(formData.pincode)) {
+      toast.error("Invalid pincode. Enter a valid 6-digit pincode.");
+      return;
+    }
+    if (!formData.phone.trim()) {
+      toast.error("Phone number is required.");
+      return;
+    }
+    if (!/^\d{10}$/.test(formData.phone)) {
+      toast.error("Invalid phone number. Enter a valid 10-digit number.");
       return;
     }
 
@@ -75,6 +108,7 @@ const Address = () => {
         await POSTAddressService(formData);
         toast.success("New address added successfully!");
       }
+
       fetchAddresses();
       setFormData({
         firstName: "",
@@ -89,7 +123,11 @@ const Address = () => {
       setIsEditing(false);
       setEditingId(null);
     } catch (error) {
-      toast.error("Failed to save address.");
+      const errorMessage =
+        error?.response?.data?.message ||
+        error?.message ||
+        "Something went wrong while saving the address.";
+      toast.error(errorMessage);
     } finally {
       setLoading(false);
     }
@@ -107,6 +145,10 @@ const Address = () => {
       setSavedAddresses((prev) =>
         prev.filter((address) => address._id !== _id)
       );
+      if (selectedAddress === _id) {
+        localStorage.removeItem("selectedAddress");
+        selectedAddress(null);
+      }
       toast.success("Address deleted successfully!");
     } catch {
       toast.error("Failed to delete address.");
@@ -121,9 +163,9 @@ const Address = () => {
               <div className="border border-gray-300 rounded-lg p-4 min-h-36">
                 <h3 className="text-base md:text-xl mb-2">Delivery Address</h3>
                 {savedAddresses.length > 0 ? (
-                  savedAddresses.map((address) => (
+                  savedAddresses.map((address, index) => (
                     <div
-                      key={address._id}
+                      key={index}
                       className="mb-4 p-4 flex items-center border border-gray-200 rounded-lg gap-4"
                     >
                       {/* Radio Button Centered */}

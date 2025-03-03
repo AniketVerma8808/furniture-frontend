@@ -91,3 +91,20 @@ export const UPDATEAddressService = (_id, data) => {
 export const DELETEAddressService = (_id) => {
   return clientAxios.delete(`/address/${_id}`);
 };
+// Create a Razorpay order
+export const CreateRazorpayOrderService = (orderData) => {
+  return clientAxios.post(`order/razorpay/order`, orderData);
+};
+
+export const VerifyRazorpayPaymentService = (paymentData) => {
+  return clientAxios.post(`order/razorpay/verify`, paymentData);
+};
+
+// Create new order
+export const CreateOrderService = (data) => {
+  return clientAxios.post("/order", data);
+};
+// get all order
+export const GetOrderService = () => {
+  return clientAxios.post("/order");
+};

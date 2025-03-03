@@ -12,7 +12,9 @@ const OrderSummary = () => {
     0
   );
 
-  const total = subtotal;
+  const shipping = 0;
+  const tax = 2000;
+  const total = subtotal + tax;
 
   const currentStep = location.state?.step || "cart";
   const nextStep = currentStep === "address" ? "payment" : "address";
@@ -37,13 +39,13 @@ const OrderSummary = () => {
         {/* Shipping */}
         <div className="flex justify-between text-[14px] md:text-lg mb-3 text-gray-600">
           <span>Shipping</span>
-          <span className="text-gray-500">Not yet calculated</span>
+          <span>₹{shipping.toFixed(2)}</span>
         </div>
 
         {/* Tax */}
         <div className="flex justify-between text-md mb-3 text-gray-600">
           <span>Tax</span>
-          <span>₹2000</span>
+          <span>₹{tax.toFixed(2)}</span>
         </div>
 
         {/* Total */}
@@ -67,26 +69,22 @@ const OrderSummary = () => {
               className="w-full p-2 text-sm border-none focus:outline-none"
               placeholder="Enter code here"
             />
-          </div>
-          <div className="mt-4 flex justify-end">
             <button className="px-4 py-2 bgColor text-white text-sm rounded-lg">
               Apply
             </button>
           </div>
+        </div>
 
-          {/* ✅ Fixed Navigation Button */}
-          <div className="mt-4 flex items-center">
-            <button
-              onClick={() =>
-                navigate("/checkout", { state: { step: nextStep } })
-              }
-              className="bgColor w-full text-white cursor-pointer p-3 text-sm rounded-lg"
-            >
-              {nextStep === "payment"
-                ? "Proceed to Payment"
-                : "Proceed to Checkout"}
-            </button>
-          </div>
+        {/* Navigation Button */}
+        <div className="mt-6">
+          <button
+            onClick={() => navigate("/checkout", { state: { step: nextStep } })}
+            className="bgColor w-full text-white cursor-pointer p-3 text-sm rounded-lg"
+          >
+            {nextStep === "payment"
+              ? "Proceed to Payment"
+              : "Proceed to Checkout"}
+          </button>
         </div>
       </div>
     </div>
