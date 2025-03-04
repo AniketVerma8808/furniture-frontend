@@ -19,6 +19,10 @@ const OrderSummary = () => {
   const currentStep = location.state?.step || "cart";
   const nextStep = currentStep === "address" ? "payment" : "address";
 
+  const handleProceed = () => {
+    localStorage.setItem("checkoutStep", nextStep);
+    navigate("/checkout", { state: { step: nextStep } });
+  };
   return (
     <div>
       <div className="bg-white p-6 rounded-lg shadow-md border h-[500px] border-gray-200">
@@ -78,7 +82,7 @@ const OrderSummary = () => {
         {/* Navigation Button */}
         <div className="mt-6">
           <button
-            onClick={() => navigate("/checkout", { state: { step: nextStep } })}
+            onClick={handleProceed}
             className="bgColor w-full text-white cursor-pointer p-3 text-sm rounded-lg"
           >
             {nextStep === "payment"
