@@ -1,5 +1,5 @@
 import axios from "axios";
-import {store} from "../redux/store";
+import { store } from "../redux/store";
 import { jwtDecode } from "jwt-decode";
 import { logoutUser } from "../redux/authSlice";
 
@@ -46,5 +46,3 @@ clientAxios.interceptors.request.use(
 );
 
 export default clientAxios;
-
-
