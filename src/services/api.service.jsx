@@ -17,7 +17,7 @@ export const getBannerService = async () => {
 
 // all Blogs data API
 export const GetBlogsService = () => {
-  return clientAxios.get(`//blogs/all`);
+  return clientAxios.get(`/blogs/all`);
 };
 export const FormService = (data) => {
   return clientAxios.post("/help", data);

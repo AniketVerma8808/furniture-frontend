@@ -4,7 +4,7 @@ import { jwtDecode } from "jwt-decode";
 import { logoutUser } from "../redux/authSlice";
 
 // const API_URL = import.meta.env.VITE_BACKEND_PORT_DEVELOPMENT;
-const API_URL = "https://furniture-backend-or9h.onrender.com/api"
+const API_URL = "https://api.4xdollar.com/furniture/api";
 const clientAxios = axios.create({
   baseURL: API_URL,
   headers: {
