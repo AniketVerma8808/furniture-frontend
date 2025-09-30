@@ -21,7 +21,7 @@ const PrevArrow = ({ onClick }) => (
   </button>
 );
 
-const ProductSlider = ({ title, data }) => {
+const ProductSlider = ({ title, data, }) => {
   const settings = {
     dots: false,
     infinite: true,
@@ -63,7 +63,7 @@ const ProductSlider = ({ title, data }) => {
         <Slider {...settings}>
           {data?.map((product) => (
             <div key={product._id} className="md:px-8 px-1">
-              <ProductItem product={product} />
+              <ProductItem product={product} sliderType={title} />
             </div>
           ))}
         </Slider>

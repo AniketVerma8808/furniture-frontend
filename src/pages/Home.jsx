@@ -9,17 +9,26 @@ import Bannerimg from "../assets/image/banner/Bannerimg2.png";
 import Bannerimg2 from "../assets/image/banner/Bannerimg3.png";
 
 const Home = () => {
-  const { bestseller, newarrival } = useSelector((state) => state.product);
+  const { products } = useSelector((state) => state.product);
+  console.log(products);
+  // Filter arrays
+  const newarrivalProducts = products.filter((p) => p.newarrival);
+  const bestsellerProducts = products.filter((p) => p.bestsellor);
+  const trendingProducts = products.filter((p) => p.trending);
+
+  // For recently viewed, you can create a separate array
+  const recentlyViewed = products.filter((p) => p.recentlyViewed); // if you track it
 
   return (
     <>
       <Hero />
       <Banner image={Bannerimg} />
       <CategoriesSlider />
-      <ProductSlider title={"New Arrivals"} data={newarrival} />
-      <ProductSlider title={"BestSeller"} data={bestseller} />
+      <ProductSlider title="New Arrivals" data={newarrivalProducts} />
+      <ProductSlider title="Best Sellers" data={bestsellerProducts} />
+      <ProductSlider title="Trending" data={trendingProducts} />
       <Banner image={Bannerimg2} />
-      <ProductSlider title={"Recently Viewed"} data={bestseller} />
+      <ProductSlider title={"Recently Viewed"} data={bestsellerProducts} />
       <Review />
     </>
   );

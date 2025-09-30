@@ -16,7 +16,7 @@ import {
 } from "../../services/api.service";
 import { addToCart, updateCountCart } from "../../redux/cartSlice";
 
-const ProductItem = ({ product }) => {
+const ProductItem = ({ product,sliderType  }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -79,10 +79,23 @@ const ProductItem = ({ product }) => {
     }
   };
 
+  // const getLabelColor = () => {
+  //   if (product.bestsellor) return "bg-yellow-500";
+  //   if (product.trending) return "bg-green-500";
+  //   if (product.newarrival) return "bg-blue-500";
+  //   return "bg-red-500";
+  // };
+  const getLabel = () => {
+    if (sliderType === "New Arrivals") return "New Arrival";
+    if (sliderType === "Trending") return "Trending";
+    if (sliderType === "Best Sellers") return "Best Seller";
+    return "";
+  };
+
   const getLabelColor = () => {
-    if (product.bestsellor) return "bg-yellow-500";
-    if (product.trending) return "bg-green-500";
-    if (product.newarrival) return "bg-blue-500";
+    if (sliderType === "New Arrivals") return "bg-blue-500";
+    if (sliderType === "Trending") return "bg-green-500";
+    if (sliderType === "Best Sellers") return "bg-yellow-500";
     return "bg-red-500";
   };
 
@@ -117,15 +130,12 @@ const ProductItem = ({ product }) => {
             Add to Cart
           </button>
         </div>
-        {(product.bestsellor || product.trending || product.newarrival) && (
+
+        {getLabel() && (
           <div
             className={`absolute bottom-0 left-0 text-white text-xs px-2 py-1 rounded-md ${getLabelColor()}`}
           >
-            {product.bestsellor
-              ? "Best Seller"
-              : product.trending
-              ? "Trending"
-              : "New Arrival"}
+            {getLabel()}
           </div>
         )}
       </div>
